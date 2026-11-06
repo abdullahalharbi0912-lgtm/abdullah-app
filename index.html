@@ -1,0 +1,1729 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://qivnzxxcwwzptnvnkaui.supabase.co; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0A4D68"><link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%230A4D68%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2247%22%20font-size%3D%2244%22%20font-family%3D%22Arial%22%20font-weight%3D%22700%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff%22%3E%D8%AD%3C%2Ftext%3E%3C%2Fsvg%3E"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="المساعد">
+<style>@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:400;src:url(fonts/ibm-plex-sans-arabic-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-sans-arabic-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:600;src:url(fonts/ibm-plex-sans-arabic-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1}@font-face{font-family:'IBM Plex Sans Arabic';font-style:normal;font-display:swap;font-weight:700;src:url(fonts/ibm-plex-sans-arabic-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px);color-scheme:light}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>مساعد عبدالله</title>
+
+<style>
+/* الهوية: هادئة ومهنية. لون واحد للتفاعل (أزرق بحري)، حدود رفيعة بدل البطاقات والظلال، خط واحد.
+   كل لون رمز. الداكن يعيد تعريف الرموز فقط. الأسماء القديمة (panel, reef, sand, coral) أسماء مستعارة للمساعد. */
+:root {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #F3F5F7;
+  --ink: #0E1A24;
+  --muted: #4F5D6B;
+  --line: #DCE2E8;
+  --line-strong: #B9C3CD;
+  --accent: #0A4D68;
+  --accent-ink: #FFFFFF;
+  --accent-text: #0A4D68;
+  --accent-soft: #E7F0F4;
+  --ok: #176B3E;
+  --warn: #8A5200;
+  --bad: #AE2A1F;
+  --ok-bg: #E2F3E9;
+  --warn-bg: #FBEFD2;
+  --bad-bg: #F9E0DD;
+  /* أسماء مستعارة */
+  --panel: var(--accent); --panel-ink: var(--accent-ink); --panel-muted: #BCD3DC;
+  --reef: var(--accent); --reef-ink: var(--accent-text);
+  --sand: var(--surface-2); --sand-ink: var(--ink);
+  --coral: var(--accent); --coral-ink: var(--accent-ink);
+  --f-display: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-body: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --r-s: 6px; --r-m: 8px; --r-l: 12px;
+  --gutter: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-e: max(20px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1118; --surface: #111A23; --surface-2: #16212C; --ink: #E8EEF3; --muted: #9DAAB7; --line: #243140; --line-strong: #3A4A5B;
+    --accent: #7CC4DC; --accent-ink: #06202B; --accent-text: #8FD0E6; --accent-soft: #12303D; --panel-muted: #14394A;
+    --ok: #5FD296; --warn: #F2B95F; --bad: #FF8E80; --ok-bg: #12331F; --warn-bg: #3A2C0F; --bad-bg: #3D1814; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1118; --surface: #111A23; --surface-2: #16212C; --ink: #E8EEF3; --muted: #9DAAB7; --line: #243140; --line-strong: #3A4A5B;
+  --accent: #7CC4DC; --accent-ink: #06202B; --accent-text: #8FD0E6; --accent-soft: #12303D; --panel-muted: #14394A;
+  --ok: #5FD296; --warn: #F2B95F; --bad: #FF8E80; --ok-bg: #12331F; --warn-bg: #3A2C0F; --bad-bg: #3D1814; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.7;
+  padding-inline: var(--gutter) var(--gutter-e); margin: 0; }
+h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 700; line-height: 1.3; margin: 0; text-wrap: balance; letter-spacing: 0; }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.num, .en { font-variant-numeric: tabular-nums; }
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.wrap { max-width: 1160px; margin-inline: auto; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* الأزرار */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px;
+  border-radius: var(--r-s); border: 1px solid var(--ink); background: transparent; font-weight: 600; font-size: 16px; cursor: pointer;
+  text-decoration: none; transition: background-color .15s ease, border-color .15s ease; color: var(--ink); }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); }
+.btn.dark { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; pointer-events: none; }
+
+/* العلامة: الحرف ح في مربع بلون التفاعل */
+.mark { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-m); background: var(--accent);
+  color: var(--accent-ink); font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 1; flex: none; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand b { font-weight: 700; font-size: 18px; line-height: 1.2; display: block; }
+.brand small { color: var(--muted); font-size: 13px; display: block; line-height: 1.3; }
+
+/* نماذج */
+label.f { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+.in { width: 100%; min-height: 48px; padding: 10px 14px; border-radius: var(--r-s); border: 1px solid var(--line-strong);
+  background: var(--surface); font-weight: 400; font-size: 16px; }
+textarea.in { min-height: 112px; resize: vertical; }
+.in:focus-visible { border-color: var(--accent); outline-offset: 0; }
+.chip { display: inline-flex; align-items: center; min-height: 28px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: var(--surface-2); color: var(--ink); white-space: nowrap; border: 1px solid var(--line); }
+.chip.ok { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+.chip.warn { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+.chip.bad { background: var(--bad-bg); color: var(--bad); border-color: transparent; }
+.hide { display: none !important; }
+.toast { position: fixed; inset-inline: var(--gutter) var(--gutter-e); inset-block-end: calc(16px + env(safe-area-inset-bottom, 0px)); margin-inline: auto;
+  max-width: 420px; background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: var(--r-m);
+  z-index: 60; text-align: center; font-weight: 600; font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+
+/* ───── المساعد: أداة تشغيل تُمسح بالإصبع. الملخص قبل التفصيل، والحالة بشكلها لا برقمها فقط ───── */
+body { padding-block-end: calc(86px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); }
+/* شارة Netlify المجانية (#nl-badge-frame) تُحقن أسفل الصفحة فوق التبويبات وتحجب النقر.
+   لا نخفيها: نقيس ارتفاعها ونرفع التبويبات والنوافذ والتنبيه فوقها (--nlb). */
+.toast { inset-block-end: calc(16px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); }
+.sheet { padding-block-end: calc(24px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)) !important; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 30; }
+.app { max-width: 720px; margin-inline: auto; }
+header.top { position: sticky; inset-block-start: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px;
+  margin-inline: calc(var(--gutter) * -1) calc(var(--gutter-e) * -1); padding-inline: var(--gutter) var(--gutter-e); border-block-end: 1px solid var(--line); }
+.round { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; }
+.round:hover { border-color: var(--ink); }
+main { padding-block: 18px; display: grid; gap: 14px; }
+.tabs { position: fixed; inset-inline: 0; inset-block-end: var(--nlb, 0px); z-index: 25; background: var(--surface); border-block-start: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(6, 1fr); padding: 6px max(6px, env(safe-area-inset-left, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-right, 0px)); }
+.tabs button { border: 0; background: transparent; min-height: 52px; border-radius: 12px; cursor: pointer; display: grid; place-items: center; gap: 2px; font-size: 12px; font-weight: 600; color: var(--muted); position: relative; }
+.tabs button[aria-current="page"] { color: var(--ink); background: var(--surface-2); }
+.tabs svg { width: 22px; height: 22px; }
+.tabs .dot { position: absolute; inset-block-start: 2px; inset-inline-start: calc(50% + 6px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--coral); color: var(--coral-ink); font-size: 11px; display: grid; place-items: center; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.card h2, .card h3 { font-size: 18px; }
+.card.alert { border-color: var(--coral); background: color-mix(in srgb, var(--coral) 10%, var(--surface)); }
+.row { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; min-width: 0; }
+.row.start { justify-content: flex-start; }
+.muted { color: var(--muted); font-size: 14px; }
+.big { font-family: var(--f-display); font-size: 40px; line-height: 1; }
+.bar-bg { height: 12px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+.bar-fg { height: 100%; background: var(--reef); border-radius: 6px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.stagegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
+.stagegrid div { background: var(--surface-2); border-radius: var(--r-s); padding: 10px; display: grid; gap: 2px; font-size: 13px; }
+.stagegrid b { font-size: 22px; font-family: var(--f-display); }
+.item { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); width: 100%; text-align: start; cursor: pointer; min-width: 0; }
+.item:hover { border-color: var(--ink); }
+.item .t { display: grid; gap: 2px; min-width: 0; }
+.item .t b { overflow-wrap: anywhere; }
+.list { display: grid; gap: 8px; }
+.filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filters .in:first-child { grid-column: 1 / -1; }
+.sheet-bg { position: fixed; inset: 0; background: rgba(5, 20, 22, .55); z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--bg); width: min(720px, 100%); max-height: 92%; overflow-y: auto; border-radius: 24px 24px 0 0; padding: 18px max(16px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; }
+.shead { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sheet h2 { font-size: 22px; overflow-wrap: anywhere; }
+.msg { background: var(--surface-2); border-radius: var(--r-m); padding: 14px; white-space: pre-wrap; font-size: 15px; overflow-wrap: anywhere; }
+.log { display: grid; gap: 6px; font-size: 14px; }
+.log div { display: flex; gap: 10px; justify-content: space-between; border-block-end: 1px solid var(--line); padding-block: 6px; }
+.table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.table th, .table td { padding: 10px 8px; text-align: start; border-block-end: 1px solid var(--line); }
+.table td.n, .table th.n { text-align: end; font-variant-numeric: tabular-nums; }
+.tw { overflow-x: auto; }
+.checks { display: grid; gap: 10px; }
+.checks label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.checks input { width: 22px; height: 22px; margin-block-start: 3px; accent-color: var(--reef); flex: none; }
+.empty { text-align: center; padding: 28px 12px; color: var(--muted); display: grid; gap: 10px; justify-items: center; }
+.banner { background: var(--warn-bg); color: var(--warn); padding: 12px 14px; border-radius: var(--r-m); font-weight: 500; font-size: 14px; }
+  .chipbar { display: flex; gap: 8px; overflow-x: auto; padding-block-end: 4px; scrollbar-width: none; }
+.chipbar button { flex: none; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; font-weight: 600; font-size: 14px; }
+.chipbar button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--r-s); overflow: hidden; }
+.seg button { min-height: 40px; padding: 0 16px; border: 0; background: var(--surface); cursor: pointer; font-weight: 600; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.board { display: flex; gap: 12px; overflow-x: auto; padding-block-end: 12px; align-items: flex-start; }
+.col { flex: none; width: 240px; background: var(--surface-2); border-radius: var(--r-m); padding: 10px; display: grid; gap: 8px; }
+.col h2 { font-size: 15px; display: flex; justify-content: space-between; }
+.kcard { display: grid; gap: 2px; text-align: start; padding: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-s); cursor: pointer; min-height: 44px; }
+.kcard:hover { border-color: var(--ink); }
+.kcard b { font-size: 14px; overflow-wrap: anywhere; }
+.selbar { position: sticky; inset-block-end: calc(76px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); border-radius: var(--r-m); padding: 10px 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; z-index: 15; }
+.selbar .btn { border-color: var(--bg); color: var(--bg); }
+.selbar .btn:hover { background: rgba(255,255,255,.12); }
+.selbar input { max-width: 140px; min-height: 40px; }
+.ck { width: 22px; height: 22px; accent-color: var(--accent); flex: none; }
+.scorebar { display: grid; gap: 6px; font-size: 14px; }
+.scorebar div { display: grid; grid-template-columns: 1fr 54px; gap: 8px; align-items: center; }
+.tagx { display: inline-flex; align-items: center; gap: 6px; }
+.tagx button { border: 0; background: transparent; cursor: pointer; font-weight: 700; min-width: 24px; min-height: 24px; }
+.lock { position: fixed; inset: 0; background: var(--bg); z-index: 80; display: grid; place-items: center; padding: 24px; }
+.lock-box { max-width: 360px; width: 100%; display: grid; gap: 14px; text-align: center; justify-items: center; }
+.lock-box .mark { width: 64px; height: 64px; font-size: 38px; border-radius: 14px; }
+.lock-box .in { text-align: center; letter-spacing: 4px; }
+.lock-box #login-user { letter-spacing: normal; }
+.brand .sync { display: block; font-size: 11px; color: var(--muted); }
+.brand .sync[data-state="err"] { color: var(--bad); }
+.brand .sync:empty { display: none; }
+textarea.code { font-family: var(--f-mono); font-size: 12px; direction: ltr; min-height: 120px; }
+</style></head><body>
+
+<div class="app">
+  <header class="top">
+    <a class="brand" href="#today"><span class="mark" aria-hidden="true">ح</span><span><b>مساعد عبدالله</b><small id="sub"></small><small id="sync" class="sync" aria-live="polite"></small></span></a>
+    <div class="row start">
+      <button class="round" id="b-theme" type="button" aria-label="المظهر"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+      <button class="round" id="b-set" type="button" aria-label="الإعدادات"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
+    </div>
+  </header>
+  <main id="view"></main>
+</div>
+<nav class="tabs" id="tabs" aria-label="التبويبات"></nav>
+<div id="sheet-root"></div>
+<div class="lock hide" id="lock" role="dialog" aria-label="قفل التطبيق"></div>
+<div class="toast hide" id="toast" role="status"></div>
+
+<script>
+// منطق المشروع: باقات، كوتيشن، قواعد الإرسال، استيراد العملاء.
+// نقيّ تماماً: لا يلمس المتصفح ولا الشبكة. يُختبر في Node ويُدمج في الصفحتين عند البناء.
+// قاعدة الدمج: كل تصدير يبدأ السطر بكلمة export، ولا تصدير مجمَّع.
+
+const DEFAULT_SITE_URL = 'https://abdullah-alharbi-studio.netlify.app';
+
+const OWNER = {
+  name: 'عبدالله الحربي',
+  nameEn: 'Abdullah Alharbi',
+  phone: '0533128296',
+  city: 'جدة',
+};
+
+// الباقات كما في SPEC القسم ٥. الأسعار بالريال. fromPrice = «يبدأ من».
+const PACKAGES = [
+  {
+    id: 'page', price: 1200, fromPrice: false, days: 5, deposit: [50, 50],
+    ar: { name: 'صفحة المحل', tag: 'للمحل الذي يبدأ',
+      items: ['صفحة واحدة مثل النموذج بصور المحل وبياناته', 'زر طلب وحجز على واتساب', 'خريطة وساعات عمل', 'ربط بحساب Google للمحل', 'تعديل واحد بعد التسليم'] },
+    en: { name: 'Shop page', tag: 'For a shop getting started',
+      items: ['One page like the demo, with your photos and details', 'Order and booking button on WhatsApp', 'Map and opening hours', 'Linked to your Google Business profile', 'One revision after delivery'] },
+  },
+  {
+    id: 'site', price: 3500, fromPrice: true, days: null, deposit: [40, 30, 30],
+    ar: { name: 'موقع تعريفي', tag: 'حضور كامل على الإنترنت',
+      items: ['عدة صفحات', 'قائمة منتجات أو خدمات كاملة', 'تصميم خاص بهويتكم'] },
+    en: { name: 'Business website', tag: 'A full presence online',
+      items: ['Several pages', 'Complete product or service catalogue', 'Design made for your brand'] },
+  },
+  {
+    id: 'web', price: 9500, fromPrice: true, days: null, deposit: [40, 30, 30],
+    ar: { name: 'نظام ويب', tag: 'لمن يدير حجوزات وطلبات',
+      items: ['حجوزات بلوحة تحكم', 'طلبات', 'عملاء'] },
+    en: { name: 'Web system', tag: 'For bookings and orders at scale',
+      items: ['Bookings with an admin dashboard', 'Orders', 'Customers'] },
+  },
+  {
+    id: 'app', price: 22000, fromPrice: true, days: null, deposit: [40, 30, 30],
+    ar: { name: 'تطبيق جوال', tag: 'لمن يحتاج تطبيقاً خاصاً',
+      items: ['iOS و Android', 'لوحة تحكم', 'نشر على المتاجر'] },
+    en: { name: 'Mobile app', tag: 'For a dedicated app',
+      items: ['iOS and Android', 'Admin dashboard', 'Store publishing'] },
+  },
+];
+
+const MAINTENANCE = { price: 600, fromPrice: true,
+  ar: 'صيانة شهرية اختيارية', en: 'Optional monthly maintenance' };
+
+const HOURLY_RATE = 150;
+const ROUND_TO = 500;
+const QUOTE_VALID_DAYS = 14;
+const WARRANTY_DAYS = 90;
+const DAILY_LIMIT = 10;
+const MIN_GAP_MIN = 3;
+const MONTH_TARGET = 3000;
+const ALERT_EVERY = 40;
+
+// الوعود والشروط (SPEC القسم ٥). نصّان بالعربية والإنجليزية.
+const PROMISES = [
+  { ar: 'ملكية كاملة للكود بعقد نقل', en: 'Full code ownership, transferred by contract' },
+  { ar: 'ضمان إصلاح الأعطال ٩٠ يوماً', en: '90-day warranty on defects' },
+  { ar: 'سعر ثابت للخصائص المعتمدة، والإضافات بكوتيشن منفصل', en: 'Fixed price for approved scope; additions quoted separately' },
+  { ar: 'الدومين يُسجَّل باسمك وتدفعه أنت', en: 'The domain is registered in your name and paid by you' },
+  { ar: 'الاستضافة على Netlify المجاني', en: 'Hosting on free-tier Netlify' },
+  { ar: 'رسوم متاجر التطبيقات على العميل', en: 'App store fees are paid by the client' },
+];
+
+/* ───── أرقام ───── */
+const IND = '٠١٢٣٤٥٦٧٨٩';
+const toIndic = v => String(v).replace(/[0-9]/g, d => IND[d]);
+const toLatin = v => String(v)
+  .replace(/[٠-٩]/g, d => String(IND.indexOf(d)))
+  .replace(/[۰-۹]/g, d => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+// مبلغ: آلاف بفاصلة عربية صغيرة ٬ كما في SPEC (١٬٢٠٠)
+const moneyAr = n => toIndic(Math.round(n).toLocaleString('en-US').replace(/,/g, '٬'));
+const moneyEn = n => Math.round(n).toLocaleString('en-US');
+// يقبل ١٢٠٠ أو 1,200 أو «١٬٢٠٠» ويعيد رقماً، وnull لغير الصالح (لا صفراً).
+function toAmount(v) {
+  if (v === null || v === undefined) return null;
+  const s = toLatin(v).replace(/[,٬\s]/g, '').replace('٫', '.');
+  if (!/^\d+(\.\d+)?$/.test(s)) return null;
+  return Number(s);
+}
+
+/* ───── الجوال ───── */
+// 05xxxxxxxx فقط. يقبل أرقاماً هندية ومسافات وشرطات و+966.
+function normPhone(raw) {
+  let s = toLatin(raw || '').replace(/[^\d+]/g, '');
+  if (s.startsWith('+966')) s = '0' + s.slice(4);
+  else if (s.startsWith('00966')) s = '0' + s.slice(5);
+  else if (s.startsWith('966')) s = '0' + s.slice(3);
+  else if (/^5\d{8}$/.test(s)) s = '0' + s;
+  return /^05\d{8}$/.test(s) ? s : null;
+}
+const waLink = (phone, text) => {
+  const p = normPhone(phone);
+  if (!p) return null;
+  return 'https://wa.me/966' + p.slice(1) + (text ? '?text=' + encodeURIComponent(text) : '');
+};
+
+/* ───── الوقت بتوقيت الرياض (UTC+3 بلا توقيت صيفي) ───── */
+function riyadh(date = new Date()) {
+  const t = new Date(date.getTime() + 3 * 3600 * 1000);
+  return { dow: t.getUTCDay(), min: t.getUTCHours() * 60 + t.getUTCMinutes(),
+           ymd: t.toISOString().slice(0, 10) };
+}
+const hm = (h, m = 0) => h * 60 + m;
+
+/* ───── نوافذ الإرسال (SPEC القسم ٤) ───── */
+const CATEGORIES = {
+  garage:     { ar: 'ورش وصيانة سيارات',  en: 'Auto repair',        win: [hm(10, 30), hm(12, 30)] },
+  phones:     { ar: 'صيانة جوالات',        en: 'Phone repair',       win: [hm(10, 30), hm(12, 30)] },
+  carwash:    { ar: 'مغاسل سيارات',        en: 'Car wash',           win: [hm(10, 30), hm(12, 30)] },
+  carpet:     { ar: 'مغاسل سجاد',          en: 'Carpet cleaning',    win: [hm(10, 30), hm(12, 30)] },
+  barber:     { ar: 'حلاقة رجالية',        en: "Men's barber",       win: [hm(15), hm(17)] },
+  restaurant: { ar: 'مطاعم ومندي',         en: 'Restaurants',        win: [hm(16), hm(17, 30)] },
+  sweets:     { ar: 'حلويات وكنافة',       en: 'Sweets',             win: [hm(16), hm(18)] },
+  bakery:     { ar: 'مخابز',               en: 'Bakeries',           win: [hm(16), hm(18)] },
+  flowers:    { ar: 'ورد',                 en: 'Flowers',            win: [hm(16), hm(18)] },
+  tailor:     { ar: 'خياطة رجالية',        en: "Men's tailoring",    win: [hm(16), hm(18)] },
+};
+const FRIDAY_FROM = hm(15, 30);
+
+function inWindow(category, date = new Date()) {
+  const c = CATEGORIES[category];
+  if (!c) return false;
+  const { dow, min } = riyadh(date);
+  if (dow === 5 && min < FRIDAY_FROM) return false;
+  return min >= c.win[0] && min <= c.win[1];
+}
+
+// hours_week: 7 مصفوفات، 0=الأحد، [فتح,إغلاق] أو [فتح1,إغلاق1,فتح2,إغلاق2]،
+// ساعات عشرية (٩٫٥ = ٩:٣٠)، إغلاق فوق ٢٤ = بعد منتصف الليل، [0,0] = مغلق.
+// الغائب (null) يعني «غير معروف»، فلا يحجب الإرسال.
+function openStatus(hours, date = new Date()) {
+  if (!Array.isArray(hours) || hours.length !== 7) return { known: false };
+  const { dow, min } = riyadh(date);
+  const spans = d => {
+    const a = hours[d];
+    if (!Array.isArray(a) || a.length < 2 || (a[0] === 0 && a[1] === 0)) return [];
+    const out = [[a[0] * 60, a[1] * 60]];
+    if (a.length >= 4) out.push([a[2] * 60, a[3] * 60]);
+    return out;
+  };
+  const prev = spans((dow + 6) % 7).filter(s => s[1] > 1440).map(s => [s[0] - 1440, s[1] - 1440]);
+  const all = [...prev, ...spans(dow)];
+  const hit = all.find(s => min >= s[0] && min < s[1]);
+  if (!hit) return { known: true, open: false, sinceOpen: 0 };
+  return { known: true, open: true, sinceOpen: min - hit[0] };
+}
+
+/* ───── الرسالة الأولى ───── */
+// مبادئ الرسالة: اسم المحل وتقييماته (حقيقية من الخرائط)، فائدة واحدة تخص نشاطه، رابط يجرّبه، ومخرج مهذب.
+// لا أرقام مخترعة ولا عملاء سابقين مزعومين. الأرقام هندية لأن النص يصل العميل.
+// سطر واحد لكل نشاط: ما يكسبه المحل تحديداً، بلا إحصاءات.
+const HOOKS = {
+  carwash: 'اللي يبحث عن مغسلة قريبة يختار اللي يشوف أسعاره ويحجز دوره من جواله.',
+  barber: 'زبونك يحجز موعده من الجوال بدل ما ينتظر في المحل أو يتصل يسأل.',
+  restaurant: 'قائمتكم بصورها وأسعارها، والطلب يوصلكم واتساب مباشرة بدون عمولة تطبيقات التوصيل.',
+  bakery: 'طلبات المناسبات والكميات توصلكم واتساب مباشرة، بدون عمولة وبدون اتصالات.',
+  sweets: 'طلبات المناسبات والكميات توصلكم واتساب مباشرة، بدون عمولة وبدون اتصالات.',
+  flowers: 'تنسيقاتكم بأسعارها في صفحة وحدة، والطلب والتوصيل يوصلكم واتساب.',
+  garage: 'العميل يشوف خدماتكم وأسعارها ويحجز، بدل ما يتصل يسأل ويروح لغيركم.',
+  phones: 'قائمة الصيانة بأسعارها وحجز موعد من الجوال، فيجيكم العميل وهو جاهز.',
+  tailor: 'العميل يشوف تفصيلاتكم وأسعارها ويحجز موعد القياس من جواله.',
+  carpet: 'العميل يطلب الغسيل والاستلام من الجوال، وتوصلكم الطلبات مرتبة.',
+};
+const hookOf = lead => HOOKS[lead.category] || 'العميل يلقاكم في Google ويطلب منكم مباشرة على الواتساب.';
+const opener = 'معاك عبدالله الحربي من جدة، أسوي مواقع وتطبيقات للمحلات.';
+const sawLine = lead => {
+  const reviews = Math.round(Number(lead.reviews) || 0);
+  return reviews
+    ? `شفت ${lead.name} في خرائط Google، ${toIndic(reviews)} تقييم ما شاء الله، وهذا ما يجي إلا بشغل نظيف. بس ما لقيت لكم موقع.`
+    : `شفت ${lead.name} في خرائط Google، وما لقيت لكم موقع.`;
+};
+const closer = 'السعر معلن قبل أي شي، والكود ملككم بالكامل.\nوإذا مو وقته الحين ولا يهمك، الله يوفقكم.';
+
+function introMessage(lead) {
+  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
+    'سويت لكم نموذج مبدئي تجربونه من الجوال، فيه طلب يوصلكم على الواتساب مباشرة:', lead.demo_url, closer].join('\n');
+}
+
+// رسالة تعرّف بالموقع الترحيبي (وضع 'site'). الرابط يحمل اسم المحل لتخصيص الصفحة.
+function normSiteUrl(u) {
+  const x = String(u || '').trim().replace(/\/+$/, '');
+  return /^https:\/\/[a-z0-9.-]+(:\d+)?(\/[^\s?#]*)?$/i.test(x) ? x : DEFAULT_SITE_URL;
+}
+// رابط نظيف قصير. الرابط المخصص بالاسم يظهر في واتساب حروفاً مشفّرة طويلة (%D9%85...) فيبدو احتيالاً.
+// الرسالة نفسها تذكر اسم المحل، فلا حاجة له في الرابط.
+const welcomeLink = (lead, siteUrl) => normSiteUrl(siteUrl) + '/hello/';
+const PROFILE_PATH = '/profile.pdf';
+const profileLink = siteUrl => normSiteUrl(siteUrl) + PROFILE_PATH;
+function siteMessage(lead, siteUrl) {
+  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
+    'جهزت لكم صفحة باسمكم فيها الفكرة، وتقدرون تجربون تسوون نموذجكم بأنفسكم من الجوال في دقيقتين:',
+    welcomeLink(lead, siteUrl), closer].join('\n');
+}
+// وضع البروفايل: ملف PDF يعرّف بالخدمة والباقات، ورابط الصفحة للتجربة
+function pdfMessage(lead, siteUrl) {
+  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
+    'هذا بروفايلي، فيه وش أسوي والباقات وأسعارها:', profileLink(siteUrl),
+    'وهذي صفحة باسمكم تجربون فيها الفكرة من الجوال:', welcomeLink(lead, siteUrl), closer].join('\n');
+}
+const MESSAGE_MODES = ['site', 'pdf', 'demo'];
+const firstMessage = (lead, mode, siteUrl) => (mode === 'site' ? siteMessage(lead, siteUrl) : mode === 'pdf' ? pdfMessage(lead, siteUrl) : introMessage(lead));
+
+/* ───── الردود الجاهزة: للإقفال ───── */
+// body نص ثابت أو دالة تأخذ { lead, siteUrl }. كل رد يدفع خطوة واحدة نحو الإقفال، بلا ضغط ولا وعود مخترعة.
+const P0 = PACKAGES[0];
+const QUICK_REPLIES = [
+  { key: 'price', ask: 'كم السعر؟',
+    body: `صفحة زي النموذج بصوركم وبياناتكم بـ ${moneyAr(P0.price)} ريال، وتتسلمونها خلال ${toIndic(P0.days)} أيام عمل.\nفيها زر طلب واتساب، خريطة وساعات عمل، وربط بحسابكم في Google، وتعديل بعد التسليم.\nتدفعون النص عند البدء، والنص الثاني بعد ما تشوفون الشغل وترضون. والكود ملككم.\nوإذا تبغون موقع أكبر بعدة صفحات يبدأ من ${moneyAr(PACKAGES[1].price)}.` },
+  { key: 'expensive', ask: 'غالي',
+    body: 'أفهمك. سؤال بسيط: كم زبون يشوفكم في خرائط Google ويتصل يسأل أو يروح لغيركم؟\nالصفحة تخلي هذا الزبون يطلب منكم على طول.\nوما تدفع إلا النص عند البدء، والباقي بعد ما تشوف الشغل وترضى.' },
+  { key: 'insta', ask: 'عندنا انستقرام يكفي',
+    body: ({ lead }) => `الانستقرام ممتاز للصور. بس اللي يبحث في Google عن ${CATEGORIES[lead && lead.category] ? CATEGORIES[lead.category].ar : 'محل'} قريب ما يوصل لحسابكم.\nالصفحة تجمع الاثنين: يلقاكم من Google، يطلب على الواتساب، ومنها يروح لحسابكم.` },
+  { key: 'works', ask: 'أبغى أشوف شغلك',
+    body: ({ siteUrl }) => `تفضل بروفايلي، فيه وش أسوي والباقات:\n${profileLink(siteUrl)}\nوهذا موقعي، تقدر تجرب فيه تسوي نموذج محلك بنفسك:\n${normSiteUrl(siteUrl)}` },
+  { key: 'source', ask: 'من وين جبت رقمي؟',
+    body: 'من صفحتكم في خرائط Google، الرقم المكتوب فيها.' },
+  { key: 'think', ask: 'أفكر وأرد',
+    body: 'خذ راحتك. الرابط عندكم.\nوإذا عندك سؤال يقرر عليه، اسألني هنا وأرد عليك.' , stage: 'interested' },
+  { key: 'yes', ask: 'مهتم',
+    body: `ممتاز. نبدأ كذا:\n${toIndic(1)}. ترسل لي صور المحل والشعار وقائمة الخدمات بأسعارها.\n${toIndic(2)}. أرسل لك عرض السعر الرسمي.\n${toIndic(3)}. تدفع النص وأبدأ، وتستلم خلال ${toIndic(P0.days)} أيام عمل.\nتبغى نتكلم ${toIndic(5)} دقايق الحين، ولا نكمل هنا؟`, stage: 'interested' },
+  { key: 'later', ask: 'مو الحين',
+    body: 'ولا يهمك، الرابط يبقى عندكم.', stage: 'not_now' },
+  { key: 'no', ask: 'لا أو عندنا موقع',
+    body: 'الله يوفقكم.', stage: 'rejected' },
+];
+const replyText = (r, ctx = {}) => (typeof r.body === 'function' ? r.body(ctx) : r.body);
+
+/* ───── المراحل ───── */
+const STAGES = ['candidate', 'demo_ready', 'sent', 'auto_reply', 'human_reply',
+  'interested', 'quoted', 'deposit', 'delivering', 'won', 'not_now', 'rejected'];
+const STAGE_AR = {
+  candidate: 'مرشح', demo_ready: 'نموذج جاهز', sent: 'أُرسل', auto_reply: 'رد آلي',
+  human_reply: 'رد بشري', interested: 'مهتم', quoted: 'كوتيشن', deposit: 'دفعة أولى',
+  delivering: 'تسليم', won: 'مغلق', not_now: 'مو الحين', rejected: 'مرفوض',
+};
+const FINAL_STAGES = ['not_now', 'rejected', 'won'];
+const REPLIED = ['human_reply', 'interested', 'quoted', 'deposit', 'delivering', 'won', 'not_now', 'rejected'];
+
+/* ───── من يحق إرسال رسالة له ───── */
+// السبب يُعاد نصاً ليظهر في الواجهة.
+// mode: 'demo' يطلب نموذجاً جاهزاً لكل محل (المواصفة الأصلية)، و 'site' يرسل رابط الموقع الترحيبي ولا يحتاج نموذجاً.
+function sendBlock(lead, now = new Date(), mode = 'demo') {
+  if (lead.do_not_contact) return 'محجوب: تواصلنا معه سابقاً';
+  if (FINAL_STAGES.includes(lead.stage)) return 'مرحلته نهائية';
+  if (mode !== 'demo') { // الموقع والبروفايل لا يحتاجان نموذجاً لكل محل
+    if (!['candidate', 'demo_ready'].includes(lead.stage)) return 'ليس مرشحاً للإرسال';
+  } else {
+    if (lead.stage !== 'demo_ready') return 'ليس في مرحلة «نموذج جاهز»';
+  }
+  if ((lead.log || []).some(e => e.dir === 'out' && e.kind === 'intro')) return 'أُرسل له من قبل';
+  if (mode === 'demo' && !lead.demo_url) return 'لا رابط نموذج';
+  if (!normPhone(lead.phone)) return 'جوال غير صالح';
+  if (!inWindow(lead.category, now)) return 'خارج نافذة الفئة';
+  const o = openStatus(lead.hours_week, now);
+  if (o.known && (!o.open || o.sinceOpen < 60)) return 'المحل مغلق أو لم يمضِ ساعة على الافتتاح';
+  return null;
+}
+
+function sentTodayCount(leads, now = new Date()) {
+  const today = riyadh(now).ymd;
+  let n = 0;
+  for (const l of leads) for (const e of l.log || [])
+    if (e.dir === 'out' && e.kind === 'intro' && riyadh(new Date(e.at)).ymd === today) n++;
+  return n;
+}
+function lastSentAt(leads) {
+  let t = 0;
+  for (const l of leads) for (const e of l.log || [])
+    if (e.dir === 'out' && e.kind === 'intro') t = Math.max(t, new Date(e.at).getTime());
+  return t || null;
+}
+
+// الطابور: من يُرسل له الآن. فارغ إن بلغ الحد أو لم تمضِ المهلة.
+function sendQueue(leads, now = new Date(), mode = 'demo', limit = DAILY_LIMIT) {
+  const used = sentTodayCount(leads, now);
+  const left = Math.max(0, Math.min(Number(limit) || DAILY_LIMIT, 20) - used);
+  const last = lastSentAt(leads);
+  const waitMin = last ? Math.max(0, MIN_GAP_MIN - (now.getTime() - last) / 60000) : 0;
+  const eligible = leads.filter(l => !sendBlock(l, now, mode));
+  return { used, left, waitMin, eligible: left ? eligible : [], blockedReason: left ? null : 'بلغت الحد اليومي' };
+}
+
+/* ───── الكوتيشن (SPEC القسم ٥) ───── */
+const roundUp = (n, step = ROUND_TO) => Math.ceil(n / step) * step;
+
+// مخصص: الساعات × ١٥٠ + التكاليف، مقرّب للأعلى لأقرب ٥٠٠، ولا يقل عن سعر الباقة.
+function customTotal({ hours, costs = 0, floor = 0 }) {
+  const h = toAmount(hours), c = toAmount(costs);
+  if (h === null || c === null || h < 0 || c < 0) return null;
+  return Math.max(floor, roundUp(h * HOURLY_RATE + c));
+}
+
+function paymentPlan(total, pcts) {
+  const labelsShop = ['عند الاتفاق', 'عند التسليم'];
+  const labelsBig = ['عند التوقيع', 'بعد اعتماد التصميم', 'عند التسليم'];
+  const labels = pcts.length === 2 ? labelsShop : labelsBig;
+  let paid = 0;
+  return pcts.map((p, i) => {
+    const amount = i === pcts.length - 1 ? total - paid : Math.round(total * p / 100);
+    paid += amount;
+    return { label: labels[i], pct: p, amount };
+  });
+}
+
+function addDays(date, n) { return new Date(date.getTime() + n * 86400000); }
+
+function makeQuote({ lead, pkg, hours, costs, now = new Date() }) {
+  const p = PACKAGES.find(x => x.id === pkg);
+  if (!p) return null;
+  const custom = hours !== undefined && hours !== '' && hours !== null;
+  let total = p.price;
+  if (custom) {
+    total = customTotal({ hours, costs, floor: p.price });
+    if (total === null) return null;
+  }
+  return {
+    id: 'q' + now.getTime().toString(36),
+    lead_id: lead ? lead.id : null,
+    package: pkg,
+    hours: custom ? toAmount(hours) : null,
+    hourly_rate: custom ? HOURLY_RATE : null,
+    costs: custom ? toAmount(costs) || 0 : null,
+    total,
+    payment_terms: paymentPlan(total, p.deposit),
+    valid_until: addDays(now, QUOTE_VALID_DAYS).toISOString().slice(0, 10),
+    created: now.toISOString(),
+    status: 'draft',
+  };
+}
+
+// نص الكوتيشن الذي يصل العميل: أرقام هندية، بلا أي بند جبائي وبلا رقم حساب.
+function quoteText(q, leadName = '') {
+  const p = PACKAGES.find(x => x.id === q.package);
+  const lines = [
+    'السلام عليكم ورحمة الله',
+    leadName ? `كوتيشن ${leadName}` : 'كوتيشن',
+    `الباقة: ${p.ar.name}`,
+    `الإجمالي: ${moneyAr(q.total)} ريال${p.fromPrice && q.hours === null ? ' (يبدأ من)' : ''}`,
+    'الدفعات:',
+    ...q.payment_terms.map(t => `- ${t.label}: ${moneyAr(t.amount)} ريال (${toIndic(t.pct)}%)`),
+  ];
+  if (p.days) lines.push(`التسليم خلال ${toIndic(p.days)} أيام عمل من استلام الصور والبيانات.`);
+  lines.push(
+    `صالح حتى ${toIndic(q.valid_until)}.`,
+    `يشمل: ملكية كاملة للكود بعقد نقل، وضمان إصلاح الأعطال ${toIndic(WARRANTY_DAYS)} يوماً.`,
+    'الدومين يُسجَّل باسمكم وتدفعونه أنتم.');
+  return lines.join('\n');
+}
+// كلمات ممنوعة في أي مخرَج للعميل
+const FORBIDDEN_CLIENT_WORDS = ['فاتورة', 'ضريبة', 'ضريبية', 'شامل الضريبة', 'IBAN', 'آيبان', 'SA0', 'SA1', 'SA2', 'SA3', 'SA4', 'SA5', 'SA6', 'SA7', 'SA8', 'SA9'];
+const clientTextIsClean = t => !FORBIDDEN_CLIENT_WORDS.some(w => t.includes(w));
+
+/* ───── التسليم ───── */
+const DELIVERY_CHECKLIST = [
+  'الصفحة تعمل على الجوال بلا أي خطأ',
+  'زر الطلب يفتح واتساب المحل الصحيح',
+  'الصور والأسعار من المحل فقط',
+  'ربط الصفحة في حساب Google للمحل',
+  'تسليم الكود والدومين باسم العميل، وورقة نقل ملكية',
+  'تاريخ بداية ضمان ٩٠ يوماً',
+];
+const warrantyUntil = deliveredAt => addDays(new Date(deliveredAt), WARRANTY_DAYS).toISOString().slice(0, 10);
+
+/* ───── الأرقام ───── */
+const inRange = (iso, from, to) => { const t = new Date(iso).getTime(); return t >= from && t < to; };
+
+function monthRevenue(leads, now = new Date()) {
+  const ym = riyadh(now).ymd.slice(0, 7);
+  let sum = 0;
+  for (const l of leads) for (const p of l.payments || [])
+    if (riyadh(new Date(p.at)).ymd.slice(0, 7) === ym) sum += Number(p.amount) || 0;
+  return sum;
+}
+
+function stageCounts(leads) {
+  const out = Object.fromEntries(STAGES.map(s => [s, 0]));
+  for (const l of leads) if (out[l.stage] !== undefined) out[l.stage]++;
+  return out;
+}
+
+function weekStats(leads, from, to) {
+  const s = { sent: 0, read: 0, human_replies: 0, interested: 0, quotes: 0, won: 0, revenue: 0 };
+  for (const l of leads) {
+    for (const e of l.log || []) {
+      if (e.dir === 'out' && e.kind === 'intro' && inRange(e.at, from, to)) {
+        s.sent++;
+        if (e.read === 'read') s.read++;
+      }
+      if (e.dir === 'in' && e.reply === 'human' && inRange(e.at, from, to)) s.human_replies++;
+      if (e.kind === 'stage' && e.stage === 'interested' && inRange(e.at, from, to)) s.interested++;
+      if (e.kind === 'stage' && e.stage === 'won' && inRange(e.at, from, to)) s.won++;
+    }
+    for (const q of l.quotes || []) if (q.status !== 'draft' && inRange(q.created, from, to)) s.quotes++;
+    for (const p of l.payments || []) if (inRange(p.at, from, to)) s.revenue += Number(p.amount) || 0;
+  }
+  return s;
+}
+
+// ردود بشرية لم يُجب عليها بعد: آخر حدث في السجل رد بشري وارد.
+function unansweredHuman(leads) {
+  return leads.filter(l => {
+    const log = l.log || [];
+    const last = log[log.length - 1];
+    return last && last.dir === 'in' && last.reply === 'human' && !FINAL_STAGES.includes(l.stage);
+  });
+}
+
+// كل ٤٠ رسالة أولى بلا رد بشري: غيّر متغيراً واحداً.
+function fortyAlert(leads) {
+  const sent = [];
+  for (const l of leads) for (const e of l.log || [])
+    if (e.dir === 'out' && e.kind === 'intro') sent.push({ lead: l, at: new Date(e.at).getTime() });
+  sent.sort((a, b) => a.at - b.at);
+  const blocks = Math.floor(sent.length / ALERT_EVERY);
+  if (!blocks) return { due: false, sent: sent.length, next: ALERT_EVERY - sent.length };
+  const last = sent.slice((blocks - 1) * ALERT_EVERY, blocks * ALERT_EVERY);
+  const human = last.filter(x => REPLIED.includes(x.lead.stage) && x.lead.replyType === 'human').length;
+  return { due: human === 0, sent: sent.length, block: blocks, humanInBlock: human,
+           next: ALERT_EVERY - (sent.length % ALERT_EVERY),
+           text: 'غيّر شيئاً واحداً فقط: الوقت أو النص أو الفئة. ثم قِس ٤٠ رسالة أخرى.' };
+}
+
+/* ───── الاستيراد ───── */
+function parseCSV(text) {
+  const rows = []; let row = [], cur = '', q = false;
+  const src = String(text).replace(/^﻿/, '');
+  for (let i = 0; i < src.length; i++) {
+    const ch = src[i];
+    if (q) {
+      if (ch === '"' && src[i + 1] === '"') { cur += '"'; i++; }
+      else if (ch === '"') q = false;
+      else cur += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === ',') { row.push(cur); cur = ''; }
+    else if (ch === '\n' || ch === '\r') {
+      if (ch === '\r' && src[i + 1] === '\n') i++;
+      row.push(cur); cur = '';
+      if (row.some(c => c !== '')) rows.push(row);
+      row = [];
+    } else cur += ch;
+  }
+  row.push(cur);
+  if (row.some(c => c !== '')) rows.push(row);
+  if (!rows.length) return [];
+  const head = rows[0].map(h => h.trim());
+  return rows.slice(1).map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] ?? '').trim()])));
+}
+
+const MONTHS = { يناير: 1, فبراير: 2, مارس: 3, أبريل: 4, ابريل: 4, مايو: 5, يونيو: 6, يوليو: 7, أغسطس: 8, اغسطس: 8, سبتمبر: 9, أكتوبر: 10, اكتوبر: 10, نوفمبر: 11, ديسمبر: 12 };
+// «أُرسل 3 نوفمبر» → 2026-11-03. الغامض يعيد null ولا يُخمَّن.
+function parseSentDate(note, year = 2026) {
+  const m = toLatin(note || '').match(/(\d{1,2})\s+(يناير|فبراير|مارس|أبريل|ابريل|مايو|يونيو|يوليو|أغسطس|اغسطس|سبتمبر|أكتوبر|اكتوبر|نوفمبر|ديسمبر)/);
+  if (!m) return null;
+  return `${year}-${String(MONTHS[m[2]]).padStart(2, '0')}-${String(Number(m[1])).padStart(2, '0')}`;
+}
+
+/* ───── مرونة الاستيراد: أعمدة عربية وإنجليزية من أي أداة تصدير، وتخمين الفئة ───── */
+const HEADERS = {
+  name: ['name', 'title', 'businessname', 'business', 'placename', 'الاسم', 'اسمالمحل', 'اسمالنشاط', 'المنشأة', 'المنشاة', 'اسمالمنشأة'],
+  phone: ['phone', 'phonenumber', 'tel', 'telephone', 'mobile', 'mobilenumber', 'whatsapp', 'الجوال', 'الهاتف', 'رقمالجوال', 'رقمالهاتف', 'واتساب', 'رقمالتواصل'],
+  alt_phone: ['altphone', 'phone2', 'secondaryphone', 'secondphone', 'جوال2', 'الجوالالبديل', 'هاتفآخر'],
+  category: ['category', 'categories', 'type', 'maincategory', 'الفئة', 'التصنيف', 'النشاط', 'النوع'],
+  district: ['district', 'neighborhood', 'neighbourhood', 'area', 'الحي', 'المنطقة'],
+  city: ['city', 'town', 'المدينة'],
+  address: ['address', 'fulladdress', 'العنوان'],
+  rating: ['rating', 'stars', 'averagerating', 'totalscore', 'التقييم'],
+  reviews: ['reviews', 'reviewscount', 'reviewcount', 'numberofreviews', 'userratingstotal', 'المراجعات', 'عددالمراجعات', 'عددالتقييمات'],
+  website: ['website', 'site', 'url', 'web', 'الموقع', 'الموقعالإلكتروني', 'الموقعالالكتروني'],
+  stage: ['stage', 'المرحلة'],
+  demo_url: ['demourl', 'demo', 'رابطالنموذج'],
+  demo_slug: ['demoslug'],
+  batch: ['batch', 'الدفعة'],
+  notes: ['notes', 'note', 'ملاحظات'],
+  maps_url: ['mapsurl', 'googlemaps', 'checkurl', 'maplink', 'رابطالخريطة'],
+  claimed: ['claimed', 'isclaimed'],
+  source: ['source', 'المصدر'],
+};
+const hkey = h => String(h || '').replace(/^\uFEFF/, '').toLowerCase().replace(/[\s_\-.'"]/g, '');
+const ALIAS = (() => { const m = new Map(); for (const [k, list] of Object.entries(HEADERS)) for (const a of list) m.set(a, k); return m; })();
+function normalizeRow(raw) {
+  const out = {};
+  for (const [h, v] of Object.entries(raw)) {
+    const k = ALIAS.get(hkey(h));
+    if (k && (out[k] === undefined || out[k] === '')) out[k] = String(v ?? '').trim();
+  }
+  if (!out.district && out.address) { const m = out.address.match(/حي\s+([^,،\-–]+)/); if (m) out.district = m[1].trim(); }
+  return out;
+}
+const WOMEN = /نسائي|نسائية|للنساء|سيدات|ladies|women|beauty|تجميل|سبا|spa\b/i;
+const CAT_RULES = [
+  ['carwash', /مغسلة\s*سيارات|غسيل\s*سيارات|car\s*wash|تلميع\s*سيارات/i],
+  ['carpet', /سجاد|مفروشات|carpet|rug\b/i],
+  ['barber', /حلاق|barber|صالون\s*رجال|men'?s\s*(salon|grooming)|قص\s*شعر/i],
+  ['phones', /صيانة\s*(جوال|موبايل|هواتف)|جوالات|موبايلات|phone\s*repair|mobile\s*phone|cell\s*phone/i],
+  ['flowers', /ورد|زهور|كوش|florist|flower/i],
+  ['bakery', /مخبز|معجنات|bakery/i],
+  ['sweets', /حلويات|كنافة|بقلاوة|sweet|dessert|confection|chocolate|candy/i],
+  ['restaurant', /مطعم|مندي|مظبي|كبسة|شواء|مشويات|مطبخ|restaurant|grill|kitchen|cafe|كافيه/i],
+  ['tailor', /خياط|تفصيل|tailor|ثياب|thobe/i],
+  ['garage', /ورشة|ورش\s|ميكانيك|سمكرة|كهرباء\s*سيارات|تغيير\s*زيت|garage|auto\s*repair|car\s*repair|mechanic|tire|إطارات/i],
+];
+// يعيد مفتاح الفئة أو '' إن لم يعرف. لا يخمّن خارج القواعد.
+function guessCategory(...texts) {
+  const t = texts.filter(Boolean).join(' ');
+  for (const [k, re] of CAT_RULES) if (re.test(t)) return k;
+  return '';
+}
+const SOCIAL = /instagram\.com|facebook\.com|fb\.com|tiktok\.com|snapchat\.com|twitter\.com|x\.com|linktr\.ee|wa\.me|api\.whatsapp|t\.me|youtube\.com/i;
+const hasRealWebsite = w => { const x = String(w || '').trim(); return !!x && !SOCIAL.test(x) && /\./.test(x); };
+
+const https = u => /^https:\/\/[^\s"'<>]+$/.test(String(u || ''));
+const CONTACTED_STAGES = ['sent', 'auto_reply', 'human_reply', 'interested', 'quoted', 'deposit', 'delivering', 'won', 'not_now', 'rejected'];
+
+// يستورد صفوف CSV. المفتاح: الجوال. من تواصلنا معه يدخل بـ do_not_contact.
+// existing: العملاء الحاليون. لا يُكرَّر أحد، ولا يُفكّ حجز أحد.
+function importLeads(rows, existing = []) {
+  const byPhone = new Map();
+  for (const l of existing) {
+    if (l.phone) byPhone.set(l.phone, l);
+    if (l.alt_phone) byPhone.set(l.alt_phone, l);
+  }
+  const added = [], skipped = [], invalid = [], flagged = [];
+  for (const raw of rows) {
+    const r = normalizeRow(raw);
+    if (!r.name) { invalid.push({ name: '(بلا اسم)', why: 'سطر بلا اسم محل' }); continue; }
+    if (WOMEN.test(r.name + ' ' + (r.category || ''))) { invalid.push({ name: r.name, why: 'صالون أو نشاط نسائي: خارج الاستهداف' }); continue; }
+    const phone = normPhone(r.phone);
+    if (!phone) { invalid.push({ name: r.name, why: 'جوال لا يبدأ بـ 05 أو غير صالح' }); continue; }
+    const alt = normPhone(r.alt_phone) || '';
+    if (byPhone.has(phone) || (alt && byPhone.has(alt))) { skipped.push(r.name); continue; }
+    let stage = STAGES.includes(r.stage) ? r.stage : 'candidate';
+    const hasSite = hasRealWebsite(r.website);
+    if (hasSite && !CONTACTED_STAGES.includes(stage)) stage = 'rejected';
+    const contacted = CONTACTED_STAGES.includes(stage);
+    const sentAt = contacted ? parseSentDate(r.notes) : null;
+    const rating = Number(toLatin(r.rating)) || null;
+    const reviews = Math.round(Number(toLatin(r.reviews))) || null;
+    const lead = {
+      id: 'l' + phone.slice(2),
+      name: r.name, category: CATEGORIES[r.category] ? r.category : guessCategory(r.category, r.name), district: r.district || '', city: r.city || '',
+      phone, alt_phone: alt, rating, reviews,
+      demo_slug: r.demo_slug || '', demo_url: r.demo_url || '',
+      hours_week: null, batch: Number(r.batch) || null,
+      stage, notes: r.notes || '',
+      website: r.website || '', address: r.address || '', maps_url: https(r.maps_url) ? r.maps_url : '', source: r.source || '',
+      claimed: /^(true|1|yes|نعم)$/i.test(r.claimed || ''), tags: [],
+      do_not_contact: contacted,
+      replyType: stage === 'auto_reply' ? 'auto' : null,
+      // سجل بلا تاريخ لا يُنشأ: لا يُحسب في «اليوم» ولا في كتل الأربعين. الحجب يكفيه do_not_contact.
+      log: sentAt ? [{ dir: 'out', kind: 'intro', at: sentAt + 'T12:00:00+03:00', imported: true }] : [],
+      quotes: [], payments: [],
+    };
+    // تحذير قواعد الاستهداف (SPEC القسم ٣). يُعلَّم فقط ولا يُحذف.
+    const warn = [];
+    if (!CATEGORIES[lead.category]) warn.push('فئة غير معروفة');
+    if (hasSite) warn.push('عنده موقع');
+    if (rating !== null && rating < 4.0) warn.push('تقييم أقل من ٤٫٠');
+    if (reviews !== null && reviews < 300) warn.push('مراجعات أقل من ٣٠٠');
+    if (warn.length) { lead.warnings = warn; flagged.push({ name: lead.name, warn }); }
+    added.push(lead);
+    byPhone.set(phone, lead);
+    if (alt) byPhone.set(alt, lead);
+  }
+  return { added, skipped, invalid, flagged };
+}
+
+// إدخال سريع: كل سطر فيه جوال واسم. يقبل نصاً منسوخاً من خرائط Google. يعيد صفوفاً لـ importLeads.
+// لا يخمّن اسماً: السطر بلا اسم بعد حذف الرقم يُرجَع في bad.
+function parseQuickLines(text, defaultCategory = '') {
+  const rows = [], bad = [];
+  for (const line0 of String(text || '').split(/\r?\n/)) {
+    const line = toLatin(line0).trim();
+    if (!line) continue;
+    const m = line.match(/(?:\+?966|00966)?[\s\-]*0?5(?:[\s\-]?\d){8}/);
+    const phone = m ? normPhone(m[0].replace(/[\s\-]/g, '')) : null;
+    const name = (m ? line.replace(m[0], ' ') : line).replace(/[|·•;,،:\-\u2013\u2014\t]+/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!phone) { bad.push({ line: line0.trim(), why: 'لا جوال سعودي يبدأ بـ 05' }); continue; }
+    if (!name) { bad.push({ line: line0.trim(), why: 'لا اسم للمحل' }); continue; }
+    rows.push({ name, phone, category: CATEGORIES[defaultCategory] ? defaultCategory : guessCategory(name), stage: 'candidate' });
+  }
+  return { rows, bad };
+}
+
+const isContactedBefore = l => !!l.do_not_contact || (l.log || []).some(e => e.dir === 'out');
+
+// الأرقام المحجوبة (الرئيسي والبديل) لمجموعة عملاء.
+function lockedPhones(leads) {
+  const set = new Set();
+  for (const l of leads) if (l.do_not_contact) { if (l.phone) set.add(l.phone); if (l.alt_phone) set.add(l.alt_phone); }
+  return set;
+}
+
+// استرجاع نسخة احتياطية: لا يفكّ حجزاً أبداً. كل رقم محجوب اليوم يبقى محجوباً بعد الاسترجاع.
+function restoreLeads(current, incoming) {
+  const out = incoming.map(l => ({ ...l }));
+  const byPhone = new Map();
+  out.forEach(l => { if (l.phone) byPhone.set(l.phone, l); if (l.alt_phone) byPhone.set(l.alt_phone, l); });
+  for (const c of current) {
+    if (!c.do_not_contact) continue;
+    const hit = byPhone.get(c.phone) || (c.alt_phone && byPhone.get(c.alt_phone));
+    if (hit) hit.do_not_contact = true;
+    else out.push({ ...c });
+  }
+  return out;
+}
+
+/* ───── أسئلة تتكرر: مصدر واحد للموقع ولبيانات محركات البحث. الأسعار من PACKAGES فلا تنحرف ───── */
+const priceOf = id => PACKAGES.find(p => p.id === id).price;
+const FAQ = [
+  { q: { ar: 'كم السعر؟', en: 'How much?' },
+    a: { ar: `صفحة المحل ${moneyAr(priceOf('page'))} ريال. الموقع التعريفي يبدأ من ${moneyAr(priceOf('site'))}، ونظام الويب من ${moneyAr(priceOf('web'))}، وتطبيق الجوال من ${moneyAr(priceOf('app'))}.`,
+         en: `The shop page is SAR ${moneyEn(priceOf('page'))}. A business website starts from SAR ${moneyEn(priceOf('site'))}, a web system from SAR ${moneyEn(priceOf('web'))}, and a mobile app from SAR ${moneyEn(priceOf('app'))}.` } },
+  { q: { ar: 'كم المدة؟', en: 'How long?' },
+    a: { ar: `صفحة المحل خلال ${toIndic(5)} أيام عمل من استلام الصور والبيانات. الباقات الأكبر نحددها في الكوتيشن.`, en: 'The shop page takes 5 working days from receiving photos and details. Larger packages are set in the quote.' } },
+  { q: { ar: 'من يملك الكود والدومين؟', en: 'Who owns the code and domain?' },
+    a: { ar: 'أنت. الكود بعقد نقل ملكية، والدومين يُسجَّل باسمك وتدفعه أنت.', en: 'You do. The code is transferred by ownership contract, and the domain is registered in your name and paid by you.' } },
+  { q: { ar: 'وإذا صار عطل؟', en: 'What if something breaks?' },
+    a: { ar: `ضمان إصلاح الأعطال ${toIndic(WARRANTY_DAYS)} يوماً من التسليم.`, en: `Defects are fixed free for ${WARRANTY_DAYS} days after delivery.` } },
+  { q: { ar: 'وين يُستضاف الموقع؟', en: 'Where is it hosted?' },
+    a: { ar: 'على Netlify المجاني. وفي التطبيقات رسوم المتاجر على العميل.', en: 'On free-tier Netlify. For apps, store fees are paid by the client.' } },
+  { q: { ar: 'وإذا طلبت إضافة بعد الاعتماد؟', en: 'What about additions after approval?' },
+    a: { ar: 'السعر ثابت للخصائص المعتمدة، والإضافات بكوتيشن منفصل.', en: 'The price is fixed for approved scope. Additions are quoted separately.' } },
+];
+
+/* ───── CRM: قوة العميل، المهام، الوسوم، التصدير ───── */
+// قوة العميل 0 إلى 100، وكل جزء مشروح. من بيانات حقيقية فقط (التقييم والمراجعات والحضور والجوال).
+function leadScore(l) {
+  const r = Number(l.rating) || 0, v = Number(l.reviews) || 0;
+  const pr = Math.round(Math.max(0, Math.min(1, r - 4)) * 30);
+  const pv = v >= 300 ? Math.min(40, Math.round(40 * Math.log10(v / 300))) : 0;
+  const social = /instagram|tiktok|snapchat|fresha|linktr|facebook|twitter|x\.com/i.test(l.website || '') ? 10 : 0;
+  const claimed = l.claimed ? 10 : 0;
+  const mobile = normPhone(l.phone) ? 10 : 0;
+  const parts = [['التقييم', pr, 30], ['عدد المراجعات', pv, 40], ['حضور على السوشال', social, 10], ['ملف مطالَب به', claimed, 10], ['جوال صالح', mobile, 10]];
+  return { score: pr + pv + social + claimed + mobile, parts };
+}
+const mapsUrl = l => (/^https:\/\/\S+$/.test(l.maps_url || '') ? l.maps_url
+  : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent([l.name, l.district, l.city || 'جدة'].filter(Boolean).join(' ')));
+
+// المهمة التالية: { text, due: 'YYYY-MM-DD' } بتوقيت الرياض.
+const dueIn = (days, now = new Date()) => riyadh(addDays(now, days)).ymd;
+function setNextAction(l, text, due) {
+  const t = String(text || '').trim().slice(0, 140);
+  if (!t || !/^\d{4}-\d{2}-\d{2}$/.test(due || '')) return false;
+  l.next = { text: t, due }; return true;
+}
+const clearNextAction = l => { delete l.next; };
+function tasksDue(leads, now = new Date()) {
+  const today = riyadh(now).ymd;
+  return leads.filter(l => l.next && l.next.due <= today && !['rejected', 'not_now'].includes(l.stage)).sort((a, b) => a.next.due.localeCompare(b.next.due));
+}
+const dueLabel = (due, now = new Date()) => { const t = riyadh(now).ymd; return due < t ? 'متأخرة' : due === t ? 'اليوم' : due; };
+
+// الوسوم
+const cleanTag = t => String(t || '').replace(/[,\n\r"<>]/g, ' ').trim().slice(0, 20);
+function addTag(l, tag) { const t = cleanTag(tag); if (!t) return false; l.tags = l.tags || []; if (l.tags.includes(t)) return false; if (l.tags.length >= 8) return false; l.tags.push(t); return true; }
+function removeTag(l, tag) { l.tags = (l.tags || []).filter(x => x !== tag); }
+
+// إجراء جماعي. لا يمسّ do_not_contact أبداً، ولا يسجّل رفضاً على من تواصلنا معه إلا إن طُلب صراحة.
+function applyBulk(leads, ids, op, arg) {
+  const set = new Set(ids); let n = 0;
+  for (const l of leads) {
+    if (!set.has(l.id)) continue;
+    if (op === 'reject') { if (l.stage !== 'rejected') { l.stage = 'rejected'; (l.log = l.log || []).push({ kind: 'stage', stage: 'rejected', at: new Date().toISOString() }); n++; } }
+    else if (op === 'tag') { if (addTag(l, arg)) n++; }
+    else if (op === 'untag') { const b = (l.tags || []).length; removeTag(l, arg); if ((l.tags || []).length !== b) n++; }
+  }
+  return n;
+}
+
+// قوائم ذكية
+const SMART = {
+  top: { ar: 'الأقوى', test: (l, ctx) => !l.do_not_contact && ['candidate', 'demo_ready'].includes(l.stage), sort: (a, b) => leadScore(b).score - leadScore(a).score },
+  ready: { ar: 'جاهز للإرسال الآن', test: (l, ctx) => !sendBlock(l, ctx.now, ctx.mode), sort: (a, b) => leadScore(b).score - leadScore(a).score },
+  waiting: { ar: 'ردود تنتظرني', test: (l, ctx) => ctx.waiting.has(l.id), sort: (a, b) => 0 },
+  tasks: { ar: 'لها مهمة', test: (l, ctx) => !!l.next, sort: (a, b) => (a.next.due).localeCompare(b.next.due) },
+  hot: { ar: 'مهتم أو كوتيشن', test: (l) => ['interested', 'quoted', 'deposit'].includes(l.stage), sort: (a, b) => 0 },
+};
+
+// تصدير CSV (نص). الأعمدة ثابتة ومرتبة لتُفتح في إكسل أو تُستورد ثانية.
+const csvCell = v => { const x = String(v ?? ''); return /[",\n\r]/.test(x) ? '"' + x.replace(/"/g, '""') + '"' : x; };
+function exportCsv(leads) {
+  const cols = ['name', 'category', 'district', 'phone', 'alt_phone', 'rating', 'reviews', 'website', 'address', 'maps_url', 'stage', 'score', 'tags', 'notes', 'sent_at', 'next_action', 'next_due'];
+  const rows = [cols.join(',')];
+  for (const l of leads) {
+    const sent = (l.log || []).find(e => e.dir === 'out' && e.kind === 'intro');
+    rows.push([l.name, l.category, l.district, l.phone, l.alt_phone, l.rating, l.reviews, l.website, l.address, mapsUrl(l), l.stage, leadScore(l).score,
+      (l.tags || []).join('|'), l.notes, sent ? sent.at : '', l.next ? l.next.text : '', l.next ? l.next.due : ''].map(csvCell).join(','));
+  }
+  return rows.join('\n');
+}
+
+
+(function () {
+  'use strict';
+  const KEY = 'asst.v1';
+  const CLOUD = {"url":"https://qivnzxxcwwzptnvnkaui.supabase.co","key":"sb_publishable_FNpRJONGddFeEowMQunOBg_2mhu8MRe","domain":"abdullah-studio.app"};          // في التطبيق المنشور: {url, key, domain}
+  const cloudMode = !!(CLOUD && CLOUD.url);
+  const $ = (s, r) => (r || document).querySelector(s);
+  const ls = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+  };
+  function h(tag, props, ...kids) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v === false || v == null) continue;
+      if (k === 'class') e.className = v;
+      else if (k === 'html') e.innerHTML = v;
+      else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+      else if (v === true) e.setAttribute(k, '');
+      else e.setAttribute(k, v);
+    }
+    for (const c of kids.flat(9)) { if (c == null || c === false) continue; e.append(c.nodeType ? c : document.createTextNode(String(c))); }
+    return e;
+  }
+  let toastT;
+  function toast(m) { const el = $('#toast'); el.textContent = m; el.classList.remove('hide'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.add('hide'), 1900); }
+
+  /* ═════ الحالة ═════ */
+  const day = iso => riyadh(new Date(iso)).ymd;
+  const hhmm = iso => { const r = riyadh(new Date(iso)); return String(Math.floor(r.min / 60)).padStart(2, '0') + ':' + String(r.min % 60).padStart(2, '0'); };
+  const nowIso = () => new Date().toISOString();
+
+  const DEFAULTS = () => ({ worksUrl: '', mode: 'site', siteUrl: DEFAULT_SITE_URL, dailyLimit: DAILY_LIMIT });
+  function normalize(d) {
+    d.settings = Object.assign(DEFAULTS(), d.settings || {});
+    d.settings.siteUrl = normSiteUrl(d.settings.siteUrl);
+    if (!MESSAGE_MODES.includes(d.settings.mode)) d.settings.mode = 'site';
+    d.settings.dailyLimit = Math.min(20, Math.max(1, Math.round(Number(d.settings.dailyLimit) || DAILY_LIMIT)));
+    return d;
+  }
+  function loadPlain() {
+    const raw = ls.get(KEY);
+    if (raw) { try { const d = JSON.parse(raw); if (d && Array.isArray(d.leads)) return normalize(d); } catch (e) { /* فاسد: نبدأ من جديد */ } }
+    return normalize({ ver: 1, leads: [], settings: {} });
+  }
+  let S = null;            // تبقى null أثناء القفل: لا بيانات في الذاكرة ولا في الصفحة
+  let storageOk = true;
+  const LOCK_KEY = 'asst.v2';
+
+  /* ═════ القفل: رقم سري يشتق مفتاحاً (PBKDF2) ويشفّر البيانات (AES-GCM) ═════ */
+  const Vault = (() => {
+    const enc = new TextEncoder(), dec = new TextDecoder();
+    const toB64 = u8 => { let x = ''; for (let i = 0; i < u8.length; i += 0x8000) x += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(x); };
+    const fromB64 = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+    return {
+      ok: () => !!(window.crypto && crypto.subtle),
+      newSalt: () => toB64(crypto.getRandomValues(new Uint8Array(16))),
+      async derive(pin, saltB64, iter) {
+        const base = await crypto.subtle.importKey('raw', enc.encode(pin), 'PBKDF2', false, ['deriveKey']);
+        return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: fromB64(saltB64), iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+      },
+      async seal(key, text) {
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(text)));
+        return { iv: toB64(iv), ct: toB64(ct) };
+      },
+      async open(key, box) { return dec.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(box.iv) }, key, fromB64(box.ct))); },
+    };
+  })();
+
+  /* ═════ السحابة: Supabase. الجلسة في الذاكرة وحدها، فإغلاق التطبيق يعني دخولاً جديداً ═════ */
+  const Cloud = (() => {
+    let sess = null, refreshT = null, lastSaved = '', saving = null, pending = false;
+    const status = { state: 'idle', msg: '' };
+    const hdr = (auth) => Object.assign({ apikey: CLOUD.key, 'Content-Type': 'application/json' }, auth && sess ? { Authorization: 'Bearer ' + sess.access } : {});
+    const emailOf = u => { u = String(u || '').trim().toLowerCase(); return u.includes('@') ? u : u + '@' + CLOUD.domain; };
+    async function call(path, opts) {
+      const r = await fetch(CLOUD.url + path, opts);
+      let body = null; try { body = await r.json(); } catch (e) { /* بلا جسم */ }
+      if (!r.ok) { const e = new Error((body && (body.msg || body.error_description || body.message)) || ('HTTP ' + r.status)); e.status = r.status; throw e; }
+      return body;
+    }
+    function keep(t) {
+      sess = { access: t.access_token, refresh: t.refresh_token, user: t.user, exp: Date.now() + (t.expires_in || 3600) * 1000 };
+      clearTimeout(refreshT);
+      refreshT = setTimeout(() => refresh().catch(() => {}), Math.max(30e3, (t.expires_in || 3600) * 1000 - 120e3));
+    }
+    async function refresh() {
+      if (!sess) return;
+      keep(await call('/auth/v1/token?grant_type=refresh_token', { method: 'POST', headers: hdr(), body: JSON.stringify({ refresh_token: sess.refresh }) }));
+    }
+    function setStatus(state, msg) { status.state = state; status.msg = msg || ''; const el = $('#sync'); if (el) { el.textContent = msg || ''; el.dataset.state = state; } }
+    return {
+      status,
+      get user() { return sess && sess.user; },
+      mustChange: () => !!(sess && sess.user && sess.user.user_metadata && sess.user.user_metadata.must_change_password),
+      async login(username, password) {
+        keep(await call('/auth/v1/token?grant_type=password', { method: 'POST', headers: hdr(), body: JSON.stringify({ email: emailOf(username), password }) }));
+      },
+      async changePassword(pw) {
+        const u = await call('/auth/v1/user', { method: 'PUT', headers: hdr(true), body: JSON.stringify({ password: pw, data: { must_change_password: false } }) });
+        sess.user = u;
+      },
+      async load() {
+        const id = sess.user.id;
+        const rows = await call('/rest/v1/app_state?select=data&user_id=eq.' + id, { headers: hdr(true) });
+        if (rows && rows.length) { lastSaved = JSON.stringify(rows[0].data); return rows[0].data; }
+        const fresh = { ver: 1, leads: [], settings: {} };
+        await call('/rest/v1/app_state', { method: 'POST', headers: Object.assign(hdr(true), { Prefer: 'return=minimal' }), body: JSON.stringify({ user_id: id, data: fresh }) });
+        lastSaved = JSON.stringify(fresh); return fresh;
+      },
+      // يحفظ الحالة كاملة. لا يرسل إن لم يتغير شيء، ولا يرسل طلبين معاً.
+      async save(data) {
+        if (!sess) return;
+        const body = JSON.stringify(data);
+        if (body === lastSaved) return;
+        if (saving) { pending = true; return; }
+        setStatus('saving', 'جارٍ الحفظ...');
+        saving = (async () => {
+          try {
+            if (Date.now() > sess.exp - 60e3) await refresh();
+            await call('/rest/v1/app_state?user_id=eq.' + sess.user.id, { method: 'PATCH', headers: Object.assign(hdr(true), { Prefer: 'return=minimal' }), body: '{"data":' + body + '}' });
+            lastSaved = body; setStatus('ok', 'محفوظ في السحابة');
+          } catch (e) { setStatus('err', 'تعذّر الحفظ. سأحاول ثانية.'); setTimeout(() => this.save(S), 8000); }
+          finally { saving = null; if (pending) { pending = false; this.save(S); } }
+        })();
+        return saving;
+      },
+      async flush() { if (saving) await saving; if (S) await this.save(S); if (saving) await saving; },
+      logout() { clearTimeout(refreshT); sess = null; lastSaved = ''; },
+    };
+  })();
+
+  const PBKDF2_ITER = 400000;
+  let vault = null;        // { key, salt, iter } أثناء الفتح فقط
+  let saveT = null;
+  async function persistNow() {
+    if (!S) return;
+    if (cloudMode) { clearTimeout(cloudT); await Cloud.save(S); return; }
+    if (!vault) { storageOk = ls.set(KEY, JSON.stringify(S)); return; }
+    try { const box = await Vault.seal(vault.key, JSON.stringify(S)); storageOk = ls.set(LOCK_KEY, JSON.stringify({ v: 2, salt: vault.salt, iter: vault.iter, iv: box.iv, ct: box.ct })); } catch (e) { storageOk = false; }
+  }
+  let cloudT = null;
+  function save() { if (!S) return; if (cloudMode) { clearTimeout(cloudT); cloudT = setTimeout(() => Cloud.save(S), 600); return; } if (!vault) { storageOk = ls.set(KEY, JSON.stringify(S)); return; } clearTimeout(saveT); saveT = setTimeout(persistNow, 250); }
+  let fails = 0, blockedUntil = 0;
+  function showLock(msg) {
+    S = null; vault = null;
+    $('#view').innerHTML = ''; $('#tabs').innerHTML = ''; $('#sheet-root').innerHTML = ''; $('#sub').textContent = 'مقفل';
+    const root = $('#lock'); root.classList.remove('hide'); root.innerHTML = '';
+    const err = h('div', { class: 'muted', id: 'lock-err', role: 'alert', style: 'min-height:24px;color:var(--bad)' }, msg || '');
+    const pin = h('input', { class: 'in', id: 'lock-pin', type: 'password', autocomplete: 'current-password', 'aria-label': 'الرقم السري', placeholder: 'الرقم السري' });
+    const reset = h('div', { class: 'hide', id: 'lock-reset', style: 'display:grid;gap:8px' }, h('div', { class: 'banner' }, 'مسح بيانات هذا الجهاز نهائياً. تستعيدها فقط من نسخة احتياطية.'),
+      h('button', { class: 'btn sm', type: 'button', onclick: () => { try { localStorage.removeItem(LOCK_KEY); localStorage.removeItem(KEY); } catch (e) { /* لا شيء */ } fails = 0; root.classList.add('hide'); S = loadPlain(); startUi(); } }, 'امسح وابدأ من جديد'));
+    root.append(h('form', { class: 'lock-box', onsubmit: async e => { e.preventDefault(); await tryUnlock(pin.value, err, pin); } },
+      h('span', { class: 'mark', 'aria-hidden': 'true' }, 'ح'), h('h1', { style: 'font-size:26px' }, 'مساعد عبدالله'), h('p', { class: 'muted' }, 'أدخل الرقم السري لفتح بياناتك.'),
+      pin, err, h('button', { class: 'btn primary', type: 'submit', style: 'width:100%' }, 'افتح'),
+      h('button', { class: 'btn sm', type: 'button', style: 'border-color:transparent', onclick: () => $('#lock-reset').classList.toggle('hide') }, 'نسيت الرقم؟'), reset));
+    setTimeout(() => pin.focus(), 50);
+  }
+  async function tryUnlock(pin, err, input) {
+    const wait = Math.ceil((blockedUntil - Date.now()) / 1000);
+    if (wait > 0) { err.textContent = 'انتظر ' + wait + ' ثانية.'; return; }
+    let blob; try { blob = JSON.parse(ls.get(LOCK_KEY)); } catch (e) { blob = null; }
+    if (!blob) { err.textContent = 'لا بيانات مشفّرة. استعمل «نسيت الرقم».'; return; }
+    err.textContent = 'جارٍ الفتح...';
+    try {
+      const key = await Vault.derive(pin, blob.salt, blob.iter);
+      const d = JSON.parse(await Vault.open(key, blob));
+      if (!d || !Array.isArray(d.leads)) throw new Error('bad');
+      fails = 0; S = normalize(d); vault = { key, salt: blob.salt, iter: blob.iter };
+      $('#lock').classList.add('hide'); $('#lock').innerHTML = ''; startUi();
+    } catch (e) {
+      fails++; input.value = '';
+      if (fails >= 5) { blockedUntil = Date.now() + Math.min(600, 30 * (fails - 4)) * 1000; err.textContent = 'محاولات كثيرة. انتظر ' + Math.min(600, 30 * (fails - 4)) + ' ثانية.'; }
+      else err.textContent = 'الرقم غير صحيح.';
+    }
+  }
+  async function enableLock(pin, pin2) {
+    if (!Vault.ok()) return 'المتصفح لا يدعم التشفير هنا.';
+    if (pin.length < 6) return 'الرقم السري ٦ خانات على الأقل. الأفضل ٨ أو أكثر.';
+    if (pin !== pin2) return 'الرقمان غير متطابقين.';
+    const salt = Vault.newSalt(), key = await Vault.derive(pin, salt, PBKDF2_ITER);
+    vault = { key, salt, iter: PBKDF2_ITER };
+    await persistNow();
+    if (!storageOk) { vault = null; return 'تعذّر الحفظ في هذا المتصفح.'; }
+    try { localStorage.removeItem(KEY); } catch (e) { /* لا شيء */ }
+    return '';
+  }
+  async function disableLock(pin) {
+    let blob; try { blob = JSON.parse(ls.get(LOCK_KEY)); } catch (e) { return 'لا قفل مفعّل.'; }
+    try { await Vault.open(await Vault.derive(pin, blob.salt, blob.iter), blob); } catch (e) { return 'الرقم غير صحيح.'; }
+    vault = null; storageOk = ls.set(KEY, JSON.stringify(S));
+    try { localStorage.removeItem(LOCK_KEY); } catch (e) { /* لا شيء */ }
+    return '';
+  }
+
+  /* ═════ الدخول السحابي: اسم مستخدم ورمز مرور ═════ */
+  function lockShell(title, note, ...body) {
+    S = null; vault = null;
+    $('#view').innerHTML = ''; $('#tabs').innerHTML = ''; $('#sheet-root').innerHTML = ''; $('#sub').textContent = 'غير مسجّل'; const sy = $('#sync'); if (sy) sy.textContent = '';
+    const root = $('#lock'); root.classList.remove('hide'); root.innerHTML = '';
+    root.append(h('form', { class: 'lock-box', onsubmit: e => e.preventDefault() },
+      h('span', { class: 'mark', 'aria-hidden': 'true' }, 'ح'), h('h1', { style: 'font-size:26px' }, title), h('p', { class: 'muted' }, note), ...body));
+    return root;
+  }
+  function showLogin(msg) {
+    const err = h('div', { class: 'muted', id: 'lock-err', role: 'alert', style: 'min-height:24px;color:var(--bad)' }, msg || '');
+    const user = h('input', { class: 'in', id: 'login-user', autocomplete: 'username', autocapitalize: 'none', spellcheck: 'false', dir: 'ltr', 'aria-label': 'اسم المستخدم', placeholder: 'اسم المستخدم' });
+    const pass = h('input', { class: 'in', id: 'login-pass', type: 'password', autocomplete: 'current-password', dir: 'ltr', 'aria-label': 'رمز المرور', placeholder: 'رمز المرور' });
+    const go = h('button', { class: 'btn primary', type: 'submit', style: 'width:100%' }, 'دخول');
+    const root = lockShell('مساعد عبدالله', 'سجّل دخولك. بياناتك في حسابك السحابي، ولا يُحفظ شيء في هذا الجهاز.', user, pass, err, go);
+    root.querySelector('form').addEventListener('submit', async () => {
+      const wait = Math.ceil((blockedUntil - Date.now()) / 1000);
+      if (wait > 0) { err.textContent = 'انتظر ' + wait + ' ثانية.'; return; }
+      if (!user.value.trim() || !pass.value) { err.textContent = 'اكتب اسم المستخدم ورمز المرور.'; return; }
+      go.disabled = true; err.textContent = 'جارٍ الدخول...';
+      try { await Cloud.login(user.value, pass.value); }
+      catch (e) {
+        go.disabled = false; pass.value = ''; fails++;
+        if (!navigator.onLine || !e.status) { err.textContent = 'لا اتصال بالإنترنت. التطبيق يحتاج اتصالاً ليفتح بياناتك.'; return; }
+        if (fails >= 5) { blockedUntil = Date.now() + Math.min(600, 30 * (fails - 4)) * 1000; err.textContent = 'محاولات كثيرة. انتظر ' + Math.min(600, 30 * (fails - 4)) + ' ثانية.'; }
+        else err.textContent = 'اسم المستخدم أو رمز المرور غير صحيح.';
+        return;
+      }
+      fails = 0;
+      if (Cloud.mustChange()) { showChangePass(); return; }
+      await openCloud(err, go);
+    });
+    setTimeout(() => user.focus(), 50);
+  }
+  function showChangePass() {
+    const err = h('div', { class: 'muted', id: 'lock-err', role: 'alert', style: 'min-height:24px;color:var(--bad)' });
+    const p1 = h('input', { class: 'in', id: 'new-pass', type: 'password', autocomplete: 'new-password', dir: 'ltr', 'aria-label': 'رمز المرور الجديد', placeholder: 'رمز المرور الجديد' });
+    const p2 = h('input', { class: 'in', id: 'new-pass2', type: 'password', autocomplete: 'new-password', dir: 'ltr', 'aria-label': 'أعد كتابة الرمز', placeholder: 'أعد كتابته' });
+    const go = h('button', { class: 'btn primary', type: 'submit', style: 'width:100%' }, 'احفظ الرمز وادخل');
+    const root = lockShell('اختر رمز مرورك', 'هذا أول دخول. الرمز المؤقت يتوقف الآن. اختر رمزاً لا يعرفه غيرك، ١٠ محارف على الأقل.', p1, p2, err, go);
+    root.querySelector('form').addEventListener('submit', async () => {
+      if (p1.value.length < 10) { err.textContent = 'الرمز ١٠ محارف على الأقل.'; return; }
+      if (p1.value !== p2.value) { err.textContent = 'الرمزان غير متطابقين.'; return; }
+      go.disabled = true; err.textContent = 'جارٍ الحفظ...';
+      try { await Cloud.changePassword(p1.value); }
+      catch (e) { go.disabled = false; err.textContent = 'تعذّر تغيير الرمز: ' + e.message; return; }
+      await openCloud(err, go);
+      toast('حُفظ رمزك الجديد');
+    });
+    setTimeout(() => p1.focus(), 50);
+  }
+  async function openCloud(err, go) {
+    err.textContent = 'جارٍ تحميل عملائك...';
+    try { S = normalize(await Cloud.load()); }
+    catch (e) { if (go) go.disabled = false; err.textContent = 'تعذّر تحميل البيانات: ' + e.message; return; }
+    $('#lock').classList.add('hide'); $('#lock').innerHTML = ''; startUi();
+  }
+  async function logout(msg) { if (S) { clearTimeout(cloudT); try { await Cloud.flush(); } catch (e) { /* نحاول ولا نوقف الخروج */ } } Cloud.logout(); showLogin(msg); }
+  async function lockNow() { clearTimeout(saveT); await persistNow(); showLock(); }
+  let hiddenAt = 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { hiddenAt = Date.now(); if (cloudMode && S) { clearTimeout(cloudT); Cloud.save(S); } else if (vault) { clearTimeout(saveT); persistNow(); } }
+    else if (hiddenAt && Date.now() - hiddenAt > 5 * 60 * 1000) { if (cloudMode && S) logout('خرجت تلقائياً بعد ٥ دقائق. ادخل من جديد.'); else if (vault) lockNow(); }
+  });
+  const real = () => S.leads.filter(l => !l.example);
+  const hasExamples = () => S.leads.some(l => l.example);
+  const byId = id => S.leads.find(l => l.id === id);
+  function pushLog(l, e) { (l.log = l.log || []).push({ at: nowIso(), ...e }); }
+  function setStage(l, stage) {
+    if (l.stage === stage) return;
+    l.stage = stage; pushLog(l, { kind: 'stage', stage });
+  }
+
+  /* ═════ الإطار ═════ */
+  const TABS = [
+    ['today', 'اليوم', 'M3 12l9-8 9 8M5 10v10h5v-6h4v6h5V10'],
+    ['leads', 'العملاء', 'M16 11a4 4 0 1 0-8 0M4 21a8 8 0 0 1 16 0'],
+    ['send', 'الإرسال', 'M22 2L11 13M22 2l-7 20-4-9-9-4z'],
+    ['quotes', 'كوتيشن', 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6'],
+    ['delivery', 'التسليم', 'M20 6L9 17l-5-5'],
+    ['stats', 'الأرقام', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+  ];
+  let tab = 'today';
+  const routeFromHash = () => { const k = (location.hash || '').slice(1); return TABS.some(t => t[0] === k) ? k : 'today'; };
+  function go(k) { tab = k; if (location.hash !== '#' + k) history.replaceState(null, '', '#' + k); render(); window.scrollTo(0, 0); }
+  window.addEventListener('hashchange', () => { tab = routeFromHash(); render(); });
+
+  function renderTabs() {
+    const badge = { today: 0, send: 0, delivery: 0 };
+    badge.today = unansweredHuman(S.leads).length;
+    const t = $('#tabs'); t.innerHTML = '';
+    for (const [k, label, path] of TABS) {
+      const b = h('button', { type: 'button', 'aria-current': k === tab ? 'page' : false, onclick: () => go(k) },
+        h('span', { html: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>` }), label);
+      if (k === 'today' && badge.today) b.append(h('span', { class: 'dot' }, badge.today));
+      t.append(b);
+    }
+  }
+  function render() {
+    if (!S) return;
+    save();
+    renderTabs();
+    $('#sub').textContent = hasExamples() ? 'بيانات مثال' : real().length + ' محل';
+    const v = $('#view'); v.innerHTML = '';
+    v.append(...[VIEW[tab]()].flat().filter(Boolean));
+    if (!storageOk && !cloudMode) v.prepend(h('div', { class: 'banner' }, 'التخزين غير متاح في هذا المتصفح. ما تسجّله يضيع عند الإغلاق. انسخ نسخة احتياطية من الإعدادات.'));
+  }
+
+  /* ═════ أجزاء مشتركة ═════ */
+  const catName = c => (CATEGORIES[c] ? CATEGORIES[c].ar : 'بلا فئة');
+  const stageChip = s => h('span', { class: 'chip ' + (['won', 'deposit', 'delivering', 'interested'].includes(s) ? 'ok' : ['rejected', 'not_now'].includes(s) ? 'bad' : ['human_reply', 'quoted'].includes(s) ? 'warn' : '') }, STAGE_AR[s] || s);
+  const exampleNote = () => hasExamples() ? h('div', { class: 'banner' }, 'هذي بيانات مثال لترى الشاشات. لا تُرسل ولا تُحسب في دخلك. تُمسح تلقائياً عند أول استيراد.') : null;
+  function leadItem(l, extra, sel) {
+    const sc = leadScore(l).score;
+    const body = [
+      h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted' }, [catName(l.category), l.district].filter(Boolean).join(' · '))),
+      h('span', { class: 'chips' }, l.example ? h('span', { class: 'chip warn' }, 'مثال') : null, l.do_not_contact ? h('span', { class: 'chip' }, 'محجوب') : null, l.next ? h('span', { class: 'chip warn' }, dueLabel(l.next.due)) : null, h('span', { class: 'chip num', title: 'قوة العميل' }, sc), stageChip(l.stage), extra)];
+    // وضع التحديد: label فيه checkbox (لا أزرار متداخلة). العادي: زر يفتح البطاقة.
+    if (sel) return h('label', { class: 'item' }, h('input', { class: 'ck', type: 'checkbox', checked: sel.has(l.id), onchange: () => sel.toggle(l.id), 'aria-label': 'تحديد ' + l.name }), ...body);
+    return h('button', { class: 'item', type: 'button', onclick: () => openLead(l.id) }, ...body);
+  }
+  function sheet(title, ...body) {
+    const root = $('#sheet-root');
+    const close = () => { root.innerHTML = ''; document.removeEventListener('keydown', esc); render(); };
+    const esc = e => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', esc);
+    root.innerHTML = '';
+    root.append(h('div', { class: 'sheet-bg', onclick: e => { if (e.target.classList.contains('sheet-bg')) close(); } },
+      h('div', { class: 'sheet', role: 'dialog', 'aria-label': title },
+        h('div', { class: 'shead' }, h('h2', null, title), h('button', { class: 'round', type: 'button', 'aria-label': 'إغلاق', onclick: close }, '×')), ...body)));
+    return close;
+  }
+  const waBtn = (lead, text, label, onclick, cls) => {
+    const url = lead && !lead.example ? waLink(lead.phone, text) : null;
+    return h('a', { class: 'btn ' + (cls || ''), href: url || '#', target: '_blank', rel: 'noopener', 'aria-disabled': url ? false : 'true', onclick: e => { if (!url) e.preventDefault(); else if (onclick) onclick(); } }, label);
+  };
+  const copyBtn = (text, label) => h('button', { class: 'btn', type: 'button', onclick: () => {
+    const done = () => toast('تم النسخ');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => toast('انسخ يدوياً من النص'));
+    else toast('انسخ يدوياً من النص');
+  } }, label || 'انسخ');
+
+  /* ═════ اليوم ═════ */
+  // البيانات في هذا الجوال فقط، فنذكّر بالنسخة الاحتياطية بعد ٧ أيام بلا نسخ.
+  function backupNote() {
+    if (cloudMode) return null;
+    if (hasExamples() || !real().length) return null;
+    const last = S.lastBackup ? new Date(S.lastBackup).getTime() : 0;
+    const days = last ? Math.floor((Date.now() - last) / 86400e3) : null;
+    if (last && days < 7) return null;
+    return h('div', { class: 'banner', role: 'status' }, last ? 'آخر نسخة احتياطية قبل ' + days + ' أيام. ' : 'ما نسخت نسخة احتياطية بعد. ', 'بياناتك في هذا الجوال فقط. ',
+      h('button', { class: 'btn sm', type: 'button', style: 'margin-inline-start:8px', onclick: () => settingsSheet() }, 'انسخ الآن'));
+  }
+  function viewToday() {
+    const rev = monthRevenue(real()), pct = Math.min(100, Math.round(rev / MONTH_TARGET * 100));
+    const q = sendQueue(S.leads, new Date(), S.settings.mode, S.settings.dailyLimit), human = unansweredHuman(S.leads), alertF = fortyAlert(real());
+    const counts = stageCounts(S.leads);
+    const out = [exampleNote(), backupNote(), h('h1', { class: 'sr' }, 'اليوم')];
+    out.push(h('section', { class: 'card' },
+      h('div', { class: 'row' }, h('h2', null, 'دخل هذا الشهر'), h('span', { class: 'muted num' }, 'الهدف ' + MONTH_TARGET)),
+      h('div', { class: 'big num' }, String(Math.round(rev)), h('span', { class: 'muted', style: 'font-size:16px;font-family:var(--f-body)' }, ' ريال')),
+      h('div', { class: 'bar-bg', role: 'progressbar', 'aria-label': 'نسبة الهدف الشهري', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100 }, h('div', { class: 'bar-fg', style: 'width:' + pct + '%' })),
+      h('div', { class: 'muted num' }, pct + '% من الهدف. المحسوب فقط ما وصل فعلاً وسجّلته دفعة.')));
+    if (human.length) out.push(h('section', { class: 'card alert' }, h('h2', null, 'ردود بشرية تنتظرك (' + human.length + ')'),
+      h('div', { class: 'muted' }, 'جاوب خلال ساعة في وقت الدوام.'), h('div', { class: 'list' }, human.map(l => leadItem(l)))));
+    const dueTasks = tasksDue(S.leads);
+    if (dueTasks.length) out.push(h('section', { class: 'card alert' }, h('h2', null, 'مهامك (' + dueTasks.length + ')'),
+      h('div', { class: 'list' }, dueTasks.slice(0, 8).map(l => h('button', { class: 'item', type: 'button', onclick: () => openLead(l.id) },
+        h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted' }, l.next.text)), h('span', { class: 'chip warn' }, dueLabel(l.next.due)))))));
+    out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, 'طابور اليوم'), h('button', { class: 'btn sm', type: 'button', onclick: () => go('send') }, 'افتح الإرسال')),
+      h('div', { class: 'chips' }, h('span', { class: 'chip num' }, 'أُرسل اليوم ' + q.used + ' من ' + S.settings.dailyLimit), h('span', { class: 'chip ' + (q.eligible.length ? 'ok' : '') }, q.eligible.length ? 'جاهز للإرسال ' + q.eligible.length : 'لا أحد جاهز الآن'))));
+    const topReady = q.eligible.slice().sort((a, b) => leadScore(b).score - leadScore(a).score).slice(0, 5);
+    if (topReady.length) out.push(h('section', { class: 'card' }, h('h3', null, 'الأقوى الجاهزون للإرسال'), h('div', { class: 'list' }, topReady.map(l => leadItem(l)))));
+    if (alertF.due) out.push(h('section', { class: 'card alert' }, h('h2', null, 'مرّت ' + ALERT_EVERY + ' رسالة بلا رد بشري'), h('p', null, alertF.text)));
+    else out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'قياس الرسائل'), h('span', { class: 'muted num' }, 'باقي ' + alertF.next + ' رسالة للتقييم القادم')),
+      h('div', { class: 'muted' }, 'بعد كل ' + ALERT_EVERY + ' رسالة بلا رد بشري تغيّر شيئاً واحداً فقط، ثم تقيس.')));
+    out.push(h('section', { class: 'card' }, h('h2', null, 'خط المبيعات'),
+      h('div', { class: 'stagegrid' }, STAGES.map(s => h('div', null, h('span', { class: 'muted' }, STAGE_AR[s]), h('b', { class: 'num' }, counts[s]))))));
+    return out;
+  }
+
+  /* ═════ العملاء ═════ */
+  const F = { q: '', cat: '', stage: '', sort: 'score', smart: '', view: 'list', limit: 60, selecting: false, sel: new Set() };
+  const SORTS = {
+    score: ['الأقوى', (a, b) => leadScore(b).score - leadScore(a).score],
+    reviews: ['الأعلى مراجعات', (a, b) => (Number(b.reviews) || 0) - (Number(a.reviews) || 0)],
+    newest: ['الأحدث إضافة', null],
+    name: ['الاسم', (a, b) => String(a.name).localeCompare(String(b.name), 'ar')],
+  };
+  function filteredLeads() {
+    const ctx = { now: new Date(), mode: S.settings.mode, waiting: new Set(unansweredHuman(S.leads).map(l => l.id)) };
+    const sm = F.smart ? SMART[F.smart] : null;
+    let rows = S.leads.filter(l => (!F.cat || l.category === F.cat) && (!F.stage || l.stage === F.stage) && (!sm || sm.test(l, ctx)) &&
+      (!F.q || [l.name, l.district, l.phone, (l.tags || []).join(' ')].join(' ').includes(F.q)));
+    if (sm && sm.sort && F.sort === 'score') rows = rows.slice().sort(sm.sort);
+    else if (F.sort === 'newest') rows = rows.slice().reverse();
+    else rows = rows.slice().sort(SORTS[F.sort][1]);
+    return rows;
+  }
+  const PIPE = ['candidate', 'demo_ready', 'sent', 'auto_reply', 'human_reply', 'interested', 'quoted', 'deposit', 'delivering', 'won'];
+  function viewLeads() {
+    const chips = h('div', { class: 'chipbar', role: 'group', 'aria-label': 'قوائم ذكية' }), bar = h('div'), box = h('div', { class: 'list' }), count = h('div', { class: 'muted num', role: 'status' });
+    const sel = { has: id => F.sel.has(id), toggle: id => { F.sel.has(id) ? F.sel.delete(id) : F.sel.add(id); paint(); } };
+    const paint = () => {
+      const rows = filteredLeads();
+      chips.innerHTML = ''; chips.append(h('button', { type: 'button', 'aria-pressed': F.smart === '' ? 'true' : 'false', onclick: () => { F.smart = ''; F.limit = 60; paint(); } }, 'الكل'),
+        ...Object.keys(SMART).map(k => h('button', { type: 'button', 'aria-pressed': F.smart === k ? 'true' : 'false', onclick: () => { F.smart = k; F.limit = 60; paint(); } }, SMART[k].ar)));
+      count.textContent = rows.length + ' من ' + S.leads.length + (F.selecting ? ' · محدد ' + F.sel.size : '');
+      bar.innerHTML = '';
+      if (F.selecting) {
+        const tagIn = h('input', { class: 'in', 'aria-label': 'وسم جديد', placeholder: 'وسم' });
+        bar.append(h('div', { class: 'selbar' },
+          h('button', { class: 'btn sm', type: 'button', onclick: () => { rows.forEach(l => F.sel.add(l.id)); paint(); } }, 'حدد الكل (' + rows.length + ')'),
+          h('button', { class: 'btn sm', type: 'button', disabled: !F.sel.size, onclick: () => { const n = applyBulk(S.leads, [...F.sel], 'reject'); toast('استُبعد ' + n); F.sel.clear(); save(); paint(); renderTabs(); } }, 'استبعاد'),
+          tagIn, h('button', { class: 'btn sm', type: 'button', disabled: !F.sel.size, onclick: () => { const n = applyBulk(S.leads, [...F.sel], 'tag', tagIn.value); toast('وُسم ' + n); save(); paint(); } }, 'وسم'),
+          h('button', { class: 'btn sm', type: 'button', onclick: () => { F.selecting = false; F.sel.clear(); paint(); } }, 'إنهاء')));
+      }
+      box.innerHTML = '';
+      if (!rows.length) { box.append(h('div', { class: 'empty' }, h('b', null, 'ما فيه نتائج'), h('span', null, 'غيّر الفلتر، أو استورد ملف العملاء من الإعدادات.'))); return; }
+      if (F.view === 'board') {
+        const byStage = {}; rows.forEach(l => { (byStage[l.stage] = byStage[l.stage] || []).push(l); });
+        box.className = 'board';
+        PIPE.forEach(st => { const list = byStage[st] || []; box.append(h('div', { class: 'col' }, h('h2', null, h('span', null, STAGE_AR[st]), h('span', { class: 'chip num' }, list.length)),
+          list.slice(0, 12).map(l => h('button', { class: 'kcard', type: 'button', onclick: () => openLead(l.id) }, h('b', null, l.name), h('span', { class: 'muted num' }, [catName(l.category), 'قوة ' + leadScore(l).score].join(' · ')))),
+          list.length > 12 ? h('button', { class: 'btn sm', type: 'button', onclick: () => { F.view = 'list'; F.stage = st; paint(); } }, '+ ' + (list.length - 12) + ' أخرى') : null)); });
+      } else {
+        box.className = 'list';
+        rows.slice(0, F.limit).forEach(l => box.append(leadItem(l, null, F.selecting ? sel : null)));
+        if (rows.length > F.limit) box.append(h('button', { class: 'btn', type: 'button', onclick: () => { F.limit += 60; paint(); } }, 'اعرض المزيد (' + (rows.length - F.limit) + ')'));
+      }
+      vList.setAttribute('aria-pressed', F.view === 'list' ? 'true' : 'false'); vBoard.setAttribute('aria-pressed', F.view === 'board' ? 'true' : 'false');
+    };
+    const search = h('input', { class: 'in', id: 'f-q', placeholder: 'ابحث بالاسم أو الحي أو الجوال أو الوسم', value: F.q, oninput: e => { F.q = e.target.value.trim(); F.limit = 60; paint(); } });
+    const cat = h('select', { class: 'in', id: 'f-cat', 'aria-label': 'الفئة', onchange: e => { F.cat = e.target.value; F.limit = 60; paint(); } }, h('option', { value: '' }, 'كل الفئات'), Object.keys(CATEGORIES).map(k => h('option', { value: k, selected: F.cat === k }, CATEGORIES[k].ar)));
+    const st = h('select', { class: 'in', id: 'f-st', 'aria-label': 'المرحلة', onchange: e => { F.stage = e.target.value; F.limit = 60; paint(); } }, h('option', { value: '' }, 'كل المراحل'), STAGES.map(k => h('option', { value: k, selected: F.stage === k }, STAGE_AR[k])));
+    const so = h('select', { class: 'in', id: 'f-so', 'aria-label': 'الترتيب', onchange: e => { F.sort = e.target.value; paint(); } }, Object.keys(SORTS).map(k => h('option', { value: k, selected: F.sort === k }, 'ترتيب: ' + SORTS[k][0])));
+    const vList = h('button', { id: 'v-list', type: 'button', onclick: () => { F.view = 'list'; paint(); } }, 'قائمة'), vBoard = h('button', { id: 'v-board', type: 'button', onclick: () => { F.view = 'board'; paint(); } }, 'لوحة');
+    const view = h('div', { class: 'seg', role: 'group', 'aria-label': 'طريقة العرض' }, vList, vBoard);
+    paint();
+    return [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'العملاء المحتملون'),
+      h('div', { class: 'row start' }, h('button', { class: 'btn sm', type: 'button', onclick: () => { F.selecting = !F.selecting; if (!F.selecting) F.sel.clear(); paint(); } }, 'تحديد'), h('button', { class: 'btn sm', type: 'button', onclick: quickAddSheet }, 'إدخال سريع'), h('button', { class: 'btn primary sm', type: 'button', onclick: addLeadSheet }, '+ محل'))),
+      chips, h('div', { class: 'filters' }, search, cat, st, so), h('div', { class: 'row' }, count, view), bar, box];
+  }
+
+  function quickAddSheet() {
+    const box = h('textarea', { class: 'in code', id: 'q-text', rows: 8, dir: 'auto', placeholder: 'سطر لكل محل: الاسم ثم الجوال\nمغسلة سيارات النخبة 05XXXXXXXX\nحلاق الأمير +966 5X XXX XXXX' });
+    const cat = h('select', { class: 'in', id: 'q-cat', 'aria-label': 'الفئة' }, h('option', { value: '' }, 'حسب الاسم'), Object.keys(CATEGORIES).map(k => h('option', { value: k }, CATEGORIES[k].ar)));
+    const info = h('div', { class: 'muted', style: 'white-space:pre-wrap' });
+    const peek = () => { const q = parseQuickLines(box.value, cat.value); info.textContent = box.value.trim() ? 'جاهز للإضافة: ' + q.rows.length + (q.bad.length ? '. ينقصه رقم أو اسم: ' + q.bad.length : '') : ''; };
+    box.addEventListener('input', peek); cat.addEventListener('change', peek);
+    sheet('إدخال سريع',
+      h('div', { class: 'muted' }, 'انسخ الاسم والرقم من خرائط Google والصقهما هنا. يقبل عدة محلات دفعة واحدة. الأرقام الهندية و+966 مقبولة.'),
+      box, h('label', { class: 'f', for: 'q-cat' }, 'الفئة لكل ما تلصقه', cat), info,
+      h('button', { class: 'btn primary', type: 'button', onclick: () => {
+        const q = parseQuickLines(box.value, cat.value);
+        if (!q.rows.length) { info.textContent = 'لا سطر صالح. لازم اسم وجوال يبدأ بـ 05.'; return; }
+        const wasExample = hasExamples(); if (wasExample) S.leads = real();
+        const r = importLeads(q.rows, real());
+        S.leads = S.leads.concat(r.added); save();
+        const noCat = r.added.filter(l => !CATEGORIES[l.category]).length;
+        box.value = '';
+        info.textContent = 'أُضيف ' + r.added.length + '. مكرر تُرك ' + r.skipped.length + '. مستبعد ' + (r.invalid.length + q.bad.length) + (noCat ? '. بلا فئة (اخترها من بطاقته): ' + noCat : '') + '.' + (r.added.length ? '\nافتح العملاء وابدأ من أول محل.' : '');
+        render();
+      } }, 'أضف'));
+    peek();
+  }
+
+  function addLeadSheet() {
+    const f = id => $('#' + id).value.trim();
+    const msg = h('div', { class: 'muted' });
+    sheet('محل جديد',
+      h('label', { class: 'f', for: 'n-name' }, 'اسم المحل', h('input', { class: 'in', id: 'n-name' })),
+      h('label', { class: 'f', for: 'n-cat' }, 'الفئة', h('select', { class: 'in', id: 'n-cat' }, Object.keys(CATEGORIES).map(k => h('option', { value: k }, CATEGORIES[k].ar)))),
+      h('label', { class: 'f', for: 'n-dis' }, 'الحي', h('input', { class: 'in', id: 'n-dis' })),
+      h('label', { class: 'f', for: 'n-ph' }, 'الجوال (يبدأ بـ 05)', h('input', { class: 'in', id: 'n-ph', inputmode: 'tel', dir: 'ltr' })),
+      h('label', { class: 'f', for: 'n-rt' }, 'التقييم', h('input', { class: 'in', id: 'n-rt', inputmode: 'decimal' })),
+      h('label', { class: 'f', for: 'n-rv' }, 'عدد المراجعات', h('input', { class: 'in', id: 'n-rv', inputmode: 'numeric' })),
+      msg,
+      h('button', { class: 'btn primary', type: 'button', onclick: () => {
+        const r = importLeads([{ name: f('n-name'), category: f('n-cat'), district: f('n-dis'), phone: f('n-ph'), rating: f('n-rt'), reviews: f('n-rv'), stage: 'candidate' }], real());
+        if (!f('n-name')) { msg.textContent = 'اكتب اسم المحل.'; return; }
+        if (r.invalid.length) { msg.textContent = 'الجوال لازم يبدأ بـ 05 ويكون ١٠ أرقام. الأرضي و9200 ما يدخل.'; return; }
+        if (r.skipped.length) { msg.textContent = 'هذا الرقم موجود عندنا. لا يُضاف مرتين.'; return; }
+        S.leads = real().concat(r.added); toast('أُضيف'); render(); $('#sheet-root').innerHTML = ''; go('leads');
+      } }, 'أضف'));
+  }
+
+  function openLead(id) {
+    const l = byId(id); if (!l) return;
+    const body = [];
+    const info = h('div', { class: 'chips' }, l.example ? h('span', { class: 'chip warn' }, 'مثال') : null, stageChip(l.stage), h('span', { class: 'chip' }, catName(l.category)),
+      l.city && l.city !== 'جدة' ? h('span', { class: 'chip' }, l.city) : null, l.district ? h('span', { class: 'chip' }, l.district) : null, l.rating ? h('span', { class: 'chip num' }, l.rating + ' ★ · ' + (l.reviews || 0)) : null,
+      l.do_not_contact ? h('span', { class: 'chip bad' }, 'محجوب: لا نكلمه') : null);
+    body.push(info);
+    if (l.do_not_contact) body.push(h('div', { class: 'banner' }, 'تواصلنا مع هذا المحل سابقاً. رسالة واحدة فقط لكل محل. الحجب لا يُفكّ من التطبيق.'));
+    if (l.warnings) body.push(h('div', { class: 'banner' }, 'خارج قواعد الاستهداف: ' + l.warnings.join('، ')));
+    body.push(h('div', { class: 'row' }, h('span', { class: 'ltr num', dir: 'ltr' }, l.phone + (l.alt_phone ? ' · ' + l.alt_phone : '')),
+      h('div', { class: 'row start' }, h('a', { class: 'btn sm', target: '_blank', rel: 'noopener', href: mapsUrl(l) }, 'خرائط Google'),
+        l.demo_url && !l.example ? h('a', { class: 'btn sm', target: '_blank', rel: 'noopener', href: l.demo_url }, 'النموذج') : null)));
+    if (l.address || l.website) body.push(h('div', { class: 'muted', dir: 'auto' }, [l.address, l.website ? 'الحضور: ' + l.website : ''].filter(Boolean).join(' · ')));
+    // الرسالة الأولى جاهزة: نقرة تفتح المحادثة بالنص، ونقرة تسجّل الإرسال
+    if (!l.do_not_contact) {
+      const text = firstMessage(l, S.settings.mode, S.settings.siteUrl), why = l.example ? 'مثال: لا يُرسل.' : sendBlock(l, new Date(), S.settings.mode);
+      const sentBtn = h('button', { class: 'btn', type: 'button', disabled: !sendState.opened[l.id], onclick: () => {
+        pushLog(l, { dir: 'out', kind: 'intro', body: text }); setStage(l, 'sent'); l.do_not_contact = true; delete sendState.opened[l.id];
+        toast('سُجّل. لا متابعة لهذا المحل.'); render(); openLead(id);
+      } }, '2. تم الإرسال');
+      body.push(h('section', { class: 'card' }, h('h3', null, 'الرسالة الأولى جاهزة'), h('div', { class: 'msg', dir: 'rtl' }, text),
+        why ? h('div', { class: 'banner' }, why) : null,
+        h('div', { class: 'row start' },
+          h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
+            onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; } }, '1. افتح واتساب والرسالة جاهزة'), sentBtn),
+        h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. رسالة واحدة لكل محل.')));
+    }
+    const sc = leadScore(l);
+    body.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'قوة العميل'), h('span', { class: 'chip num' }, sc.score + ' / 100')),
+      h('div', { class: 'scorebar' }, sc.parts.map(p => h('div', null, h('span', null, p[0]), h('span', { class: 'num' }, p[1] + ' / ' + p[2]))))));
+    // المهمة التالية
+    const taText = h('input', { class: 'in', id: 'na-text', 'aria-label': 'نص المهمة', placeholder: 'مثال: اتصل بعد ما يرد على الكوتيشن', value: l.next ? l.next.text : '' });
+    const preset = (label, d) => h('button', { class: 'btn sm', type: 'button', onclick: () => {
+      if (!setNextAction(l, taText.value, dueIn(d))) { toast('اكتب نص المهمة'); return; }
+      pushLog(l, { kind: 'task', text: l.next.text }); toast('حُفظت المهمة'); render(); openLead(id);
+    } }, label);
+    body.push(h('section', { class: 'card' }, h('h3', null, 'المهمة التالية'),
+      l.next ? h('div', { class: 'row' }, h('span', null, l.next.text), h('span', { class: 'chip warn' }, dueLabel(l.next.due))) : h('div', { class: 'muted' }, 'لا مهمة. حدّد خطوتك التالية مع هذا العميل.'),
+      taText, h('div', { class: 'row start' }, preset('غداً', 1), preset('بعد ٣ أيام', 3), preset('بعد أسبوع', 7),
+        l.next ? h('button', { class: 'btn sm', type: 'button', onclick: () => { pushLog(l, { kind: 'task_done', text: l.next.text }); clearNextAction(l); toast('تمّت'); render(); openLead(id); } }, 'تمّت') : null)));
+    // الوسوم
+    const tagIn = h('input', { class: 'in', id: 'tag-in', 'aria-label': 'وسم جديد', placeholder: 'وسم جديد', style: 'max-width:180px' });
+    body.push(h('section', { class: 'card' }, h('h3', null, 'الوسوم'),
+      h('div', { class: 'chips' }, (l.tags || []).length ? l.tags.map(t => h('span', { class: 'chip tagx' }, t, h('button', { type: 'button', 'aria-label': 'احذف الوسم ' + t, onclick: () => { removeTag(l, t); render(); openLead(id); } }, '×'))) : h('span', { class: 'muted' }, 'لا وسوم')),
+      h('div', { class: 'row start' }, tagIn, h('button', { class: 'btn sm', type: 'button', onclick: () => { if (addTag(l, tagIn.value)) { render(); openLead(id); } else toast('الوسم فارغ أو مكرر أو بلغتَ ٨'); } }, 'أضف'))));
+    // الانتقال بين المراحل
+    const demoIn = h('input', { class: 'in', id: 'd-url', dir: 'ltr', placeholder: 'https://...', value: l.demo_url || '' });
+    body.push(h('section', { class: 'card' }, h('h3', null, 'المرحلة'),
+      h('select', { class: 'in', id: 'st-sel', 'aria-label': 'المرحلة', onchange: e => { setStage(l, e.target.value); render(); openLead(id); } }, STAGES.map(s => h('option', { value: s, selected: l.stage === s }, STAGE_AR[s]))),
+      h('label', { class: 'f', for: 'd-url' }, 'رابط النموذج', demoIn),
+      h('button', { class: 'btn sm', type: 'button', disabled: l.do_not_contact, onclick: () => {
+        const u = demoIn.value.trim(); if (!/^https:\/\//.test(u)) { toast('الرابط لازم يبدأ بـ https://'); return; }
+        l.demo_url = u; if (['candidate'].includes(l.stage)) setStage(l, 'demo_ready'); toast('تم. صار نموذج جاهز'); render(); openLead(id);
+      } }, 'احفظ الرابط وعلّمه «نموذج جاهز»')));
+    // الردود
+    const replies = h('section', { class: 'card' }, h('h3', null, 'سجّل رد المحل'),
+      h('div', { class: 'row start' },
+        h('button', { class: 'btn sm', type: 'button', onclick: () => { l.replyType = 'auto'; pushLog(l, { dir: 'in', kind: 'reply', reply: 'auto' }); if (l.stage === 'sent') setStage(l, 'auto_reply'); render(); openLead(id); } }, 'رد آلي'),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => { l.replyType = 'human'; pushLog(l, { dir: 'in', kind: 'reply', reply: 'human' }); if (['sent', 'auto_reply'].includes(l.stage)) setStage(l, 'human_reply'); render(); openLead(id); } }, 'رد بشري')),
+      h('div', { class: 'muted' }, 'الرد الآلي ليس رداً. لا نتابع عليه.'),
+      h('h3', null, 'ردود جاهزة'),
+      h('div', { class: 'list' }, QUICK_REPLIES.map(r => {
+        const text = replyText(r, { lead: l, siteUrl: S.settings.siteUrl });
+        return h('div', { class: 'row' }, h('span', null, r.ask),
+          text ? waBtn(l, text, 'أرسل', () => { pushLog(l, { dir: 'out', kind: 'reply', body: text }); if (r.stage) setStage(l, r.stage); render(); }, 'sm')
+               : h('span', { class: 'muted' }, 'ضع رابط أعمالك في الإعدادات'));
+      })));
+    body.push(replies);
+    // ساعات العمل
+    const o1 = h('input', { class: 'in', id: 'h-o', inputmode: 'decimal', placeholder: '9.5', value: l.hours_week && l.hours_week[0] ? l.hours_week[0][0] : '' });
+    const c1 = h('input', { class: 'in', id: 'h-c', inputmode: 'decimal', placeholder: '23 أو 25 بعد منتصف الليل', value: l.hours_week && l.hours_week[0] ? l.hours_week[0][1] : '' });
+    body.push(h('section', { class: 'card' }, h('h3', null, 'ساعات العمل'), h('div', { class: 'muted' }, 'بالساعات العشرية، ٩٫٥ تعني ٩:٣٠ص. تُطبَّق على الأيام السبعة. من غيرها لا أتحقق من فتح المحل.'),
+      h('div', { class: 'filters' }, h('label', { class: 'f', for: 'h-o' }, 'يفتح', o1), h('label', { class: 'f', for: 'h-c' }, 'يغلق', c1)),
+      h('button', { class: 'btn sm', type: 'button', onclick: () => {
+        const o = toAmount(o1.value), c = toAmount(c1.value);
+        if (o === null || c === null || c <= o) { toast('تأكد من الساعتين'); return; }
+        l.hours_week = Array.from({ length: 7 }, () => [o, c]); toast('حُفظت'); render();
+      } }, 'احفظ')));
+    body.push(h('label', { class: 'f', for: 'nt' }, 'ملاحظات', h('textarea', { class: 'in', id: 'nt', onchange: e => { l.notes = e.target.value; save(); } }, l.notes || '')));
+    const logs = (l.log || []).slice().reverse();
+    body.push(h('section', { class: 'card' }, h('h3', null, 'السجل'), logs.length ? h('div', { class: 'log' }, logs.map(e => h('div', null,
+      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : (e.kind || '')),
+      h('span', { class: 'muted num' }, e.at ? day(e.at) + ' ' + hhmm(e.at) : '')))) : h('div', { class: 'muted' }, 'لا شيء بعد.')));
+    sheet(l.name, ...body);
+  }
+
+  /* ═════ الإرسال ═════ */
+  const sendState = { opened: {} };
+  function viewSend() {
+    const mode = S.settings.mode, q = sendQueue(S.leads, new Date(), mode, S.settings.dailyLimit);
+    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num ltr', dir: 'ltr' }, q.used + ' / ' + S.settings.dailyLimit))];
+    const lead = q.eligible[0];
+    if (lead) {
+      const text = firstMessage(lead, mode, S.settings.siteUrl);
+      const wait = Math.ceil(q.waitMin);
+      const opened = !!sendState.opened[lead.id];
+      out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, lead.name), h('span', { class: 'chip' }, catName(lead.category))),
+        h('div', { class: 'msg', dir: 'rtl' }, text),
+        wait > 0 ? h('div', { class: 'banner' }, 'انتظر ' + wait + ' دقيقة بين الرسالتين.') : null,
+        lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : null,
+        h('div', { class: 'row start' },
+          h('a', { class: 'btn primary', href: lead.example || wait > 0 ? '#' : waLink(lead.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': lead.example || wait > 0 ? 'true' : false,
+            onclick: e => { if (lead.example || wait > 0) { e.preventDefault(); return; } sendState.opened[lead.id] = true; setTimeout(render, 50); } }, '1. افتح واتساب'),
+          h('button', { class: 'btn', type: 'button', disabled: !opened, onclick: () => {
+            pushLog(lead, { dir: 'out', kind: 'intro', body: text }); setStage(lead, 'sent'); lead.do_not_contact = true; delete sendState.opened[lead.id];
+            toast('سُجّل. لا متابعة لهذا المحل.'); render();
+          } }, '2. تم الإرسال')),
+        h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. التطبيق لا يرسل شيئاً.'),
+        q.eligible.length > 1 ? h('div', { class: 'muted num' }, 'بعده ' + (q.eligible.length - 1) + ' في الطابور.') : null));
+    } else {
+      const reasons = {};
+      S.leads.filter(l => (mode !== 'demo' ? ['candidate', 'demo_ready'] : ['demo_ready']).includes(l.stage) && !l.do_not_contact).forEach(l => { const r = sendBlock(l, new Date(), mode); if (r) reasons[r] = (reasons[r] || 0) + 1; });
+      out.push(h('section', { class: 'card empty' }, h('h2', null, q.blockedReason || 'ما فيه أحد جاهز الآن'),
+        Object.keys(reasons).length ? h('div', { class: 'list', style: 'width:100%' }, Object.entries(reasons).map(([r, n]) => h('div', { class: 'row' }, h('span', null, r), h('span', { class: 'chip num' }, n)))) :
+          h('span', null, mode !== 'demo' ? 'استورد عملاءك من الإعدادات، وسيظهر هنا من يحق الإرسال له داخل نافذة فئته.' : 'علّم محلاً «نموذج جاهز» من بطاقته بعد ما تبني نموذجه وتضع رابطه.'),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => go('leads') }, 'العملاء')));
+    }
+    out.push(h('section', { class: 'card' }, h('h3', null, 'نوافذ الإرسال'),
+      h('div', { class: 'tw' }, h('table', { class: 'table' }, h('tbody', null, Object.keys(CATEGORIES).map(k => {
+        const w = CATEGORIES[k].win, f = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+        return h('tr', null, h('td', null, CATEGORIES[k].ar), h('td', { class: 'n' }, h('span', { class: 'ltr', dir: 'ltr' }, f(w[0]) + ' - ' + f(w[1]))));
+      })))), h('div', { class: 'muted' }, 'الجمعة لا إرسال قبل 15:30. الحد ' + S.settings.dailyLimit + ' جديدة يومياً وبين كل رسالة ' + MIN_GAP_MIN + ' دقائق.')));
+    return out;
+  }
+
+  /* ═════ الكوتيشن ═════ */
+  const Q = { leadId: '', pkg: 'page', hours: '', costs: '', opened: false };
+  function viewQuotes() {
+    const prev = h('div'), actions = h('div');
+    const paint = () => {
+      const lead = byId(Q.leadId) || null, custom = Q.hours.trim() !== '';
+      const quote = makeQuote({ lead, pkg: Q.pkg, hours: custom ? Q.hours : undefined, costs: Q.costs });
+      prev.innerHTML = ''; actions.innerHTML = '';
+      if (!quote) { prev.append(h('div', { class: 'banner' }, 'الساعات أو التكاليف غير صالحة. اكتب أرقاماً فقط.')); return; }
+      const pk = PACKAGES.find(p => p.id === Q.pkg), text = quoteText(quote, lead ? lead.name : '');
+      const raw = custom ? Number(toAmount(Q.hours)) * HOURLY_RATE + Number(toAmount(Q.costs) || 0) : null;
+      prev.append(h('div', { class: 'row' }, h('span', { class: 'big num' }, String(quote.total)), h('span', { class: 'muted' }, 'ريال')),
+        custom ? h('div', { class: 'muted num' }, `${toAmount(Q.hours)} ساعة × ${HOURLY_RATE} + ${toAmount(Q.costs) || 0} = ${raw}، يقرَّب لأعلى ${ROUND_TO}${quote.total === pk.price && raw < pk.price ? '، ولا يقل عن سعر الباقة' : ''}` ) : h('div', { class: 'muted' }, 'سعر الباقة المعلن.'),
+        h('div', { class: 'msg', dir: 'rtl' }, text));
+      actions.append(h('div', { class: 'row start' },
+        waBtn(lead, text, '1. افتح واتساب', () => { Q.opened = true; paint(); }),
+        copyBtn(text, 'انسخ النص'),
+        h('button', { class: 'btn', type: 'button', disabled: !lead, onclick: () => saveQuote(lead, quote, 'draft') }, 'احفظ مسودة'),
+        h('button', { class: 'btn primary', type: 'button', disabled: !lead || !Q.opened, onclick: () => saveQuote(lead, quote, 'sent') }, '2. أُرسل')));
+      if (!lead) actions.append(h('div', { class: 'muted' }, 'اختر محلاً لتحفظ الكوتيشن عنده.'));
+    };
+    function saveQuote(lead, quote, status) {
+      quote.status = status; (lead.quotes = lead.quotes || []).push(quote);
+      if (status === 'sent') { pushLog(lead, { dir: 'out', kind: 'quote' }); if (['human_reply', 'interested'].includes(lead.stage)) setStage(lead, 'quoted'); }
+      Q.opened = false; toast(status === 'sent' ? 'سُجّل كمُرسل' : 'حُفظت المسودة'); render();
+    }
+    const out = [exampleNote(), h('h1', { style: 'font-size:26px' }, 'كوتيشن')];
+    out.push(h('section', { class: 'card' },
+      h('label', { class: 'f', for: 'q-lead' }, 'المحل', h('select', { class: 'in', id: 'q-lead', onchange: e => { Q.leadId = e.target.value; Q.opened = false; paint(); } },
+        h('option', { value: '' }, 'بدون محل'), S.leads.filter(l => !FINAL_STAGES.includes(l.stage) || l.stage === 'won').map(l => h('option', { value: l.id, selected: Q.leadId === l.id }, l.name)))),
+      h('label', { class: 'f', for: 'q-pkg' }, 'الباقة', h('select', { class: 'in', id: 'q-pkg', onchange: e => { Q.pkg = e.target.value; Q.opened = false; paint(); } },
+        PACKAGES.map(p => h('option', { value: p.id, selected: Q.pkg === p.id }, p.ar.name + ' · ' + p.price + (p.fromPrice ? ' فأكثر' : ''))))),
+      h('div', { class: 'filters' },
+        h('label', { class: 'f', for: 'q-h' }, 'الساعات (اختياري)', h('input', { class: 'in', id: 'q-h', inputmode: 'decimal', value: Q.hours, oninput: e => { Q.hours = e.target.value; paint(); } })),
+        h('label', { class: 'f', for: 'q-c' }, 'تكاليف أخرى', h('input', { class: 'in', id: 'q-c', inputmode: 'decimal', value: Q.costs, oninput: e => { Q.costs = e.target.value; paint(); } }))),
+      prev, actions));
+    paint();
+    // الكوتيشنات المحفوظة والدفعات
+    const saved = [];
+    for (const l of S.leads) for (const qq of l.quotes || []) saved.push({ l, q: qq });
+    saved.sort((a, b) => String(b.q.created).localeCompare(String(a.q.created)));
+    out.push(h('section', { class: 'card' }, h('h2', null, 'المحفوظة'), saved.length ? h('div', { class: 'list' }, saved.map(({ l, q: qq }) => quoteRow(l, qq))) : h('div', { class: 'muted' }, 'لا كوتيشنات بعد.')));
+    return out;
+  }
+  function paidOn(l, q) { return (l.payments || []).filter(p => p.quote === q.id).reduce((s, p) => s + p.amount, 0); }
+  function quoteRow(l, qq) {
+    const pk = PACKAGES.find(p => p.id === qq.package), paid = paidOn(l, qq);
+    const next = (qq.payment_terms || []).reduce((acc, t) => { if (acc.done) return acc; if (acc.cum + t.amount > paid) { acc.done = true; acc.t = t; acc.left = acc.cum + t.amount - paid; } acc.cum += t.amount; return acc; }, { cum: 0, done: false }).left;
+    const amt = h('input', { class: 'in', inputmode: 'numeric', style: 'max-width:140px', value: next || '', 'aria-label': 'مبلغ الدفعة' });
+    return h('div', { class: 'card' }, h('div', { class: 'row' }, h('b', null, l.name + ' · ' + (pk ? pk.ar.name : '')), h('span', { class: 'chip ' + (qq.status === 'approved' ? 'ok' : '') }, { draft: 'مسودة', sent: 'أُرسل', approved: 'معتمد', expired: 'منتهي' }[qq.status] || qq.status)),
+      h('div', { class: 'muted num' }, `${qq.total} ريال · المدفوع ${paid} · صالح حتى ${qq.valid_until}`),
+      h('div', { class: 'row start' },
+        qq.status !== 'approved' ? h('button', { class: 'btn sm', type: 'button', onclick: () => { qq.status = 'approved'; if (['sent', 'auto_reply', 'human_reply', 'interested', 'quoted'].includes(l.stage)) setStage(l, 'quoted'); toast('اعتُمد'); render(); } }, 'اعتمده العميل') : null,
+        qq.status === 'approved' && paid < qq.total ? [amt, h('button', { class: 'btn sm primary', type: 'button', disabled: l.example, onclick: () => {
+          const a = toAmount(amt.value); if (a === null || a <= 0) { toast('اكتب مبلغاً صحيحاً'); return; }
+          (l.payments = l.payments || []).push({ amount: a, at: nowIso(), quote: qq.id }); pushLog(l, { kind: 'payment', amount: a });
+          if (['quoted', 'interested', 'human_reply'].includes(l.stage)) setStage(l, 'deposit'); toast('سُجّلت الدفعة'); render();
+        } }, 'سجّل دفعة وصلت')] : null));
+  }
+
+  /* ═════ التسليم ═════ */
+  function viewDelivery() {
+    const rows = S.leads.filter(l => ['deposit', 'delivering'].includes(l.stage) || (l.stage === 'won' && l.delivery && l.delivery.delivered_at));
+    const out = [exampleNote(), h('h1', { style: 'font-size:26px' }, 'التسليم والضمان')];
+    if (!rows.length) out.push(h('div', { class: 'empty card' }, h('b', null, 'لا مشاريع قيد التسليم'), h('span', null, 'تظهر هنا بعد أول دفعة تسجّلها.')));
+    rows.forEach(l => {
+      const d = l.delivery = l.delivery || { checks: DELIVERY_CHECKLIST.map(() => false) };
+      const all = d.checks.every(Boolean), done = !!d.delivered_at;
+      out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, l.name), stageChip(l.stage)),
+        h('div', { class: 'checks' }, DELIVERY_CHECKLIST.map((txt, i) => h('label', null, h('input', { type: 'checkbox', checked: d.checks[i], disabled: done, onchange: e => { d.checks[i] = e.target.checked; save(); render(); } }), h('span', null, txt)))),
+        done ? h('div', { class: 'chip ok num' }, 'سُلّم ' + day(d.delivered_at) + ' · الضمان حتى ' + d.warranty_until)
+          : h('button', { class: 'btn primary', type: 'button', disabled: !all || l.example, onclick: () => {
+            d.delivered_at = nowIso(); d.warranty_until = warrantyUntil(d.delivered_at); pushLog(l, { kind: 'delivered' }); setStage(l, 'won'); toast('سُلّم. بدأ الضمان.'); render();
+          } }, all ? 'سلّمت المشروع' : 'أكمل القائمة أولاً')));
+    });
+    return out;
+  }
+
+  /* ═════ الأرقام ═════ */
+  function viewStats() {
+    const r = riyadh(), sundayMs = Date.now() - r.dow * 86400e3 - (r.min * 60e3);
+    const wk = (n) => [sundayMs - n * 7 * 86400e3, sundayMs - n * 7 * 86400e3 + 7 * 86400e3];
+    const a = weekStats(real(), ...wk(0)), b = weekStats(real(), ...wk(1));
+    const rows = [['أُرسل', 'sent'], ['مقروء', 'read'], ['رد بشري', 'human_replies'], ['مهتم', 'interested'], ['كوتيشن', 'quotes'], ['مغلق', 'won'], ['دخل', 'revenue']];
+    const al = fortyAlert(real());
+    return [exampleNote(), h('h1', { style: 'font-size:26px' }, 'الأرقام'),
+      h('section', { class: 'card' }, h('h2', null, 'الأسبوع'), h('div', { class: 'tw' }, h('table', { class: 'table' },
+        h('thead', null, h('tr', null, h('th', null, h('span', { class: 'sr' }, 'البند')), h('th', { class: 'n' }, 'هذا الأسبوع'), h('th', { class: 'n' }, 'الماضي'))),
+        h('tbody', null, rows.map(([lbl, k]) => h('tr', null, h('td', null, lbl), h('td', { class: 'n' }, a[k]), h('td', { class: 'n' }, b[k])))))),
+        h('div', { class: 'muted' }, 'تحسب الأسبوع من الأحد. «مقروء» يظهر حين تعلّم الرسالة مقروءة، وهو غير معروف تلقائياً.')),
+      h('section', { class: 'card' }, h('h2', null, 'قياس الأربعين'), h('div', { class: 'num' }, 'مرسل الكل: ' + al.sent + ' · الكتلة القادمة بعد ' + al.next + ' رسالة'),
+        al.due ? h('div', { class: 'banner' }, al.text) : h('div', { class: 'muted' }, 'تغيّر متغيراً واحداً فقط (الوقت أو النص أو الفئة) عند كل تنبيه.')),
+      h('section', { class: 'card' }, h('h2', null, 'دخل الشهر'), h('div', { class: 'big num' }, String(Math.round(monthRevenue(real())))), h('div', { class: 'muted num' }, 'من هدف ' + MONTH_TARGET + ' ريال'))];
+  }
+
+  /* ═════ الإعدادات: استيراد، نسخة، رابط الأعمال ═════ */
+  function settingsSheet() {
+    const result = h('div', { class: 'muted', style: 'white-space:pre-wrap' });
+    const csvBox = h('textarea', { class: 'in code', id: 's-csv', placeholder: 'الصق محتوى CSV هنا، أو اختر الملف' });
+    const doImport = text => {
+      const rows = parseCSV(text);
+      if (!rows.length) { result.textContent = 'الملف فارغ أو غير مقروء.'; return; }
+      const wasExample = hasExamples();
+      if (wasExample) S.leads = real();
+      const r = importLeads(rows, real());
+      S.leads = S.leads.concat(r.added);
+      const locked = r.added.filter(l => l.do_not_contact).length;
+      result.textContent = `أُضيف ${r.added.length}. محجوب لأننا كلمناه سابقاً ${locked}. مكرر تُرك ${r.skipped.length}. جوال غير صالح ${r.invalid.length}. خارج قواعد الاستهداف ${r.flagged.length}.` + (wasExample ? ' مُسحت بيانات المثال.' : '') + (r.invalid.length ? '\nاستُبعد:\n' + r.invalid.slice(0, 8).map(x => '- ' + x.name + ': ' + x.why).join('\n') + (r.invalid.length > 8 ? '\n... و ' + (r.invalid.length - 8) + ' أخرى' : '') : '');
+      save(); renderTabs();
+    };
+    const fileIn = h('input', { type: 'file', id: 's-file', 'aria-label': 'ملف CSV', accept: '.csv,text/csv', class: 'in', onchange: e => {
+      const f = e.target.files[0]; if (!f) return; const fr = new FileReader(); fr.onload = () => doImport(String(fr.result)); fr.readAsText(f, 'utf-8');
+    } });
+    const expBox = h('textarea', { class: 'in code', id: 's-exp', 'aria-label': 'تصدير CSV', readonly: true });
+    const backBox = h('textarea', { class: 'in code', id: 's-bk', 'aria-label': 'النسخة الاحتياطية', readonly: true });
+    const restoreBox = h('textarea', { class: 'in code', id: 's-rs', placeholder: 'الصق النسخة الاحتياطية هنا' });
+    const works = h('input', { class: 'in', id: 's-works', dir: 'ltr', placeholder: 'https://...', value: S.settings.worksUrl || '' });
+    // الرسالة الأولى: رابط الموقع الترحيبي أو نموذج لكل محل
+    const sample = { name: 'مغسلة المثال', reviews: 812, demo_url: 'https://example.invalid/demo/' };
+    const prevBox = h('div', { class: 'msg', dir: 'rtl' });
+    const preview = () => { prevBox.textContent = firstMessage(sample, S.settings.mode, S.settings.siteUrl); };
+    const modeSel = h('select', { class: 'in', id: 's-mode', 'aria-label': 'قالب الرسالة الأولى', onchange: e => { S.settings.mode = e.target.value; save(); preview(); renderTabs(); } },
+      h('option', { value: 'site', selected: S.settings.mode === 'site' }, 'رابط الموقع الترحيبي (للقوائم الكبيرة)'),
+      h('option', { value: 'pdf', selected: S.settings.mode === 'pdf' }, 'البروفايل PDF مع رابط الموقع'),
+      h('option', { value: 'demo', selected: S.settings.mode === 'demo' }, 'نموذج جاهز لكل محل (المواصفة الأصلية)'));
+    const limSel = h('select', { class: 'in', id: 's-lim', 'aria-label': 'الحد اليومي', onchange: e => { S.settings.dailyLimit = Number(e.target.value); save(); renderTabs(); toast('الحد اليومي ' + S.settings.dailyLimit); } },
+      [5, 10, 15, 20].map(n => h('option', { value: n, selected: S.settings.dailyLimit === n }, 'الحد اليومي: ' + n + (n === 5 ? ' (تسخين)' : n === 10 ? ' (مواصفتك)' : n > 10 ? ' (خطر على الرقم)' : ''))));
+    const siteIn = h('input', { class: 'in', id: 's-site', dir: 'ltr', 'aria-label': 'رابط الموقع', value: S.settings.siteUrl, placeholder: 'https://...' });
+    preview();
+    // القفل
+    const lockMsg = h('div', { class: 'muted', role: 'status' });
+    const p1 = h('input', { class: 'in', id: 's-pin', type: 'password', autocomplete: 'new-password', 'aria-label': 'رقم سري جديد', placeholder: 'رقم سري (٦ خانات فأكثر)' });
+    const p2 = h('input', { class: 'in', id: 's-pin2', type: 'password', autocomplete: 'new-password', 'aria-label': 'تأكيد الرقم السري', placeholder: 'أعد كتابته' });
+    const p0 = h('input', { class: 'in', id: 's-pin0', type: 'password', autocomplete: 'current-password', 'aria-label': 'الرقم السري الحالي', placeholder: 'الرقم السري الحالي' });
+    const accountCard = cloudMode ? h('section', { class: 'card' }, h('h3', null, 'الحساب'),
+      h('div', { class: 'chip ok' }, 'مسجّل: ' + ((Cloud.user && Cloud.user.user_metadata && Cloud.user.user_metadata.username) || 'abdullah')),
+      h('div', { class: 'muted' }, 'بياناتك محفوظة في حسابك السحابي. لا يُحفظ شيء في هذا الجهاز. تخرج تلقائياً بعد ٥ دقائق في الخلفية.'),
+      h('button', { class: 'btn', type: 'button', onclick: () => logout() }, 'خروج')) : null;
+    const lockCard = cloudMode ? accountCard : vault
+      ? h('section', { class: 'card' }, h('h3', null, 'قفل التطبيق'), h('div', { class: 'chip ok' }, 'مفعّل: البيانات مشفّرة في هذا الجهاز'),
+          h('div', { class: 'muted' }, 'يُقفل تلقائياً بعد ٥ دقائق من تركه.'),
+          h('button', { class: 'btn', type: 'button', onclick: () => lockNow() }, 'اقفل الآن'), p0,
+          h('button', { class: 'btn sm', type: 'button', onclick: async () => { const e = await disableLock(p0.value); if (e) lockMsg.textContent = e; else { toast('أُلغي القفل'); settingsSheet(); } } }, 'ألغِ القفل'), lockMsg)
+      : h('section', { class: 'card' }, h('h3', null, 'قفل التطبيق'),
+          h('div', { class: 'muted' }, 'يشفّر بياناتك برقم سري، فلا يقرأها من يفتح جوالك. نسيان الرقم يعني فقد البيانات إلا من نسخة احتياطية.'),
+          p1, p2, h('button', { class: 'btn primary', type: 'button', onclick: async () => { const e = await enableLock(p1.value, p2.value); if (e) lockMsg.textContent = e; else { toast('فُعّل القفل'); settingsSheet(); } } }, 'فعّل القفل'), lockMsg);
+    sheet('الإعدادات',
+      h('section', { class: 'card' }, h('h3', null, 'الرسالة الأولى'),
+        h('div', { class: 'muted' }, 'رسالة واحدة لكل محل، بلا متابعة. أنت تضغط إرسال بنفسك.'),
+        modeSel, limSel, h('label', { class: 'f', for: 's-site' }, 'رابط موقعك (https)', siteIn),
+        h('div', { class: 'row start' }, h('button', { class: 'btn sm', type: 'button', onclick: () => { S.settings.siteUrl = normSiteUrl(siteIn.value); siteIn.value = S.settings.siteUrl; save(); preview(); toast('حُفظ'); } }, 'احفظ الرابط'),
+          h('a', { class: 'btn sm', target: '_blank', rel: 'noopener', href: '#', onclick: e => { e.currentTarget.href = waLink(OWNER.phone, firstMessage(sample, S.settings.mode, S.settings.siteUrl)); } }, 'جرّب الرسالة على جوالك')),
+        prevBox),
+      lockCard,
+      h('section', { class: 'card' }, h('h3', null, 'ثبّت التطبيق'),
+        h('div', { class: 'muted' }, 'آيفون: افتح الرابط في Safari ثم زر المشاركة ثم «إضافة إلى الشاشة الرئيسية». أندرويد: قائمة Chrome ثم «تثبيت التطبيق».')),
+      h('section', { class: 'card' }, h('h3', null, 'استيراد العملاء (CSV)'),
+        h('div', { class: 'muted' }, 'يقبل ملفات الخرائط بأعمدة عربية أو إنجليزية: الاسم والجوال والفئة والتقييم والمراجعات. المفتاح الجوال: لا تكرار. يُستبعد النسائي ومن عنده موقع. من أُرسل له سابقاً يدخل محجوباً ولا يظهر في الطابور أبداً.'),
+        copyBtn('الاسم,الفئة,الحي,الجوال,التقييم,المراجعات\nاسم المحل,مغسلة سيارات,الرحاب,05XXXXXXXX,4.6,812', 'انسخ قالب CSV'),
+        fileIn, csvBox, h('button', { class: 'btn primary', type: 'button', onclick: () => doImport(csvBox.value) }, 'استورد'), result),
+      h('section', { class: 'card' }, h('h3', null, 'رابط أعمالك'), h('div', { class: 'muted' }, 'يُرسل عند سؤال «أبغى أشوف شغلك». لا أضع رابطاً من عندي.'),
+        works, h('button', { class: 'btn sm', type: 'button', onclick: () => { S.settings.worksUrl = works.value.trim(); save(); toast('حُفظ'); } }, 'احفظ')),
+      h('section', { class: 'card' }, h('h3', null, 'تصدير العملاء (CSV)'), h('div', { class: 'muted' }, 'كل العملاء بمراحلهم وقوتهم ومهامهم. يُفتح في إكسل ويُستورد ثانية.'),
+        expBox, h('div', { class: 'row start' }, h('button', { class: 'btn sm', type: 'button', onclick: () => { expBox.value = exportCsv(real()); expBox.select(); } }, 'أظهر'),
+          h('button', { class: 'btn sm', type: 'button', onclick: () => {
+            expBox.value = exportCsv(real()); expBox.select(); S.lastBackup = nowIso(); save();
+            const done = () => toast('تم النسخ'), fall = () => toast('حُدِّد. انسخ يدوياً');
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(expBox.value).then(done, fall); else fall();
+          } }, 'انسخ'))),
+      cloudMode ? null : h('section', { class: 'card' }, h('h3', null, 'نسخة احتياطية'), h('div', { class: 'muted' }, 'بياناتك في هذا المتصفح فقط. انسخ نسخة بعد كل جلسة مهمة.'),
+        backBox, h('div', { class: 'row start' }, h('button', { class: 'btn sm', type: 'button', onclick: () => { backBox.value = JSON.stringify({ ...S, leads: real() }); backBox.select(); S.lastBackup = nowIso(); save(); } }, 'أظهر النسخة'),
+          h('button', { class: 'btn sm', type: 'button', onclick: () => {
+            if (!backBox.value) backBox.value = JSON.stringify({ ...S, leads: real() });
+            backBox.select(); S.lastBackup = nowIso(); save();
+            const done = () => toast('تم النسخ'), fall = () => toast('حُدِّدت. انسخ يدوياً');
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(backBox.value).then(done, fall); else fall();
+          } }, 'انسخ')),
+        h('hr'), restoreBox, h('div', { class: 'muted' }, 'الاسترجاع لا يفكّ حجز أي محل محجوب.'),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => {
+          try { const d = JSON.parse(restoreBox.value); if (!d || !Array.isArray(d.leads)) throw 0; S.leads = restoreLeads(real(), d.leads); S.settings = normalize({ settings: Object.assign({}, S.settings, d.settings || {}) }).settings; save(); toast('تم الاسترجاع'); render(); }
+          catch (e) { toast('النسخة غير صالحة'); }
+        } }, 'استرجع')));
+  }
+
+  const VIEW = { today: viewToday, leads: viewLeads, send: viewSend, quotes: viewQuotes, delivery: viewDelivery, stats: viewStats };
+
+  $('#b-set').addEventListener('click', () => { if (S) settingsSheet(); });
+  $('#b-theme').addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const dark = cur ? cur === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark'); if (!cloudMode) ls.set('asst.theme', dark ? 'light' : 'dark');
+  });
+  const th = cloudMode ? null : ls.get('asst.theme'); if (th) document.documentElement.setAttribute('data-theme', th);
+  document.documentElement.lang = 'ar'; document.documentElement.dir = 'rtl';
+
+  // شارة Netlify: تظهر متأخرة بعد التحميل، فنراقب ظهورها ونقيس ارتفاعها الفعلي
+  (function liftAboveBadge() {
+    const set = () => {
+      const f = document.getElementById('nl-badge-frame');
+      const r = f && getComputedStyle(f).display !== 'none' ? f.getBoundingClientRect() : null;
+      const lift = r && r.height > 0 && r.bottom >= innerHeight - 4 ? Math.ceil(innerHeight - r.top) + 4 : 0;
+      document.documentElement.style.setProperty('--nlb', lift + 'px');
+    };
+    new MutationObserver(set).observe(document.body, { childList: true });
+    addEventListener('resize', set);
+    if ('ResizeObserver' in window) { const ro = new ResizeObserver(set); new MutationObserver(() => { const f = document.getElementById('nl-badge-frame'); if (f) ro.observe(f); }).observe(document.body, { childList: true }); }
+    set(); setTimeout(set, 1500); setTimeout(set, 4000);
+  })();
+  function startUi() { tab = routeFromHash(); render(); }
+  (function boot() {
+    if (cloudMode) { try { localStorage.removeItem(KEY); localStorage.removeItem(LOCK_KEY); localStorage.removeItem('asst.theme'); } catch (e) { /* لا شيء */ } showLogin(); return; }
+    let blob = null; try { blob = JSON.parse(ls.get(LOCK_KEY) || 'null'); } catch (e) { blob = null; }
+    if (blob && blob.ct) { showLock(); return; }
+    S = loadPlain(); startUi();
+  })();
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) { /* غير مدعوم هنا */ } }
+  setInterval(() => { if (tab === 'send' && !$('#sheet-root').children.length && !document.activeElement.closest('main')) render(); }, 20000);
+})();
+</script>
+</body></html>
