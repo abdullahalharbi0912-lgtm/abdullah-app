@@ -393,31 +393,29 @@ function openStatus(hours, date = new Date()) {
 // مبادئ الرسالة: اسم المحل وتقييماته (حقيقية من الخرائط)، فائدة واحدة تخص نشاطه، رابط يجرّبه، ومخرج مهذب.
 // لا أرقام مخترعة ولا عملاء سابقين مزعومين. الأرقام هندية لأن النص يصل العميل.
 // سطر واحد لكل نشاط: ما يكسبه المحل تحديداً، بلا إحصاءات.
+// كل سطر يلمس وجعاً حقيقياً عند صاحب المحل، بكلام جداوي عادي. بلا إحصاءات ولا وعود.
 const HOOKS = {
-  carwash: 'اللي يبحث عن مغسلة قريبة يختار اللي يشوف أسعاره ويحجز دوره من جواله.',
-  barber: 'زبونك يحجز موعده من الجوال بدل ما ينتظر في المحل أو يتصل يسأل.',
-  restaurant: 'قائمتكم بصورها وأسعارها، والطلب يوصلكم واتساب مباشرة بدون عمولة تطبيقات التوصيل.',
-  bakery: 'طلبات المناسبات والكميات توصلكم واتساب مباشرة، بدون عمولة وبدون اتصالات.',
-  sweets: 'طلبات المناسبات والكميات توصلكم واتساب مباشرة، بدون عمولة وبدون اتصالات.',
-  flowers: 'تنسيقاتكم بأسعارها في صفحة وحدة، والطلب والتوصيل يوصلكم واتساب.',
-  garage: 'العميل يشوف خدماتكم وأسعارها ويحجز، بدل ما يتصل يسأل ويروح لغيركم.',
-  phones: 'قائمة الصيانة بأسعارها وحجز موعد من الجوال، فيجيكم العميل وهو جاهز.',
-  tailor: 'العميل يشوف تفصيلاتكم وأسعارها ويحجز موعد القياس من جواله.',
-  carpet: 'العميل يطلب الغسيل والاستلام من الجوال، وتوصلكم الطلبات مرتبة.',
+  carwash: 'الزبون اللي يدور مغسلة في الخرائط يبغى يعرف السعر قبل ما يجي، وإذا ما لقاه يروح للي بعدكم.',
+  barber: 'الزبون يكره ينتظر في المحل، ولو يقدر يحجز دوره من جواله كان جاكم بدل ما يروح لغيركم.',
+  restaurant: 'تطبيقات التوصيل تاخذ نسبة من كل طلب، والطلب اللي يجيكم واتساب مباشرة يجيكم كامل.',
+  bakery: 'طلبات المناسبات والكميات تضيع بين الاتصالات، ولو لها صفحة واضحة توصلكم مرتبة على الواتساب.',
+  sweets: 'طلبات المناسبات والكميات تضيع بين الاتصالات، ولو لها صفحة واضحة توصلكم مرتبة على الواتساب.',
+  flowers: 'اللي يطلب ورد يطلبه على عجلة، واللي يشوف الصور والأسعار قدامه يطلب على طول.',
+  garage: 'كثير يتصلون يسألون عن السعر وما يرجعون، ولو شافوا خدماتكم وأسعارها قدامهم جوكم وهم جاهزين.',
+  phones: 'كثير يتصلون يسألون كم التصليح وما يرجعون، ولو شافوا الأسعار قدامهم جوكم وهم جاهزين.',
+  tailor: 'الزبون يبغى يشوف التفصيلات والأسعار قبل ما يجي، ويحجز موعد القياس من جواله.',
+  carpet: 'الزبون يبغى يطلب الغسيل والاستلام من جواله، بدل ما يتصل وينتظر أحد يرد.',
 };
-const hookOf = lead => HOOKS[lead.category] || 'العميل يلقاكم في Google ويطلب منكم مباشرة على الواتساب.';
-const opener = 'معاك عبدالله الحربي من جدة، أسوي مواقع وتطبيقات للمحلات.';
-const sawLine = lead => {
-  const reviews = Math.round(Number(lead.reviews) || 0);
-  return reviews
-    ? `شفت ${lead.name} في خرائط Google، ${toIndic(reviews)} تقييم ما شاء الله، وهذا ما يجي إلا بشغل نظيف. بس ما لقيت لكم موقع.`
-    : `شفت ${lead.name} في خرائط Google، وما لقيت لكم موقع.`;
-};
-const closer = 'السعر معلن قبل أي شي، والكود ملككم بالكامل.\nوإذا مو وقته الحين ولا يهمك، الله يوفقكم.';
+const hookOf = lead => HOOKS[lead.category] || 'كثير يدورون عليكم في الخرائط، ويبغون يطلبون منكم على طول بدون اتصال.';
+// النبرة: جداوية ودودة وقصيرة. بلا رقم التقييمات (يحسّسه أنه مراقَب كأنها رسالة آلية) وبلا وعود بيع في أول رسالة.
+const opener = 'أنا عبدالله الحربي من جدة، أسوي مواقع للمحلات.';
+const sawLine = lead => `شفت ${lead.name} في الخرائط، ما شاء الله تقييماتكم حلوة، بس ما لقيت لكم موقع.`;
+const closer = 'وإذا مو وقته، عادي والله، الله يوفقكم.';
+const hello = 'السلام عليكم، كيفكم؟';
 
 function introMessage(lead) {
-  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
-    'سويت لكم نموذج مبدئي تجربونه من الجوال، فيه طلب يوصلكم على الواتساب مباشرة:', lead.demo_url, closer].join('\n');
+  return [hello, opener, sawLine(lead), hookOf(lead),
+    'سويت لكم نموذج سريع تشوفونه من الجوال، فيه زر طلب يوصلكم واتساب:', lead.demo_url, closer].join('\n');
 }
 
 // رسالة تعرّف بالموقع الترحيبي (وضع 'site'). الرابط يحمل اسم المحل لتخصيص الصفحة.
@@ -431,18 +429,20 @@ const welcomeLink = (lead, siteUrl) => normSiteUrl(siteUrl) + '/hello/';
 const PROFILE_PATH = '/profile.pdf';
 const profileLink = siteUrl => normSiteUrl(siteUrl) + PROFILE_PATH;
 function siteMessage(lead, siteUrl) {
-  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
-    'جهزت لكم صفحة باسمكم فيها الفكرة، وتقدرون تجربون تسوون نموذجكم بأنفسكم من الجوال في دقيقتين:',
-    welcomeLink(lead, siteUrl), closer].join('\n');
+  return [hello, opener, sawLine(lead), hookOf(lead),
+    'سويت صفحة تجربون فيها شكل موقعكم من الجوال، تاخذ دقيقتين:', welcomeLink(lead, siteUrl), closer].join('\n');
 }
 // وضع البروفايل: ملف PDF يعرّف بالخدمة والباقات، ورابط الصفحة للتجربة
-function pdfMessage(lead, siteUrl) {
-  return ['السلام عليكم ورحمة الله', opener, sawLine(lead), hookOf(lead),
-    'هذا بروفايلي، فيه وش أسوي والباقات وأسعارها:', profileLink(siteUrl),
-    'وهذي صفحة باسمكم تجربون فيها الفكرة من الجوال:', welcomeLink(lead, siteUrl), closer].join('\n');
+// وضع البروفايل: نص بلا أي رابط، ثم ملف PDF يُرفق بزر المشاركة (رابط wa.me لا يحمل ملفات، حدّ في واتساب نفسه).
+const PROFILE_FILE_NAME = 'بروفايل عبدالله الحربي.pdf';
+// اسم التنزيل على الكمبيوتر بحروف لاتينية: بعض المتصفحات ترفض الاسم العربي في التنزيل فتسميه «download» بلا .pdf
+const PROFILE_FILE_ASCII = 'Abdullah-Alharbi-Profile.pdf';
+function pdfMessage(lead) {
+  return [hello, opener, sawLine(lead), hookOf(lead),
+    'بأرسل لكم دحين ملف قصير فيه الفكرة والأسعار، شوفوه على راحتكم.', closer].join('\n');
 }
 const MESSAGE_MODES = ['site', 'pdf', 'demo'];
-const firstMessage = (lead, mode, siteUrl) => (mode === 'site' ? siteMessage(lead, siteUrl) : mode === 'pdf' ? pdfMessage(lead, siteUrl) : introMessage(lead));
+const firstMessage = (lead, mode, siteUrl) => (mode === 'site' ? siteMessage(lead, siteUrl) : mode === 'pdf' ? pdfMessage(lead) : introMessage(lead));
 
 /* ───── الردود الجاهزة: للإقفال ───── */
 // body نص ثابت أو دالة تأخذ { lead, siteUrl }. كل رد يدفع خطوة واحدة نحو الإقفال، بلا ضغط ولا وعود مخترعة.
@@ -455,13 +455,13 @@ const QUICK_REPLIES = [
   { key: 'insta', ask: 'عندنا انستقرام يكفي',
     body: ({ lead }) => `الانستقرام ممتاز للصور. بس اللي يبحث في Google عن ${CATEGORIES[lead && lead.category] ? CATEGORIES[lead.category].ar : 'محل'} قريب ما يوصل لحسابكم.\nالصفحة تجمع الاثنين: يلقاكم من Google، يطلب على الواتساب، ومنها يروح لحسابكم.` },
   { key: 'works', ask: 'أبغى أشوف شغلك',
-    body: ({ siteUrl }) => `تفضل بروفايلي، فيه وش أسوي والباقات:\n${profileLink(siteUrl)}\nوهذا موقعي، تقدر تجرب فيه تسوي نموذج محلك بنفسك:\n${normSiteUrl(siteUrl)}` },
+    body: ({ siteUrl }) => `تفضل، هذا ملفي فيه إيش أسوي والباقات:\n${profileLink(siteUrl)}\nوهذا موقعي، تقدر تجرب فيه تسوي نموذج محلك بنفسك:\n${normSiteUrl(siteUrl)}` },
   { key: 'source', ask: 'من وين جبت رقمي؟',
     body: 'من صفحتكم في خرائط Google، الرقم المكتوب فيها.' },
   { key: 'think', ask: 'أفكر وأرد',
     body: 'خذ راحتك. الرابط عندكم.\nوإذا عندك سؤال يقرر عليه، اسألني هنا وأرد عليك.' , stage: 'interested' },
   { key: 'yes', ask: 'مهتم',
-    body: `ممتاز. نبدأ كذا:\n${toIndic(1)}. ترسل لي صور المحل والشعار وقائمة الخدمات بأسعارها.\n${toIndic(2)}. أرسل لك عرض السعر الرسمي.\n${toIndic(3)}. تدفع النص وأبدأ، وتستلم خلال ${toIndic(P0.days)} أيام عمل.\nتبغى نتكلم ${toIndic(5)} دقايق الحين، ولا نكمل هنا؟`, stage: 'interested' },
+    body: `حلو. نبدأ كده:\n${toIndic(1)}. ترسل لي صور المحل والشعار وقائمة الخدمات بأسعارها.\n${toIndic(2)}. أرسل لك عرض السعر الرسمي.\n${toIndic(3)}. تدفع النص وأبدأ، وتستلم خلال ${toIndic(P0.days)} أيام عمل.\nتبغى نتكلم ${toIndic(5)} دقايق دحين، ولا نكمل هنا؟`, stage: 'interested' },
   { key: 'later', ask: 'مو الحين',
     body: 'ولا يهمك، الرابط يبقى عندكم.', stage: 'not_now' },
   { key: 'no', ask: 'لا أو عندنا موقع',
@@ -1468,6 +1468,8 @@ function exportCsv(leads) {
       const text = firstMessage(l, S.settings.mode, S.settings.siteUrl);
       const chk = l.example ? { ok: false, reason: 'مثال: لا يُرسل.', tips: [] } : sendCheck(l, real(), new Date(), S.settings.mode, S.settings.dailyLimit);
       const why = chk.ok ? null : chk.reason;
+      const attach = S.settings.mode === 'pdf' && !why ? attachButton(l, () => { attach.textContent = 'أُرفق البروفايل ✓'; }) : null;
+      if (attach && !sendState.opened[l.id]) attach.hidden = true;
       const sentBtn = h('button', { class: 'btn', type: 'button', disabled: !sendState.opened[l.id], onclick: () => {
         pushLog(l, { dir: 'out', kind: 'intro', body: text }); setStage(l, 'sent'); l.do_not_contact = true; delete sendState.opened[l.id];
         toast('سُجّل. لا متابعة لهذا المحل.'); render(); openLead(id);
@@ -1477,7 +1479,7 @@ function exportCsv(leads) {
         chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
         h('div', { class: 'row start' },
           h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
-            onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; } }, '1. افتح واتساب والرسالة جاهزة'), sentBtn),
+            onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; if (attach) attach.hidden = false; } }, '1. افتح واتساب والرسالة جاهزة'), attach, sentBtn),
 
         h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. رسالة واحدة لكل محل.')));
     }
@@ -1540,14 +1542,43 @@ function exportCsv(leads) {
     sheet(l.name, ...body);
   }
 
+  /* ═════ إرفاق البروفايل PDF ═════
+     رابط wa.me يحمل نصاً فقط. الملف يُسلَّم لواتساب عبر زر المشاركة في الجوال، فيختار عبدالله المحادثة.
+     المحادثة التي فُتحت للتو تكون أول القائمة. وإن لم يدعم الجهاز مشاركة الملفات (غالباً الكمبيوتر) يُنزَّل الملف. */
+  async function shareProfile() {
+    let file;
+    try {
+      const r = await fetch('profile.pdf'); if (!r.ok) throw new Error('HTTP ' + r.status);
+      file = new File([await r.blob()], PROFILE_FILE_NAME, { type: 'application/pdf' });
+    } catch (e) { toast('تعذّر تحميل البروفايل. تأكد من الاتصال.'); return 'failed'; }
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: 'بروفايل عبدالله الحربي' }); return 'shared'; }
+      catch (e) { return e && e.name === 'AbortError' ? 'cancelled' : 'failed'; }
+    }
+    // تنزيل من عنوان التطبيق نفسه: ملف مبني في الذاكرة يفقد اسمه عند بعض المتصفحات فينزل باسم «download» بلا .pdf
+    const a = h('a', { href: 'profile.pdf', download: PROFILE_FILE_ASCII }); document.body.append(a); a.click();
+    setTimeout(() => a.remove(), 4000);
+    toast('نزل الملف. أرفقه في المحادثة من واتساب.'); return 'downloaded';
+  }
+  function attachButton(lead, onDone) {
+    const done = !!sendState.attached[lead.id];
+    return h('button', { class: 'btn' + (done ? '' : ' primary big'), id: 'q-attach', type: 'button', onclick: async () => {
+      const r = await shareProfile();
+      if (r === 'shared' || r === 'downloaded') { sendState.attached[lead.id] = true; onDone(); }
+    } }, done ? 'أُرفق البروفايل ✓ (أرفقه مرة ثانية)' : '٢. أرفق البروفايل PDF');
+  }
+
   /* ═════ الإرسال ═════ */
-  const sendState = { opened: {} };
+  const sendState = { opened: {}, attached: {} };
   const skipped = new Set();   // «التالي»: تخطٍّ مؤقت في هذه الجلسة، لا حجب
   function viewSend() {
     const mode = S.settings.mode, q = sendQueue(S.leads, new Date(), mode, S.settings.dailyLimit);
     if (skipped.size && q.ready.every(l => skipped.has(l.id))) skipped.clear();
     q.ready = q.ready.filter(l => !skipped.has(l.id)).concat(q.ready.filter(l => skipped.has(l.id)));
-    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num' }, 'اليوم ' + q.used + ' من ' + S.settings.dailyLimit))];
+    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num' }, 'اليوم ' + q.used + ' من ' + S.settings.dailyLimit)),
+      mode === 'demo' ? null : h('div', { class: 'seg', role: 'group', 'aria-label': 'نوع الرسالة الأولى' },
+        h('button', { type: 'button', 'aria-pressed': String(mode === 'pdf'), onclick: () => { S.settings.mode = 'pdf'; save(); render(); } }, 'نص + ملف PDF'),
+        h('button', { type: 'button', 'aria-pressed': String(mode === 'site'), onclick: () => { S.settings.mode = 'site'; save(); render(); } }, 'نص + رابط الموقع'))];
     const lead = q.ready[0];
     if (lead) {
       // ضغطتان لكل محل: «افتح واتساب» ثم «تم، التالي». الأزرار أولاً تحت الإبهام، والرسالة مطوية تحتها.
@@ -1557,18 +1588,21 @@ function exportCsv(leads) {
       const meta = h('div', { class: 'muted' }, [catName(lead.category), lead.city && lead.city !== 'جدة' ? lead.city : null, lead.district || null].filter(Boolean).join(' · '),
         lead.rating ? h('span', { class: 'chip num', dir: 'ltr', style: 'margin-inline-start:8px' }, '★ ' + lead.rating + ' (' + (lead.reviews || 0) + ')') : null);
       const done = () => {
-        pushLog(lead, { dir: 'out', kind: 'intro', body: text }); setStage(lead, 'sent'); lead.do_not_contact = true; delete sendState.opened[lead.id];
+        pushLog(lead, { dir: 'out', kind: 'intro', body: text, pdf: !!sendState.attached[lead.id] }); setStage(lead, 'sent'); lead.do_not_contact = true;
+        delete sendState.opened[lead.id]; delete sendState.attached[lead.id];
         toast('سُجّل ' + lead.name); render(); window.scrollTo(0, 0);
       };
       const actions = lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : opened
         ? h('div', { class: 'qbtns' },
-            h('button', { class: 'btn primary big', id: 'q-done', type: 'button', onclick: done }, 'تم، التالي'),
+            mode === 'pdf' ? attachButton(lead, () => render()) : null,
+            // الزر البارز هو الخطوة التالية: الإرفاق أولاً في وضع الملف، ثم «تم، التالي»
+            h('button', { class: 'btn big' + (mode === 'pdf' && !sendState.attached[lead.id] ? '' : ' primary'), id: 'q-done', type: 'button', onclick: done }, mode === 'pdf' ? '٣. تم، التالي' : 'تم، التالي'),
             h('div', { class: 'row start' },
               h('a', { class: 'btn sm', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener' }, 'افتح واتساب مرة ثانية'),
               h('button', { class: 'btn sm', type: 'button', onclick: () => { delete sendState.opened[lead.id]; render(); } }, 'ما أرسلت')))
         : h('div', { class: 'qbtns' },
             h('a', { class: 'btn primary big', id: 'q-open', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener',
-              onclick: () => { sendState.opened[lead.id] = true; setTimeout(render, 50); } }, 'افتح واتساب'),
+              onclick: () => { sendState.opened[lead.id] = true; setTimeout(render, 50); } }, mode === 'pdf' ? '١. افتح واتساب وأرسل النص' : 'افتح واتساب'),
             h('div', { class: 'row start' },
               h('button', { class: 'btn sm', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'تخطَّ'),
               h('button', { class: 'btn sm', type: 'button', onclick: () => {
