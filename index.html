@@ -181,6 +181,7 @@ main { padding-block: 18px; display: grid; gap: 14px; }
 .lock-box .mark { width: 64px; height: 64px; font-size: 38px; border-radius: 14px; }
 .lock-box .in { text-align: center; letter-spacing: 4px; }
 .lock-box #login-user { letter-spacing: normal; }
+.tips { border-inline-start: 3px solid var(--warn); background: var(--warn-bg); color: var(--ink); padding: 10px 12px; border-radius: 8px; display: grid; gap: 4px; font-size: 14px; }
 .brand .sync { display: block; font-size: 11px; color: var(--muted); }
 .brand .sync[data-state="err"] { color: var(--bad); }
 .brand .sync:empty { display: none; }
@@ -465,16 +466,26 @@ function sendBlock(lead, now = new Date(), mode = 'demo') {
   return null;
 }
 
-// فحص الإرسال من بطاقة المحل. الوقت وحده يُتجاوز بقرار عبدالله، والباقي لا يُتجاوز أبداً:
-// الحجب، الإرسال السابق، المرحلة، الجوال، والحد اليومي.
+// القرار لعبدالله: الوقت والحد اليومي والمهلة بين الرسائل نصائح تظهر له، لا موانع.
+// المانع الوحيد ما يكسر قاعدة «رسالة واحدة لكل محل» أو لا يمكن معه الإرسال: محجوب، أُرسل له، مرحلته لا تسمح، بلا جوال، بلا رابط نموذج.
 const TIME_REASONS = ['خارج نافذة الفئة', 'المحل مغلق أو لم يمضِ ساعة على الافتتاح'];
+const hhmm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
 function sendCheck(lead, leads, now = new Date(), mode = 'site', limit = DAILY_LIMIT) {
   const reason = sendBlock(lead, now, mode);
-  if (reason && !TIME_REASONS.includes(reason)) return { ok: false, reason, overridable: false };
-  const cap = Math.min(Number(limit) || DAILY_LIMIT, 20);
-  if (sentTodayCount(leads || [], now) >= cap) return { ok: false, reason: 'بلغت الحد اليومي (' + toIndic(cap) + ')', overridable: false };
-  if (reason) return { ok: false, reason, overridable: true };
-  return { ok: true, reason: null, overridable: false };
+  if (reason && !TIME_REASONS.includes(reason)) return { ok: false, reason, tips: [] };
+  const tips = [];
+  if (reason === 'خارج نافذة الفئة' && CATEGORIES[lead.category]) { const w = CATEGORIES[lead.category].win; tips.push('خارج الوقت المقترح لفئته (' + hhmm(w[0]) + ' إلى ' + hhmm(w[1]) + ').'); }
+  else if (reason) tips.push(reason + '.');
+  const cap = Math.min(Number(limit) || DAILY_LIMIT, 20), used = sentTodayCount(leads || [], now);
+  if (used >= cap) tips.push('أرسلت اليوم ' + used + '، والحد المقترح ' + cap + '. كثرة الرسائل من رقم جديد قد تعرّضه للحظر.');
+  const wait = waitMinutes(leads || [], now);
+  if (wait > 0) tips.push('آخر رسالة قبل أقل من ' + MIN_GAP_MIN + ' دقائق. التمهّل يحمي رقمك.');
+  return { ok: true, reason: null, tips };
+}
+function waitMinutes(leads, now = new Date()) {
+  let last = 0;
+  for (const l of leads) for (const e of l.log || []) if (e.dir === 'out' && e.kind === 'intro') last = Math.max(last, new Date(e.at).getTime());
+  return last ? Math.max(0, MIN_GAP_MIN - (now.getTime() - last) / 60000) : 0;
 }
 
 function sentTodayCount(leads, now = new Date()) {
@@ -498,7 +509,10 @@ function sendQueue(leads, now = new Date(), mode = 'demo', limit = DAILY_LIMIT) 
   const last = lastSentAt(leads);
   const waitMin = last ? Math.max(0, MIN_GAP_MIN - (now.getTime() - last) / 60000) : 0;
   const eligible = leads.filter(l => !sendBlock(l, now, mode));
-  return { used, left, waitMin, eligible: left ? eligible : [], blockedReason: left ? null : 'بلغت الحد اليومي' };
+  // ready: كل من يجوز الإرسال له، ولو خارج وقته. داخل الوقت أولاً ثم الأقوى. القرار لعبدالله.
+  const ready = leads.filter(l => { const r = sendBlock(l, now, mode); return !r || TIME_REASONS.includes(r); })
+    .sort((a, b) => (Number(!sendBlock(b, now, mode)) - Number(!sendBlock(a, now, mode))) || (leadScore(b).score - leadScore(a).score));
+  return { used, left, waitMin, ready, eligible: left ? eligible : [], blockedReason: left ? null : 'بلغت الحد اليومي' };
 }
 
 /* ───── الكوتيشن (SPEC القسم ٥) ───── */
@@ -1277,8 +1291,8 @@ function exportCsv(leads) {
       h('div', { class: 'list' }, dueTasks.slice(0, 8).map(l => h('button', { class: 'item', type: 'button', onclick: () => openLead(l.id) },
         h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted' }, l.next.text)), h('span', { class: 'chip warn' }, dueLabel(l.next.due)))))));
     out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, 'طابور اليوم'), h('button', { class: 'btn sm', type: 'button', onclick: () => go('send') }, 'افتح الإرسال')),
-      h('div', { class: 'chips' }, h('span', { class: 'chip num' }, 'أُرسل اليوم ' + q.used + ' من ' + S.settings.dailyLimit), h('span', { class: 'chip ' + (q.eligible.length ? 'ok' : '') }, q.eligible.length ? 'جاهز للإرسال ' + q.eligible.length : 'لا أحد جاهز الآن'))));
-    const topReady = q.eligible.slice().sort((a, b) => leadScore(b).score - leadScore(a).score).slice(0, 5);
+      h('div', { class: 'chips' }, h('span', { class: 'chip num' }, 'أُرسل اليوم ' + q.used + ' من ' + S.settings.dailyLimit), h('span', { class: 'chip ' + (q.ready.length ? 'ok' : '') }, q.ready.length ? 'جاهز للإرسال ' + q.ready.length : 'لا أحد جاهز الآن'))));
+    const topReady = q.ready.slice(0, 5);
     if (topReady.length) out.push(h('section', { class: 'card' }, h('h3', null, 'الأقوى الجاهزون للإرسال'), h('div', { class: 'list' }, topReady.map(l => leadItem(l)))));
     if (alertF.due) out.push(h('section', { class: 'card alert' }, h('h2', null, 'مرّت ' + ALERT_EVERY + ' رسالة بلا رد بشري'), h('p', null, alertF.text)));
     else out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'قياس الرسائل'), h('span', { class: 'muted num' }, 'باقي ' + alertF.next + ' رسالة للتقييم القادم')),
@@ -1410,7 +1424,7 @@ function exportCsv(leads) {
     // الرسالة الأولى جاهزة: نقرة تفتح المحادثة بالنص، ونقرة تسجّل الإرسال
     if (!l.do_not_contact) {
       const text = firstMessage(l, S.settings.mode, S.settings.siteUrl);
-      const chk = l.example ? { ok: false, reason: 'مثال: لا يُرسل.', overridable: false } : sendCheck(l, real(), new Date(), S.settings.mode, S.settings.dailyLimit);
+      const chk = l.example ? { ok: false, reason: 'مثال: لا يُرسل.', tips: [] } : sendCheck(l, real(), new Date(), S.settings.mode, S.settings.dailyLimit);
       const why = chk.ok ? null : chk.reason;
       const sentBtn = h('button', { class: 'btn', type: 'button', disabled: !sendState.opened[l.id], onclick: () => {
         pushLog(l, { dir: 'out', kind: 'intro', body: text }); setStage(l, 'sent'); l.do_not_contact = true; delete sendState.opened[l.id];
@@ -1418,12 +1432,11 @@ function exportCsv(leads) {
       } }, '2. تم الإرسال');
       body.push(h('section', { class: 'card' }, h('h3', null, 'الرسالة الأولى جاهزة'), h('div', { class: 'msg', dir: 'rtl' }, text),
         why ? h('div', { class: 'banner' }, why) : null,
+        chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
         h('div', { class: 'row start' },
           h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
             onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; } }, '1. افتح واتساب والرسالة جاهزة'), sentBtn),
-        // الوقت وحده يُتجاوز بقرارك. الحجب والحد اليومي لا يظهر لهما هذا الزر
-        chk.overridable ? h('a', { class: 'btn', id: 'send-anyway', href: waLink(l.phone, text), target: '_blank', rel: 'noopener',
-          onclick: () => { sendState.opened[l.id] = true; sentBtn.disabled = false; pushLog(l, { kind: 'override', text: chk.reason }); save(); } }, 'أرسل الآن رغم الوقت') : null,
+
         h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. رسالة واحدة لكل محل.')));
     }
     const sc = leadScore(l);
@@ -1480,47 +1493,51 @@ function exportCsv(leads) {
     body.push(h('label', { class: 'f', for: 'nt' }, 'ملاحظات', h('textarea', { class: 'in', id: 'nt', onchange: e => { l.notes = e.target.value; save(); } }, l.notes || '')));
     const logs = (l.log || []).slice().reverse();
     body.push(h('section', { class: 'card' }, h('h3', null, 'السجل'), logs.length ? h('div', { class: 'log' }, logs.map(e => h('div', null,
-      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : e.kind === 'override' ? 'فتحت واتساب خارج الوقت' : (e.kind || '')),
+      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : (e.kind || '')),
       h('span', { class: 'muted num' }, e.at ? day(e.at) + ' ' + hhmm(e.at) : '')))) : h('div', { class: 'muted' }, 'لا شيء بعد.')));
     sheet(l.name, ...body);
   }
 
   /* ═════ الإرسال ═════ */
   const sendState = { opened: {} };
+  const skipped = new Set();   // «التالي»: تخطٍّ مؤقت في هذه الجلسة، لا حجب
   function viewSend() {
     const mode = S.settings.mode, q = sendQueue(S.leads, new Date(), mode, S.settings.dailyLimit);
+    if (skipped.size && q.ready.every(l => skipped.has(l.id))) skipped.clear();
+    q.ready = q.ready.filter(l => !skipped.has(l.id)).concat(q.ready.filter(l => skipped.has(l.id)));
     const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num ltr', dir: 'ltr' }, q.used + ' / ' + S.settings.dailyLimit))];
-    const lead = q.eligible[0];
+    const lead = q.ready[0];
     if (lead) {
       const text = firstMessage(lead, mode, S.settings.siteUrl);
-      const wait = Math.ceil(q.waitMin);
+      const chk = sendCheck(lead, real(), new Date(), mode, S.settings.dailyLimit);
       const opened = !!sendState.opened[lead.id];
       out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, lead.name), h('span', { class: 'chip' }, catName(lead.category))),
         h('div', { class: 'msg', dir: 'rtl' }, text),
-        wait > 0 ? h('div', { class: 'banner' }, 'انتظر ' + wait + ' دقيقة بين الرسالتين.') : null,
+        chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
         lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : null,
         h('div', { class: 'row start' },
-          h('a', { class: 'btn primary', href: lead.example || wait > 0 ? '#' : waLink(lead.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': lead.example || wait > 0 ? 'true' : false,
-            onclick: e => { if (lead.example || wait > 0) { e.preventDefault(); return; } sendState.opened[lead.id] = true; setTimeout(render, 50); } }, '1. افتح واتساب'),
+          h('a', { class: 'btn primary', href: lead.example ? '#' : waLink(lead.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': lead.example ? 'true' : false,
+            onclick: e => { if (lead.example) { e.preventDefault(); return; } sendState.opened[lead.id] = true; setTimeout(render, 50); } }, '1. افتح واتساب'),
           h('button', { class: 'btn', type: 'button', disabled: !opened, onclick: () => {
             pushLog(lead, { dir: 'out', kind: 'intro', body: text }); setStage(lead, 'sent'); lead.do_not_contact = true; delete sendState.opened[lead.id];
             toast('سُجّل. لا متابعة لهذا المحل.'); render();
-          } }, '2. تم الإرسال')),
+          } }, '2. تم الإرسال'),
+          q.ready.length > 1 ? h('button', { class: 'btn sm', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'التالي') : null),
         h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. التطبيق لا يرسل شيئاً.'),
-        q.eligible.length > 1 ? h('div', { class: 'muted num' }, 'بعده ' + (q.eligible.length - 1) + ' في الطابور.') : null));
+        q.ready.length > 1 ? h('div', { class: 'muted num' }, 'بعده ' + (q.ready.length - 1) + ' في الطابور.') : null));
     } else {
       const reasons = {};
       S.leads.filter(l => (mode !== 'demo' ? ['candidate', 'demo_ready'] : ['demo_ready']).includes(l.stage) && !l.do_not_contact).forEach(l => { const r = sendBlock(l, new Date(), mode); if (r) reasons[r] = (reasons[r] || 0) + 1; });
-      out.push(h('section', { class: 'card empty' }, h('h2', null, q.blockedReason || 'ما فيه أحد جاهز الآن'),
+      out.push(h('section', { class: 'card empty' }, h('h2', null, 'ما فيه أحد تقدر ترسل له'),
         Object.keys(reasons).length ? h('div', { class: 'list', style: 'width:100%' }, Object.entries(reasons).map(([r, n]) => h('div', { class: 'row' }, h('span', null, r), h('span', { class: 'chip num' }, n)))) :
-          h('span', null, mode !== 'demo' ? 'استورد عملاءك من الإعدادات، وسيظهر هنا من يحق الإرسال له داخل نافذة فئته.' : 'علّم محلاً «نموذج جاهز» من بطاقته بعد ما تبني نموذجه وتضع رابطه.'),
+          h('span', null, mode !== 'demo' ? 'كل عملائك أُرسل لهم أو محجوبون. أضف محلات جديدة من «إدخال سريع» في العملاء.' : 'علّم محلاً «نموذج جاهز» من بطاقته بعد ما تبني نموذجه وتضع رابطه.'),
         h('button', { class: 'btn sm', type: 'button', onclick: () => go('leads') }, 'العملاء')));
     }
-    out.push(h('section', { class: 'card' }, h('h3', null, 'نوافذ الإرسال'),
+    out.push(h('section', { class: 'card' }, h('h3', null, 'الأوقات المقترحة'),
       h('div', { class: 'tw' }, h('table', { class: 'table' }, h('tbody', null, Object.keys(CATEGORIES).map(k => {
         const w = CATEGORIES[k].win, f = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
         return h('tr', null, h('td', null, CATEGORIES[k].ar), h('td', { class: 'n' }, h('span', { class: 'ltr', dir: 'ltr' }, f(w[0]) + ' - ' + f(w[1]))));
-      })))), h('div', { class: 'muted' }, 'الجمعة لا إرسال قبل 15:30. الحد ' + S.settings.dailyLimit + ' جديدة يومياً وبين كل رسالة ' + MIN_GAP_MIN + ' دقائق.')));
+      })))), h('div', { class: 'muted' }, 'نصائح لا قيود: الجمعة بعد 15:30، و' + S.settings.dailyLimit + ' رسائل يومياً، و' + MIN_GAP_MIN + ' دقائق بين الرسائل تحمي رقمك من الحظر. القرار لك.')));
     return out;
   }
 
