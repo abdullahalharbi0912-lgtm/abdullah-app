@@ -465,6 +465,18 @@ function sendBlock(lead, now = new Date(), mode = 'demo') {
   return null;
 }
 
+// فحص الإرسال من بطاقة المحل. الوقت وحده يُتجاوز بقرار عبدالله، والباقي لا يُتجاوز أبداً:
+// الحجب، الإرسال السابق، المرحلة، الجوال، والحد اليومي.
+const TIME_REASONS = ['خارج نافذة الفئة', 'المحل مغلق أو لم يمضِ ساعة على الافتتاح'];
+function sendCheck(lead, leads, now = new Date(), mode = 'site', limit = DAILY_LIMIT) {
+  const reason = sendBlock(lead, now, mode);
+  if (reason && !TIME_REASONS.includes(reason)) return { ok: false, reason, overridable: false };
+  const cap = Math.min(Number(limit) || DAILY_LIMIT, 20);
+  if (sentTodayCount(leads || [], now) >= cap) return { ok: false, reason: 'بلغت الحد اليومي (' + toIndic(cap) + ')', overridable: false };
+  if (reason) return { ok: false, reason, overridable: true };
+  return { ok: true, reason: null, overridable: false };
+}
+
 function sentTodayCount(leads, now = new Date()) {
   const today = riyadh(now).ymd;
   let n = 0;
@@ -1397,7 +1409,9 @@ function exportCsv(leads) {
     if (l.address || l.website) body.push(h('div', { class: 'muted', dir: 'auto' }, [l.address, l.website ? 'الحضور: ' + l.website : ''].filter(Boolean).join(' · ')));
     // الرسالة الأولى جاهزة: نقرة تفتح المحادثة بالنص، ونقرة تسجّل الإرسال
     if (!l.do_not_contact) {
-      const text = firstMessage(l, S.settings.mode, S.settings.siteUrl), why = l.example ? 'مثال: لا يُرسل.' : sendBlock(l, new Date(), S.settings.mode);
+      const text = firstMessage(l, S.settings.mode, S.settings.siteUrl);
+      const chk = l.example ? { ok: false, reason: 'مثال: لا يُرسل.', overridable: false } : sendCheck(l, real(), new Date(), S.settings.mode, S.settings.dailyLimit);
+      const why = chk.ok ? null : chk.reason;
       const sentBtn = h('button', { class: 'btn', type: 'button', disabled: !sendState.opened[l.id], onclick: () => {
         pushLog(l, { dir: 'out', kind: 'intro', body: text }); setStage(l, 'sent'); l.do_not_contact = true; delete sendState.opened[l.id];
         toast('سُجّل. لا متابعة لهذا المحل.'); render(); openLead(id);
@@ -1407,6 +1421,9 @@ function exportCsv(leads) {
         h('div', { class: 'row start' },
           h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
             onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; } }, '1. افتح واتساب والرسالة جاهزة'), sentBtn),
+        // الوقت وحده يُتجاوز بقرارك. الحجب والحد اليومي لا يظهر لهما هذا الزر
+        chk.overridable ? h('a', { class: 'btn', id: 'send-anyway', href: waLink(l.phone, text), target: '_blank', rel: 'noopener',
+          onclick: () => { sendState.opened[l.id] = true; sentBtn.disabled = false; pushLog(l, { kind: 'override', text: chk.reason }); save(); } }, 'أرسل الآن رغم الوقت') : null,
         h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. رسالة واحدة لكل محل.')));
     }
     const sc = leadScore(l);
@@ -1463,7 +1480,7 @@ function exportCsv(leads) {
     body.push(h('label', { class: 'f', for: 'nt' }, 'ملاحظات', h('textarea', { class: 'in', id: 'nt', onchange: e => { l.notes = e.target.value; save(); } }, l.notes || '')));
     const logs = (l.log || []).slice().reverse();
     body.push(h('section', { class: 'card' }, h('h3', null, 'السجل'), logs.length ? h('div', { class: 'log' }, logs.map(e => h('div', null,
-      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : (e.kind || '')),
+      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : e.kind === 'override' ? 'فتحت واتساب خارج الوقت' : (e.kind || '')),
       h('span', { class: 'muted num' }, e.at ? day(e.at) + ' ' + hhmm(e.at) : '')))) : h('div', { class: 'muted' }, 'لا شيء بعد.')));
     sheet(l.name, ...body);
   }
