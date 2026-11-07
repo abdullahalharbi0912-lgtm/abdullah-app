@@ -181,6 +181,9 @@ main { padding-block: 18px; display: grid; gap: 14px; }
 .lock-box .mark { width: 64px; height: 64px; font-size: 38px; border-radius: 14px; }
 .lock-box .in { text-align: center; letter-spacing: 4px; }
 .lock-box #login-user { letter-spacing: normal; }
+.qbtns { display: grid; gap: 10px; }
+.btn.big { min-height: 56px; font-size: 18px; width: 100%; justify-content: center; }
+.qmsg summary { cursor: pointer; color: var(--muted); padding: 6px 0; min-height: 40px; display: flex; align-items: center; }
 .tips { border-inline-start: 3px solid var(--warn); background: var(--warn-bg); color: var(--ink); padding: 10px 12px; border-radius: 8px; display: grid; gap: 4px; font-size: 14px; }
 .brand .sync { display: block; font-size: 11px; color: var(--muted); }
 .brand .sync[data-state="err"] { color: var(--bad); }
@@ -451,6 +454,7 @@ const REPLIED = ['human_reply', 'interested', 'quoted', 'deposit', 'delivering',
 // mode: 'demo' يطلب نموذجاً جاهزاً لكل محل (المواصفة الأصلية)، و 'site' يرسل رابط الموقع الترحيبي ولا يحتاج نموذجاً.
 function sendBlock(lead, now = new Date(), mode = 'demo') {
   if (lead.do_not_contact) return 'محجوب: تواصلنا معه سابقاً';
+  if (lead.no_whatsapp) return 'الرقم بلا واتساب';
   if (FINAL_STAGES.includes(lead.stage)) return 'مرحلته نهائية';
   if (mode !== 'demo') { // الموقع والبروفايل لا يحتاجان نموذجاً لكل محل
     if (!['candidate', 'demo_ready'].includes(lead.stage)) return 'ليس مرشحاً للإرسال';
@@ -1493,7 +1497,7 @@ function exportCsv(leads) {
     body.push(h('label', { class: 'f', for: 'nt' }, 'ملاحظات', h('textarea', { class: 'in', id: 'nt', onchange: e => { l.notes = e.target.value; save(); } }, l.notes || '')));
     const logs = (l.log || []).slice().reverse();
     body.push(h('section', { class: 'card' }, h('h3', null, 'السجل'), logs.length ? h('div', { class: 'log' }, logs.map(e => h('div', null,
-      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : (e.kind || '')),
+      h('span', null, e.dir === 'out' ? (e.kind === 'intro' ? 'الرسالة الأولى' : 'رسالتنا') : e.dir === 'in' ? (e.reply === 'auto' ? 'رد آلي' : 'رد بشري') : e.kind === 'stage' ? 'المرحلة: ' + STAGE_AR[e.stage] : e.kind === 'no_whatsapp' ? 'الرقم بلا واتساب' : (e.kind || '')),
       h('span', { class: 'muted num' }, e.at ? day(e.at) + ' ' + hhmm(e.at) : '')))) : h('div', { class: 'muted' }, 'لا شيء بعد.')));
     sheet(l.name, ...body);
   }
@@ -1505,26 +1509,43 @@ function exportCsv(leads) {
     const mode = S.settings.mode, q = sendQueue(S.leads, new Date(), mode, S.settings.dailyLimit);
     if (skipped.size && q.ready.every(l => skipped.has(l.id))) skipped.clear();
     q.ready = q.ready.filter(l => !skipped.has(l.id)).concat(q.ready.filter(l => skipped.has(l.id)));
-    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num ltr', dir: 'ltr' }, q.used + ' / ' + S.settings.dailyLimit))];
+    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num' }, 'اليوم ' + q.used + ' من ' + S.settings.dailyLimit))];
     const lead = q.ready[0];
     if (lead) {
+      // ضغطتان لكل محل: «افتح واتساب» ثم «تم، التالي». الأزرار أولاً تحت الإبهام، والرسالة مطوية تحتها.
       const text = firstMessage(lead, mode, S.settings.siteUrl);
       const chk = sendCheck(lead, real(), new Date(), mode, S.settings.dailyLimit);
       const opened = !!sendState.opened[lead.id];
-      out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, lead.name), h('span', { class: 'chip' }, catName(lead.category))),
-        h('div', { class: 'msg', dir: 'rtl' }, text),
+      const meta = h('div', { class: 'muted' }, [catName(lead.category), lead.city && lead.city !== 'جدة' ? lead.city : null, lead.district || null].filter(Boolean).join(' · '),
+        lead.rating ? h('span', { class: 'chip num', dir: 'ltr', style: 'margin-inline-start:8px' }, '★ ' + lead.rating + ' (' + (lead.reviews || 0) + ')') : null);
+      const done = () => {
+        pushLog(lead, { dir: 'out', kind: 'intro', body: text }); setStage(lead, 'sent'); lead.do_not_contact = true; delete sendState.opened[lead.id];
+        toast('سُجّل ' + lead.name); render(); window.scrollTo(0, 0);
+      };
+      const actions = lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : opened
+        ? h('div', { class: 'qbtns' },
+            h('button', { class: 'btn primary big', id: 'q-done', type: 'button', onclick: done }, 'تم، التالي'),
+            h('div', { class: 'row start' },
+              h('a', { class: 'btn sm', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener' }, 'افتح واتساب مرة ثانية'),
+              h('button', { class: 'btn sm', type: 'button', onclick: () => { delete sendState.opened[lead.id]; render(); } }, 'ما أرسلت')))
+        : h('div', { class: 'qbtns' },
+            h('a', { class: 'btn primary big', id: 'q-open', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener',
+              onclick: () => { sendState.opened[lead.id] = true; setTimeout(render, 50); } }, 'افتح واتساب'),
+            h('div', { class: 'row start' },
+              h('button', { class: 'btn sm', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'تخطَّ'),
+              h('button', { class: 'btn sm', type: 'button', onclick: () => {
+                lead.no_whatsapp = true; pushLog(lead, { kind: 'no_whatsapp' }); toast('أُخرج من الطابور: بلا واتساب'); render();
+              } }, 'ما عليه واتساب')));
+      out.push(h('section', { class: 'card qcard' },
+        h('div', { class: 'row' }, h('h2', null, lead.name), h('button', { class: 'btn sm', type: 'button', onclick: () => openLead(lead.id) }, 'البطاقة')),
+        meta,
         chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
-        lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : null,
-        h('div', { class: 'row start' },
-          h('a', { class: 'btn primary', href: lead.example ? '#' : waLink(lead.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': lead.example ? 'true' : false,
-            onclick: e => { if (lead.example) { e.preventDefault(); return; } sendState.opened[lead.id] = true; setTimeout(render, 50); } }, '1. افتح واتساب'),
-          h('button', { class: 'btn', type: 'button', disabled: !opened, onclick: () => {
-            pushLog(lead, { dir: 'out', kind: 'intro', body: text }); setStage(lead, 'sent'); lead.do_not_contact = true; delete sendState.opened[lead.id];
-            toast('سُجّل. لا متابعة لهذا المحل.'); render();
-          } }, '2. تم الإرسال'),
-          q.ready.length > 1 ? h('button', { class: 'btn sm', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'التالي') : null),
-        h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. التطبيق لا يرسل شيئاً.'),
-        q.ready.length > 1 ? h('div', { class: 'muted num' }, 'بعده ' + (q.ready.length - 1) + ' في الطابور.') : null));
+        actions,
+        h('details', { class: 'qmsg' }, h('summary', null, 'الرسالة'), h('div', { class: 'msg', dir: 'rtl' }, text))));
+      const next = q.ready.slice(1, 6);
+      if (next.length) out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'التالي'), h('span', { class: 'muted num' }, 'باقي ' + (q.ready.length - 1))),
+        h('div', { class: 'list' }, next.map(l => h('button', { class: 'item', type: 'button', onclick: () => { skipped.clear(); q.ready.slice(0, q.ready.indexOf(l)).forEach(x => skipped.add(x.id)); render(); window.scrollTo(0, 0); } },
+          h('span', null, l.name), h('span', { class: 'muted' }, catName(l.category)))))));
     } else {
       const reasons = {};
       S.leads.filter(l => (mode !== 'demo' ? ['candidate', 'demo_ready'] : ['demo_ready']).includes(l.stage) && !l.do_not_contact).forEach(l => { const r = sendBlock(l, new Date(), mode); if (r) reasons[r] = (reasons[r] || 0) + 1; });
