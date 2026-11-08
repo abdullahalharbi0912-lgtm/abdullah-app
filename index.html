@@ -101,80 +101,182 @@ textarea.in { min-height: 112px; resize: vertical; }
 
 
 /* ───── هوية التطبيق من صور عبدالله: أبيض الثوب، أحمر الشماغ، فحمي الاستوديو ─────
-   الأحمر #872C45 مأخوذ من الشماغ نفسه، والرمادي من خلفية الاستوديو. التباين كله فوق AA.
-   الذهبي للزخرفة فقط، لا للنص. ومربعات الشماغ هي النمط الوحيد. */
+   الأحمر #872C45 من الشماغ نفسه، والفحمي من خلفية الاستوديو. التباين كله فوق AA، والذهبي للزخرفة فقط.
+   مربعات الشماغ هي النمط الوحيد، وتظهر شريطاً رفيعاً لا خلفية.
+   التصميم (ui-ux-pro-max): مسطح حديث، مسافات بشبكة ٨، أهداف لمس ٤٤+، بطاقة واحدة بارزة في كل شاشة. */
 :root {
-  --bg: #F7F6F4; --surface: #FFFFFF; --surface-2: #EFEEEB; --ink: #1D1D1F; --muted: #5A5B59;
-  --line: #E2E0DC; --line-strong: #C9C6C0;
-  --accent: #872C45; --accent-ink: #FFFFFF; --accent-text: #872C45; --accent-soft: #F4E8EC;
-  --gold: #A8822E; --panel-muted: #E8D5DB;
+  --bg: #F5F4F1; --surface: #FFFFFF; --surface-2: #EFEDE9; --ink: #1D1D1F; --muted: #5A5B59;
+  --line: #E4E1DC; --line-strong: #CBC7C0;
+  --accent: #872C45; --accent-ink: #FFFFFF; --accent-text: #872C45; --accent-soft: #F6EBEE;
+  --gold: #A8822E; --panel-muted: #E8D5DB; --charcoal: #1D1D1F; --charcoal-2: #2A2A2D;
   --check: repeating-conic-gradient(#872C45 0 25%, #FFFFFF 0 50%) 0 0 / 8px 8px;
+  --r-m: 16px; --r-s: 12px; --r-l: 22px;
+  --shadow: 0 1px 2px rgba(29,29,31,.05), 0 4px 14px rgba(29,29,31,.04);
+  --ease: cubic-bezier(.2,.8,.2,1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #161617; --surface: #1F1F21; --surface-2: #28282B; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2E2E31; --line-strong: #45454A;
-    --accent: #9B3352; --accent-ink: #FFFFFF; --accent-text: #E58AA3; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
+    --bg: #121213; --surface: #1C1C1E; --surface-2: #26262A; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2C2C30; --line-strong: #45454A;
+    --accent: #A3375A; --accent-ink: #FFFFFF; --accent-text: #EE9AB2; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
+    --charcoal: #000000; --charcoal-2: #1C1C1E; --shadow: none;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #161617; --surface: #1F1F21; --surface-2: #28282B; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2E2E31; --line-strong: #45454A;
-  --accent: #9B3352; --accent-ink: #FFFFFF; --accent-text: #E58AA3; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
+  --bg: #121213; --surface: #1C1C1E; --surface-2: #26262A; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2C2C30; --line-strong: #45454A;
+  --accent: #A3375A; --accent-ink: #FFFFFF; --accent-text: #EE9AB2; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
+  --charcoal: #000000; --charcoal-2: #1C1C1E; --shadow: none;
 }
+body { font-size: 16px; line-height: 1.6; }
 /* الشعار: «ح» أبيض على فحمي، وتحته شريط مربعات الشماغ */
-.mark { background: #1D1D1F !important; color: #FFFFFF !important; position: relative; overflow: hidden; }
+.mark { background: #1D1D1F !important; color: #FFFFFF !important; position: relative; overflow: hidden; border-radius: 12px !important; }
 .mark::after { content: ''; position: absolute; inset-inline: 22%; bottom: 14%; height: 12%; background: var(--check); background-size: 4px 4px; border-radius: 1px; }
 .mark { padding-bottom: 10%; }
-.top { border-block-end: 1px solid var(--line); box-shadow: inset 0 -3px 0 -2px var(--gold); }
-/* شاشة الدخول: صورة عبدالله بإطار رفيع ذهبي */
 .lock-portrait { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 3px solid var(--surface); box-shadow: 0 0 0 1.5px var(--gold), 0 10px 30px rgba(0,0,0,.18); background: #4E4F4D; }
 .lock-sig { font-size: 13px; color: var(--muted); letter-spacing: .3px; }
 .lock-sig::before { content: ''; display: block; width: 44px; height: 6px; margin: 0 auto 8px; background: var(--check); background-size: 6px 6px; border-radius: 1px; }
 
-
-/* ───── المساعد: أداة تشغيل تُمسح بالإصبع. الملخص قبل التفصيل، والحالة بشكلها لا برقمها فقط ───── */
-body { padding-block-end: calc(86px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); }
-/* شارة Netlify المجانية (#nl-badge-frame) تُحقن أسفل الصفحة فوق التبويبات وتحجب النقر.
-   لا نخفيها: نقيس ارتفاعها ونرفع التبويبات والنوافذ والتنبيه فوقها (--nlb). */
-.toast { inset-block-end: calc(16px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); }
+/* ───── الإطار ───── */
+body { padding-block-end: calc(92px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); }
+.toast { inset-block-end: calc(96px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)); border-radius: 999px; }
 .sheet { padding-block-end: calc(24px + var(--nlb, 0px) + env(safe-area-inset-bottom, 0px)) !important; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 30; }
-.app { max-width: 720px; margin-inline: auto; }
-header.top { position: sticky; inset-block-start: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px;
-  margin-inline: calc(var(--gutter) * -1) calc(var(--gutter-e) * -1); padding-inline: var(--gutter) var(--gutter-e); border-block-end: 1px solid var(--line); }
-.round { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; }
-.round:hover { border-color: var(--ink); }
-main { padding-block: 18px; display: grid; gap: 14px; }
-.tabs { position: fixed; inset-inline: 0; inset-block-end: var(--nlb, 0px); z-index: 25; background: var(--surface); border-block-start: 1px solid var(--line);
-  display: grid; grid-template-columns: repeat(6, 1fr); padding: 6px max(6px, env(safe-area-inset-left, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-right, 0px)); }
-.tabs button { border: 0; background: transparent; min-height: 52px; border-radius: 12px; cursor: pointer; display: grid; place-items: center; gap: 2px; font-size: 12px; font-weight: 600; color: var(--muted); position: relative; }
-.tabs button[aria-current="page"] { color: var(--ink); background: var(--surface-2); }
-.tabs svg { width: 22px; height: 22px; }
-.tabs .dot { position: absolute; inset-block-start: 2px; inset-inline-start: calc(50% + 6px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--coral); color: var(--coral-ink); font-size: 11px; display: grid; place-items: center; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 16px; display: grid; gap: 12px; min-width: 0; }
-.card h2, .card h3 { font-size: 18px; }
-.card.alert { border-color: var(--coral); background: color-mix(in srgb, var(--coral) 10%, var(--surface)); }
+.app { max-width: 640px; margin-inline: auto; }
+header.top { position: sticky; inset-block-start: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px;
+  margin-inline: calc(var(--gutter) * -1) calc(var(--gutter-e) * -1); padding-inline: var(--gutter) var(--gutter-e); }
+header.top::after { content: ''; position: absolute; inset-inline: 0; inset-block-end: 0; height: 3px; background: var(--check); background-size: 6px 6px; opacity: .9; }
+.round { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; transition: border-color .15s var(--ease); }
+.round:hover { border-color: var(--line-strong); }
+main { padding-block: 20px 8px; display: grid; gap: 16px; }
+.ic { display: inline-grid; place-items: center; width: 22px; height: 22px; flex: none; }
+.ic svg { width: 100%; height: 100%; }
+.title { font-size: 28px; font-weight: 700; letter-spacing: -.2px; }
+.hello { display: grid; gap: 2px; }
+
+/* التبويبات: خمسة تحت الإبهام، والحالي بخلفية حمراء ناعمة */
+.tabs { position: fixed; inset-inline: 0; inset-block-end: var(--nlb, 0px); z-index: 25; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-block-start: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, 1fr); max-width: 100%;
+  padding: 6px max(8px, env(safe-area-inset-left, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-right, 0px)); }
+.tabs button { border: 0; background: transparent; min-height: 56px; border-radius: 14px; cursor: pointer; display: grid; place-items: center; align-content: center; gap: 2px; font-size: 12px; font-weight: 600; color: var(--muted); position: relative; transition: color .15s var(--ease); }
+.tabs button .ic { width: 40px; height: 28px; padding: 3px 9px; border-radius: 999px; transition: background-color .2s var(--ease); }
+.tabs button[aria-current="page"] { color: var(--accent-text); }
+.tabs button[aria-current="page"] .ic { background: var(--accent-soft); }
+.tabs .dot { position: absolute; inset-block-start: 4px; inset-inline-start: calc(50% + 8px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--accent); color: var(--accent-ink); font-size: 11px; line-height: 18px; text-align: center; box-shadow: 0 0 0 2px var(--surface); }
+
+/* ───── البطاقات ───── */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 16px; display: grid; gap: 12px; min-width: 0; box-shadow: var(--shadow); }
+.card h2, .card h3, .block h2, .block h3 { font-size: 17px; }
+.card.alert { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.card.accent { border-color: var(--accent); border-inline-start-width: 4px; }
+.block { display: grid; gap: 10px; min-width: 0; }
+.bhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.fold { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 4px 16px; }
+.fold[open] { padding-block-end: 16px; }
+.fold > summary { cursor: pointer; min-height: 48px; display: flex; align-items: center; font-weight: 600; list-style: none; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary::after { content: '+'; margin-inline-start: auto; color: var(--muted); font-size: 20px; }
+.fold[open] > summary::after { content: '−'; }
 .row { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; min-width: 0; }
 .row.start { justify-content: flex-start; }
 .muted { color: var(--muted); font-size: 14px; }
-.big { font-family: var(--f-display); font-size: 40px; line-height: 1; }
-.bar-bg { height: 12px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
-.bar-fg { height: 100%; background: var(--reef); border-radius: 6px; }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.stagegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
-.stagegrid div { background: var(--surface-2); border-radius: var(--r-s); padding: 10px; display: grid; gap: 2px; font-size: 13px; }
-.stagegrid b { font-size: 22px; font-family: var(--f-display); }
-.item { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); width: 100%; text-align: start; cursor: pointer; min-width: 0; }
-.item:hover { border-color: var(--ink); }
-.item .t { display: grid; gap: 2px; min-width: 0; }
-.item .t b { overflow-wrap: anywhere; }
+.big { font-family: var(--f-display); font-size: 40px; line-height: 1; font-weight: 700; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { border-radius: 999px; }
+
+/* البطل: بطاقة فحمية واحدة بارزة، بشريط الشماغ في أعلاها */
+.hero { position: relative; overflow: hidden; background: var(--charcoal); color: #FFFFFF; border-radius: var(--r-l); padding: 22px 20px 20px; display: grid; gap: 18px; }
+.hero::before { content: ''; position: absolute; inset-inline: 0; inset-block-start: 0; height: 6px; background: var(--check); background-size: 6px 6px; }
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.hero-k { font-size: 14px; color: #C9C8C5; font-weight: 500; }
+.hero-n { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
+.ring { --p: 0; width: 84px; height: 84px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: radial-gradient(closest-side, var(--charcoal) 78%, transparent 79%), conic-gradient(#E58AA3 calc(var(--p) * 1%), rgba(255,255,255,.14) 0); }
+.ring span { font-size: 16px; font-weight: 700; direction: ltr; }
+.btn.light { background: #FFFFFF; color: #1D1D1F; border-color: #FFFFFF; }
+.btn.light:hover { background: #EDEDEB; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 14px 12px; display: grid; gap: 2px; text-align: start; cursor: pointer; min-height: 88px; font-size: 13px; color: var(--muted); font-weight: 600; box-shadow: var(--shadow); transition: border-color .15s var(--ease), transform .15s var(--ease); }
+.tile:hover { border-color: var(--line-strong); }
+.tile:active { transform: scale(.98); }
+.tile-n { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+
+/* ───── القوائم ───── */
+.item { display: flex; gap: 12px; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-s); width: 100%; text-align: start; cursor: pointer; min-width: 0; min-height: 60px; transition: border-color .15s var(--ease); }
+.item:hover { border-color: var(--line-strong); }
+.item[disabled] { opacity: .55; cursor: default; }
+.item .t { display: grid; gap: 0; min-width: 0; flex: 1; }
+.item .t b { overflow-wrap: anywhere; font-weight: 600; }
+.item > .ic { color: var(--muted); }
 .list { display: grid; gap: 8px; }
+.avatar { width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--charcoal); color: #FFFFFF; font-weight: 700; font-size: 22px; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--accent); }
+.avatar.sm { width: 38px; height: 38px; font-size: 16px; box-shadow: none; background: var(--surface-2); color: var(--ink); }
+.mico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-text); flex: none; }
+.prow { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 0; border-block-end: 1px solid var(--line); }
+.prow:last-child { border-block-end: 0; }
+
+/* ───── الطابور: بطاقة واحدة كبيرة لكل محل، والزر الأساسي تحت الإبهام ───── */
+.qhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.qprog { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.qprog div { height: 100%; background: var(--accent); border-radius: 3px; transition: width .4s var(--ease); }
+.qcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-l); padding: 20px; display: grid; gap: 16px; box-shadow: var(--shadow); animation: qin .22s var(--ease); }
+.qcard.is-open { border-color: var(--accent); }
+@keyframes qin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.qtop { display: flex; gap: 14px; align-items: center; min-width: 0; }
+.qname { display: grid; gap: 4px; min-width: 0; }
+.qname h2 { font-size: 22px; overflow-wrap: anywhere; }
+.qmeta { display: flex; flex-wrap: wrap; gap: 4px 0; color: var(--muted); font-size: 14px; }
+.qmeta span + span::before { content: '·'; margin-inline: 8px; }
+.qrate { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; font-weight: 600; color: var(--ink); }
+.qrate .muted { font-weight: 500; }
+.qstate { display: flex; align-items: center; gap: 8px; background: var(--ok-bg); color: var(--ok); border-radius: var(--r-s); padding: 10px 12px; font-weight: 600; font-size: 14px; }
+.qbtns { display: grid; gap: 10px; }
+.qmore { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.btn { border-radius: var(--r-s); transition: background-color .15s var(--ease), border-color .15s var(--ease), transform .1s var(--ease); }
+.btn:active { transform: scale(.98); }
+.btn.big { min-height: 58px; font-size: 18px; width: 100%; justify-content: center; border-radius: 14px; }
+.btn.sm { min-height: 44px; }
+.btn.ghost { border-color: transparent; color: var(--muted); min-height: 44px; }
+.btn.ghost:hover { background: var(--surface-2); color: var(--ink); }
+.btn .ic { width: 20px; height: 20px; }
+.steps { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { counter-increment: s; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 34px; border-radius: 999px; background: var(--surface-2); color: var(--muted); font-size: 13px; font-weight: 600; }
+.steps li::before { content: counter(s, arabic-indic); }
+.steps li.now { background: var(--accent-soft); color: var(--accent-text); }
+.steps li.done { background: var(--ok-bg); color: var(--ok); }
+.qmsg { border-block-start: 1px solid var(--line); padding-block-start: 4px; }
+.qmsg summary { cursor: pointer; color: var(--muted); min-height: 44px; display: flex; align-items: center; font-weight: 600; font-size: 14px; }
+.msg { background: var(--surface-2); border-radius: var(--r-s); padding: 14px; white-space: pre-wrap; font-size: 15px; overflow-wrap: anywhere; line-height: 1.8; }
+.tips { border-inline-start: 3px solid var(--warn); background: var(--warn-bg); color: var(--ink); padding: 10px 12px; border-radius: 10px; display: grid; gap: 4px; font-size: 14px; }
+
+/* ───── الردود ───── */
+.rcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-m); padding: 12px; display: grid; gap: 10px; }
+.rhead { display: flex; align-items: center; gap: 12px; border: 0; background: transparent; padding: 0; text-align: start; cursor: pointer; min-height: 44px; width: 100%; }
+.rhead .t { display: grid; flex: 1; min-width: 0; }
+.rhead .t b { font-weight: 600; overflow-wrap: anywhere; }
+.rhead > .ic { color: var(--muted); }
+.rbtns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.rbtn { min-height: 44px; padding: 0 4px; font-size: 13px !important; white-space: nowrap; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); font-weight: 600; font-size: 14px; cursor: pointer; transition: background-color .15s var(--ease); }
+.rbtn:hover { background: var(--surface-2); }
+.rbtn.r-interested { border-color: color-mix(in srgb, var(--ok) 45%, transparent); color: var(--ok); }
+.rbtn.r-rejected { color: var(--bad); }
+.rbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* ───── بقية الشاشات ───── */
+.bar-bg { height: 10px; border-radius: 5px; background: var(--surface-2); overflow: hidden; }
+.bar-fg { height: 100%; background: var(--accent); border-radius: 5px; }
+.stagegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.stagegrid div { background: var(--surface-2); border-radius: var(--r-s); padding: 10px; display: grid; gap: 2px; font-size: 13px; }
+.stagegrid b { font-size: 22px; }
 .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .filters .in:first-child { grid-column: 1 / -1; }
-.sheet-bg { position: fixed; inset: 0; background: rgba(5, 20, 22, .55); z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
-.sheet { background: var(--bg); width: min(720px, 100%); max-height: 92%; overflow-y: auto; border-radius: 24px 24px 0 0; padding: 18px max(16px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; }
+.in { border-radius: var(--r-s); }
+.sheet-bg { position: fixed; inset: 0; background: rgba(10,10,12,.5); z-index: 40; display: flex; align-items: flex-end; justify-content: center; animation: fade .18s var(--ease); }
+.sheet { background: var(--bg); width: min(640px, 100%); max-height: 92%; overflow-y: auto; border-radius: 24px 24px 0 0; padding: 12px max(16px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 14px; animation: up .24s var(--ease); }
+.sheet::before { content: ''; justify-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--line-strong); }
+@keyframes fade { from { opacity: 0; } }
+@keyframes up { from { transform: translateY(24px); opacity: .6; } }
 .shead { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .sheet h2 { font-size: 22px; overflow-wrap: anywhere; }
-.msg { background: var(--surface-2); border-radius: var(--r-m); padding: 14px; white-space: pre-wrap; font-size: 15px; overflow-wrap: anywhere; }
 .log { display: grid; gap: 6px; font-size: 14px; }
 .log div { display: flex; gap: 10px; justify-content: space-between; border-block-end: 1px solid var(--line); padding-block: 6px; }
 .table { width: 100%; border-collapse: collapse; font-size: 15px; }
@@ -183,22 +285,23 @@ main { padding-block: 18px; display: grid; gap: 14px; }
 .tw { overflow-x: auto; }
 .checks { display: grid; gap: 10px; }
 .checks label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
-.checks input { width: 22px; height: 22px; margin-block-start: 3px; accent-color: var(--reef); flex: none; }
+.checks input { width: 22px; height: 22px; margin-block-start: 3px; accent-color: var(--accent); flex: none; }
 .empty { text-align: center; padding: 28px 12px; color: var(--muted); display: grid; gap: 10px; justify-items: center; }
-.banner { background: var(--warn-bg); color: var(--warn); padding: 12px 14px; border-radius: var(--r-m); font-weight: 500; font-size: 14px; }
-  .chipbar { display: flex; gap: 8px; overflow-x: auto; padding-block-end: 4px; scrollbar-width: none; }
-.chipbar button { flex: none; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; font-weight: 600; font-size: 14px; }
-.chipbar button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--r-s); overflow: hidden; }
-.seg button { min-height: 40px; padding: 0 16px; border: 0; background: var(--surface); cursor: pointer; font-weight: 600; }
-.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.empty-ic { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--ok-bg); color: var(--ok); }
+.banner { background: var(--warn-bg); color: var(--warn); padding: 12px 14px; border-radius: var(--r-s); font-weight: 500; font-size: 14px; }
+.chipbar { display: flex; gap: 8px; overflow-x: auto; padding-block-end: 4px; scrollbar-width: none; }
+.chipbar button { flex: none; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; font-weight: 600; font-size: 14px; }
+.chipbar button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.seg { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 3px; gap: 2px; }
+.seg button { min-height: 40px; padding: 0 14px; border: 0; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; border-radius: 999px; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
 .board { display: flex; gap: 12px; overflow-x: auto; padding-block-end: 12px; align-items: flex-start; }
 .col { flex: none; width: 240px; background: var(--surface-2); border-radius: var(--r-m); padding: 10px; display: grid; gap: 8px; }
 .col h2 { font-size: 15px; display: flex; justify-content: space-between; }
 .kcard { display: grid; gap: 2px; text-align: start; padding: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-s); cursor: pointer; min-height: 44px; }
-.kcard:hover { border-color: var(--ink); }
+.kcard:hover { border-color: var(--line-strong); }
 .kcard b { font-size: 14px; overflow-wrap: anywhere; }
-.selbar { position: sticky; inset-block-end: calc(76px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); border-radius: var(--r-m); padding: 10px 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; z-index: 15; }
+.selbar { position: sticky; inset-block-end: calc(84px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); border-radius: var(--r-m); padding: 10px 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; z-index: 15; }
 .selbar .btn { border-color: var(--bg); color: var(--bg); }
 .selbar .btn:hover { background: rgba(255,255,255,.12); }
 .selbar input { max-width: 140px; min-height: 40px; }
@@ -209,17 +312,14 @@ main { padding-block: 18px; display: grid; gap: 14px; }
 .tagx button { border: 0; background: transparent; cursor: pointer; font-weight: 700; min-width: 24px; min-height: 24px; }
 .lock { position: fixed; inset: 0; background: var(--bg); z-index: 80; display: grid; place-items: center; padding: 24px; }
 .lock-box { max-width: 360px; width: 100%; display: grid; gap: 14px; text-align: center; justify-items: center; }
-.lock-box .mark { width: 64px; height: 64px; font-size: 38px; border-radius: 14px; }
+.lock-box .mark { width: 64px; height: 64px; font-size: 38px; border-radius: 16px; }
 .lock-box .in { text-align: center; letter-spacing: 4px; }
 .lock-box #login-user { letter-spacing: normal; }
-.qbtns { display: grid; gap: 10px; }
-.btn.big { min-height: 56px; font-size: 18px; width: 100%; justify-content: center; }
-.qmsg summary { cursor: pointer; color: var(--muted); padding: 6px 0; min-height: 40px; display: flex; align-items: center; }
-.tips { border-inline-start: 3px solid var(--warn); background: var(--warn-bg); color: var(--ink); padding: 10px 12px; border-radius: 8px; display: grid; gap: 4px; font-size: 14px; }
 .brand .sync { display: block; font-size: 11px; color: var(--muted); }
 .brand .sync[data-state="err"] { color: var(--bad); }
 .brand .sync:empty { display: none; }
 textarea.code { font-family: var(--f-mono); font-size: 12px; direction: ltr; min-height: 120px; }
+@media (max-width: 360px) { .hero-n { font-size: 46px; } .ring { width: 72px; height: 72px; } .tiles { gap: 8px; } .tile-n { font-size: 22px; } }
 </style></head><body>
 
 <div class="app">
@@ -527,7 +627,7 @@ function sentTodayCount(leads, now = new Date()) {
   const today = riyadh(now).ymd;
   let n = 0;
   for (const l of leads) for (const e of l.log || [])
-    if (e.dir === 'out' && e.kind === 'intro' && riyadh(new Date(e.at)).ymd === today) n++;
+    if (e.dir === 'out' && e.kind === 'intro' && !e.outside && riyadh(new Date(e.at)).ymd === today) n++;
   return n;
 }
 function lastSentAt(leads) {
@@ -548,6 +648,74 @@ function sendQueue(leads, now = new Date(), mode = 'demo', limit = DAILY_LIMIT) 
   const ready = leads.filter(l => { const r = sendBlock(l, now, mode); return !r || TIME_REASONS.includes(r); })
     .sort((a, b) => (Number(!sendBlock(b, now, mode)) - Number(!sendBlock(a, now, mode))) || (leadScore(b).score - leadScore(a).score));
   return { used, left, waitMin, ready, eligible: left ? eligible : [], blockedReason: left ? null : 'بلغت الحد اليومي' };
+}
+
+/* ───── الإرسال المعلّق: يُسجَّل لحظة فتح واتساب، لا عند الرجوع ─────
+   كان الإرسال يُسجَّل فقط عند «تم، التالي» بعد الرجوع من واتساب. إن أُعيد تحميل التطبيق أو خرج تلقائياً
+   أو نُسي الزر، بقي المحل مرشحاً ورجع للطابور. الآن: الفتح نفسه يحجب ويسجّل، والتأكيد مجرد إقرار. */
+const logAt = (lead, now, e) => (lead.log = lead.log || []).push({ at: now.toISOString(), ...e });
+function markOpened(lead, { body = '', pdf = false, now = new Date() } = {}) {
+  if (!lead || lead.example) return false;
+  if (lead.pending_at) return true;                      // فُتح من قبل ولم يُؤكَّد: لا نسجّل مرتين
+  if (lead.do_not_contact) return false;
+  lead.pending_prev = lead.stage;
+  lead.pending_at = now.toISOString();
+  logAt(lead, now, { dir: 'out', kind: 'intro', body, pdf, pending: true });
+  if (lead.stage !== 'sent') { lead.stage = 'sent'; logAt(lead, now, { kind: 'stage', stage: 'sent' }); }
+  lead.do_not_contact = true;
+  return true;
+}
+function confirmPending(lead, { pdf } = {}) {
+  if (!lead || !lead.pending_at) return false;
+  const e = (lead.log || []).find(x => x.pending && x.kind === 'intro');
+  if (e) { delete e.pending; if (pdf) e.pdf = true; }
+  delete lead.pending_at; delete lead.pending_prev;
+  return true;
+}
+// «ما أرسلت»: يفكّ الحجب فقط لإرسال معلّق من اليوم نفسه. الحجب المؤكَّد لا يُفكّ أبداً.
+function undoPending(lead, now = new Date()) {
+  if (!lead || !lead.pending_at) return false;
+  if (riyadh(new Date(lead.pending_at)).ymd !== riyadh(now).ymd) return false;
+  const at = lead.pending_at;
+  lead.log = (lead.log || []).filter(x => !(x.at === at && (x.pending || (x.kind === 'stage' && x.stage === 'sent'))));
+  lead.stage = lead.pending_prev || 'candidate';
+  lead.do_not_contact = false;
+  delete lead.pending_at; delete lead.pending_prev;
+  return true;
+}
+const pendingSends = leads => leads.filter(l => l.pending_at);
+// أرسل له من خارج التطبيق (واتساب مباشرة أو نسخة قديمة): يُحجب ويُسجَّل، ولا يُحسب في حد اليوم.
+function markSentOutside(lead, now = new Date()) {
+  if (!lead || lead.example || lead.do_not_contact) return false;
+  logAt(lead, now, { dir: 'out', kind: 'intro', outside: true });
+  if (lead.stage !== 'sent') { lead.stage = 'sent'; logAt(lead, now, { kind: 'stage', stage: 'sent' }); }
+  lead.do_not_contact = true;
+  return true;
+}
+
+/* ───── الردود: ضغطة واحدة تسجّل الرد وتنقل المرحلة ───── */
+const REPLY_KINDS = {
+  interested: { ar: 'مهتم', stage: 'interested', reply: 'human' },
+  human: { ar: 'يسأل', stage: 'human_reply', reply: 'human' },
+  not_now: { ar: 'مو الحين', stage: 'not_now', reply: 'human' },
+  rejected: { ar: 'رفض', stage: 'rejected', reply: 'human' },
+  auto: { ar: 'آلي', stage: 'auto_reply', reply: 'auto' },
+};
+// المرحلة أولاً ثم الرد، فيكون آخر السجل «رد وارد» ويظهر في «ردود تنتظرك».
+function recordReply(lead, kind, now = new Date()) {
+  const k = REPLY_KINDS[kind];
+  if (!lead || !k) return false;
+  confirmPending(lead);
+  if (lead.stage !== k.stage) { lead.stage = k.stage; logAt(lead, now, { kind: 'stage', stage: k.stage }); }
+  logAt(lead, now, { dir: 'in', kind: 'reply', reply: k.reply, as: kind });
+  lead.replyType = k.reply;
+  lead.do_not_contact = true;                            // رد أو رفض: يبقى محجوباً عن أي رسالة أولى
+  return true;
+}
+// بانتظار رد: أُرسل له أو رد آلياً. الأحدث إرسالاً أولاً.
+function awaitingReply(leads) {
+  const sentAt = l => { let t = 0; for (const e of l.log || []) if (e.dir === 'out' && e.kind === 'intro') t = Math.max(t, new Date(e.at).getTime()); return t; };
+  return leads.filter(l => !l.example && ['sent', 'auto_reply'].includes(l.stage)).sort((a, b) => sentAt(b) - sentAt(a));
 }
 
 /* ───── الكوتيشن (SPEC القسم ٥) ───── */
@@ -943,6 +1111,7 @@ const SMART = {
   top: { ar: 'الأقوى', test: (l, ctx) => !l.do_not_contact && ['candidate', 'demo_ready'].includes(l.stage), sort: (a, b) => leadScore(b).score - leadScore(a).score },
   ready: { ar: 'جاهز للإرسال الآن', test: (l, ctx) => !sendBlock(l, ctx.now, ctx.mode), sort: (a, b) => leadScore(b).score - leadScore(a).score },
   waiting: { ar: 'ردود تنتظرني', test: (l, ctx) => ctx.waiting.has(l.id), sort: (a, b) => 0 },
+  awaiting: { ar: 'بانتظار رد', test: (l) => !l.example && ['sent', 'auto_reply'].includes(l.stage), sort: (a, b) => 0 },
   tasks: { ar: 'لها مهمة', test: (l, ctx) => !!l.next, sort: (a, b) => (a.next.due).localeCompare(b.next.due) },
   hot: { ar: 'مهتم أو كوتيشن', test: (l) => ['interested', 'quoted', 'deposit'].includes(l.stage), sort: (a, b) => 0 },
 };
@@ -1114,7 +1283,7 @@ function exportCsv(leads) {
     const reset = h('div', { class: 'hide', id: 'lock-reset', style: 'display:grid;gap:8px' }, h('div', { class: 'banner' }, 'مسح بيانات هذا الجهاز نهائياً. تستعيدها فقط من نسخة احتياطية.'),
       h('button', { class: 'btn sm', type: 'button', onclick: () => { try { localStorage.removeItem(LOCK_KEY); localStorage.removeItem(KEY); } catch (e) { /* لا شيء */ } fails = 0; root.classList.add('hide'); S = loadPlain(); startUi(); } }, 'امسح وابدأ من جديد'));
     root.append(h('form', { class: 'lock-box', onsubmit: async e => { e.preventDefault(); await tryUnlock(pin.value, err, pin); } },
-      h('span', { class: 'mark', 'aria-hidden': 'true' }, 'ح'), h('h1', { style: 'font-size:26px' }, 'مساعد عبدالله'), h('p', { class: 'muted' }, 'أدخل الرقم السري لفتح بياناتك.'),
+      h('span', { class: 'mark', 'aria-hidden': 'true' }, 'ح'), h('h1', { class: 'title' }, 'مساعد عبدالله'), h('p', { class: 'muted' }, 'أدخل الرقم السري لفتح بياناتك.'),
       pin, err, h('button', { class: 'btn primary', type: 'submit', style: 'width:100%' }, 'افتح'),
       h('button', { class: 'btn sm', type: 'button', style: 'border-color:transparent', onclick: () => $('#lock-reset').classList.toggle('hide') }, 'نسيت الرقم؟'), reset));
     setTimeout(() => pin.focus(), 50);
@@ -1168,7 +1337,7 @@ function exportCsv(leads) {
     $('#view').innerHTML = ''; $('#tabs').innerHTML = ''; $('#sheet-root').innerHTML = ''; $('#sub').textContent = 'غير مسجّل'; const sy = $('#sync'); if (sy) sy.textContent = '';
     const root = $('#lock'); root.classList.remove('hide'); root.innerHTML = '';
     root.append(h('form', { class: 'lock-box', onsubmit: e => e.preventDefault() },
-      portraitOrMark(), h('h1', { style: 'font-size:26px' }, title), h('p', { class: 'muted' }, note), ...body,
+      portraitOrMark(), h('h1', { class: 'title' }, title), h('p', { class: 'muted' }, note), ...body,
       h('div', { class: 'lock-sig' }, 'عبدالله الحربي · مواقع وتطبيقات')));
     return root;
   }
@@ -1223,9 +1392,11 @@ function exportCsv(leads) {
   async function logout(msg) { if (S) { clearTimeout(cloudT); try { await Cloud.flush(); } catch (e) { /* نحاول ولا نوقف الخروج */ } } Cloud.logout(); showLogin(msg); }
   async function lockNow() { clearTimeout(saveT); await persistNow(); showLock(); }
   let hiddenAt = 0;
+  // ٥ دقائق في الخلفية ثم خروج. وأثناء إرسال فُتح للتو (رحلة واتساب وإرفاق الملف) ١٥ دقيقة حتى لا يطلع وهو يرسل.
+  const idleLimit = () => (S && pendingSends(S.leads).some(l => Date.now() - Date.parse(l.pending_at) < 20 * 60e3) ? 15 : 5) * 60 * 1000;
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { hiddenAt = Date.now(); if (cloudMode && S) { clearTimeout(cloudT); Cloud.save(S); } else if (vault) { clearTimeout(saveT); persistNow(); } }
-    else if (hiddenAt && Date.now() - hiddenAt > 5 * 60 * 1000) { if (cloudMode && S) logout('خرجت تلقائياً بعد ٥ دقائق. ادخل من جديد.'); else if (vault) lockNow(); }
+    else if (hiddenAt && Date.now() - hiddenAt > idleLimit()) { if (cloudMode && S) logout('خرجت تلقائياً لأن التطبيق بقي في الخلفية. ادخل من جديد.'); else if (vault) lockNow(); }
   });
   const real = () => S.leads.filter(l => !l.example);
   const hasExamples = () => S.leads.some(l => l.example);
@@ -1236,28 +1407,21 @@ function exportCsv(leads) {
     l.stage = stage; pushLog(l, { kind: 'stage', stage });
   }
 
-  /* ═════ الإطار ═════ */
-  const TABS = [
-    ['today', 'اليوم', 'M3 12l9-8 9 8M5 10v10h5v-6h4v6h5V10'],
-    ['leads', 'العملاء', 'M16 11a4 4 0 1 0-8 0M4 21a8 8 0 0 1 16 0'],
-    ['send', 'الإرسال', 'M22 2L11 13M22 2l-7 20-4-9-9-4z'],
-    ['quotes', 'كوتيشن', 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6'],
-    ['delivery', 'التسليم', 'M20 6L9 17l-5-5'],
-    ['stats', 'الأرقام', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
-  ];
+  /* ═════ الإطار: خمسة تبويبات تحت الإبهام، والباقي في «المزيد» ═════ */
+  const NAV = [['today', 'اليوم', 'home'], ['send', 'الطابور', 'send'], ['replies', 'الردود', 'inbox'], ['leads', 'العملاء', 'users'], ['more', 'المزيد', 'more']];
+  const UNDER_MORE = ['quotes', 'delivery', 'stats'];
   let tab = 'today';
-  const routeFromHash = () => { const k = (location.hash || '').slice(1); return TABS.some(t => t[0] === k) ? k : 'today'; };
+  const routeFromHash = () => { const k = (location.hash || '').slice(1); return VIEW[k] ? k : 'today'; };
   function go(k) { tab = k; if (location.hash !== '#' + k) history.replaceState(null, '', '#' + k); render(); window.scrollTo(0, 0); }
   window.addEventListener('hashchange', () => { tab = routeFromHash(); render(); });
 
   function renderTabs() {
-    const badge = { today: 0, send: 0, delivery: 0 };
-    badge.today = unansweredHuman(S.leads).length;
+    const badge = { replies: unansweredHuman(S.leads).length + pendingSends(real()).length };
     const t = $('#tabs'); t.innerHTML = '';
-    for (const [k, label, path] of TABS) {
-      const b = h('button', { type: 'button', 'aria-current': k === tab ? 'page' : false, onclick: () => go(k) },
-        h('span', { html: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>` }), label);
-      if (k === 'today' && badge.today) b.append(h('span', { class: 'dot' }, badge.today));
+    for (const [k, label, icon] of NAV) {
+      const cur = k === tab || (k === 'more' && UNDER_MORE.includes(tab));
+      const b = h('button', { type: 'button', id: 'tab-' + k, 'aria-current': cur ? 'page' : false, onclick: () => go(k) }, ic(icon), h('span', null, label));
+      if (badge[k]) b.append(h('span', { class: 'dot num' }, badge[k]));
       t.append(b);
     }
   }
@@ -1272,6 +1436,23 @@ function exportCsv(leads) {
   }
 
   /* ═════ أجزاء مشتركة ═════ */
+  // أيقونات SVG خطية بسماكة واحدة (لا رموز تعبيرية). aria-hidden لأن النص بجانبها يكفي.
+  const ICONS = {
+    home: 'M3 11l9-7 9 7M5 9.5V20h5v-6h4v6h5V9.5',
+    send: 'M21 3L10 14M21 3l-7 18-4-8-8-4z',
+    inbox: 'M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5',
+    users: 'M16 19v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 10a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M22 19v-1a4 4 0 0 0-3-3.9M16 3.1a3.5 3.5 0 0 1 0 6.8',
+    more: 'M5 12h.01M12 12h.01M19 12h.01',
+    check: 'M20 6L9 17l-5-5',
+    wa: 'M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z',
+    quote: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h6M9 17h6',
+    box: 'M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8',
+    chart: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
+    gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z',
+    chev: 'M15 18l-6-6 6-6',
+  };
+  const ic = n => h('span', { class: 'ic', 'aria-hidden': 'true', html: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[n]}"/></svg>` });
+  const initial = name => { const w = String(name || '').replace(/^(مغسلة|محل|مطعم|صالون|مركز|ورشة|مؤسسة|شركة|حلاق|مخبز|كافيه|مقهى)\s+/, '').trim(); return (w[0] || '؟'); };
   const catName = c => (CATEGORIES[c] ? CATEGORIES[c].ar : 'بلا فئة');
   const stageChip = s => h('span', { class: 'chip ' + (['won', 'deposit', 'delivering', 'interested'].includes(s) ? 'ok' : ['rejected', 'not_now'].includes(s) ? 'bad' : ['human_reply', 'quoted'].includes(s) ? 'warn' : '') }, STAGE_AR[s] || s);
   const exampleNote = () => hasExamples() ? h('div', { class: 'banner' }, 'هذي بيانات مثال لترى الشاشات. لا تُرسل ولا تُحسب في دخلك. تُمسح تلقائياً عند أول استيراد.') : null;
@@ -1316,32 +1497,97 @@ function exportCsv(leads) {
     return h('div', { class: 'banner', role: 'status' }, last ? 'آخر نسخة احتياطية قبل ' + days + ' أيام. ' : 'ما نسخت نسخة احتياطية بعد. ', 'بياناتك في هذا الجوال فقط. ',
       h('button', { class: 'btn sm', type: 'button', style: 'margin-inline-start:8px', onclick: () => settingsSheet() }, 'انسخ الآن'));
   }
+  // أزرار الرد: ضغطة واحدة تسجّل الرد وتنقل المرحلة (recordReply)
+  function replyButtons(l, after) {
+    const last = (l.log || []).slice().reverse().find(e => e.dir === 'in' && e.kind === 'reply');
+    return h('div', { class: 'rbtns', role: 'group', 'aria-label': 'رد ' + l.name },
+      ['interested', 'human', 'not_now', 'rejected', 'auto'].map(k => h('button', { class: 'rbtn r-' + k, type: 'button', 'aria-pressed': last && last.as === k ? 'true' : 'false',
+        onclick: () => { recordReply(l, k); toast(l.name + ': ' + REPLY_KINDS[k].ar); save(); after(); } }, REPLY_KINDS[k].ar)));
+  }
+  // إرسال فُتح ولم يُؤكَّد: يبقى محجوباً، والقرار لعبدالله بضغطة
+  function pendingCard() {
+    const pend = pendingSends(real());
+    if (!pend.length) return null;
+    return h('section', { class: 'card accent', id: 'pending' }, h('div', { class: 'bhead' }, h('h2', null, 'فتحت واتساب لهم ولم تؤكد'), h('span', { class: 'chip num' }, pend.length)),
+      h('div', { class: 'muted' }, 'محجوبون احتياطاً. أكّد أو رجّع من ما أرسلت له.'),
+      h('div', { class: 'list' }, pend.map(l => h('div', { class: 'prow' }, h('b', null, l.name),
+        h('div', { class: 'row start' },
+          h('button', { class: 'btn sm primary', type: 'button', onclick: () => { confirmSend(l); render(); } }, 'أرسلت'),
+          h('button', { class: 'btn sm', type: 'button', onclick: () => { undoSend(l); render(); } }, 'ما أرسلت'))))));
+  }
+  const shortDay = iso => new Date(iso).toLocaleDateString('ar-SA-u-ca-gregory', { day: 'numeric', month: 'short', timeZone: 'Asia/Riyadh' });
+  function greeting() { const m = riyadh(new Date()).min; return m < 12 * 60 ? 'صباح الخير' : 'مساء الخير'; }
   function viewToday() {
-    const rev = monthRevenue(real()), pct = Math.min(100, Math.round(rev / MONTH_TARGET * 100));
     const q = sendQueue(S.leads, new Date(), S.settings.mode, S.settings.dailyLimit), human = unansweredHuman(S.leads), alertF = fortyAlert(real());
-    const counts = stageCounts(S.leads);
-    const out = [exampleNote(), backupNote(), h('h1', { class: 'sr' }, 'اليوم')];
-    out.push(h('section', { class: 'card' },
-      h('div', { class: 'row' }, h('h2', null, 'دخل هذا الشهر'), h('span', { class: 'muted num' }, 'الهدف ' + MONTH_TARGET)),
-      h('div', { class: 'big num' }, String(Math.round(rev)), h('span', { class: 'muted', style: 'font-size:16px;font-family:var(--f-body)' }, ' ريال')),
-      h('div', { class: 'bar-bg', role: 'progressbar', 'aria-label': 'نسبة الهدف الشهري', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100 }, h('div', { class: 'bar-fg', style: 'width:' + pct + '%' })),
-      h('div', { class: 'muted num' }, pct + '% من الهدف. المحسوب فقط ما وصل فعلاً وسجّلته دفعة.')));
-    if (human.length) out.push(h('section', { class: 'card alert' }, h('h2', null, 'ردود بشرية تنتظرك (' + human.length + ')'),
-      h('div', { class: 'muted' }, 'جاوب خلال ساعة في وقت الدوام.'), h('div', { class: 'list' }, human.map(l => leadItem(l)))));
+    const waiting = awaitingReply(S.leads), hot = S.leads.filter(l => ['interested', 'quoted', 'deposit'].includes(l.stage)).length, rev = monthRevenue(real());
+    const lim = S.settings.dailyLimit, pct = Math.min(100, Math.round(q.used / Math.max(1, lim) * 100));
+    const out = [exampleNote(), backupNote(),
+      h('div', { class: 'hello' }, h('h1', { class: 'title' }, greeting() + ' يا عبدالله'), h('div', { class: 'muted' }, new Date().toLocaleDateString('ar-SA-u-ca-gregory-nu-arab', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Riyadh' }))),
+      pendingCard()];
+    out.push(h('section', { class: 'hero' },
+      h('div', { class: 'hero-top' },
+        h('div', null, h('div', { class: 'hero-k' }, 'جاهز للإرسال'), h('div', { class: 'hero-n num' }, q.ready.length)),
+        h('div', { class: 'ring', style: '--p:' + pct, role: 'img', 'aria-label': 'أرسلت اليوم ' + q.used + ' من ' + lim }, h('span', { class: 'num' }, q.used + '/' + lim))),
+      h('button', { class: 'btn big light', type: 'button', id: 'start-q', disabled: !q.ready.length, onclick: () => go('send') }, ic('send'), q.used ? 'كمّل الطابور' : 'ابدأ الطابور')));
+    out.push(h('div', { class: 'tiles' },
+      h('button', { class: 'tile', type: 'button', onclick: () => go('replies') }, h('span', { class: 'tile-n num' }, waiting.length), h('span', null, 'بانتظار رد')),
+      h('button', { class: 'tile', type: 'button', onclick: () => { F.smart = 'hot'; go('leads'); } }, h('span', { class: 'tile-n num' }, hot), h('span', null, 'مهتمون')),
+      h('button', { class: 'tile', type: 'button', onclick: () => go('stats') }, h('span', { class: 'tile-n num' }, Math.round(rev)), h('span', null, 'دخل الشهر'))));
+    if (human.length) out.push(h('section', { class: 'card alert' }, h('div', { class: 'bhead' }, h('h2', null, 'ردود تنتظرك'), h('span', { class: 'chip num' }, human.length)),
+      h('div', { class: 'muted' }, 'جاوب خلال ساعة في وقت الدوام.'), h('div', { class: 'list' }, human.slice(0, 5).map(l => leadItem(l)))));
     const dueTasks = tasksDue(S.leads);
-    if (dueTasks.length) out.push(h('section', { class: 'card alert' }, h('h2', null, 'مهامك (' + dueTasks.length + ')'),
-      h('div', { class: 'list' }, dueTasks.slice(0, 8).map(l => h('button', { class: 'item', type: 'button', onclick: () => openLead(l.id) },
+    if (dueTasks.length) out.push(h('section', { class: 'card' }, h('div', { class: 'bhead' }, h('h2', null, 'مهامك'), h('span', { class: 'chip num' }, dueTasks.length)),
+      h('div', { class: 'list' }, dueTasks.slice(0, 6).map(l => h('button', { class: 'item', type: 'button', onclick: () => openLead(l.id) },
         h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted' }, l.next.text)), h('span', { class: 'chip warn' }, dueLabel(l.next.due)))))));
-    out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h2', null, 'طابور اليوم'), h('button', { class: 'btn sm', type: 'button', onclick: () => go('send') }, 'افتح الإرسال')),
-      h('div', { class: 'chips' }, h('span', { class: 'chip num' }, 'أُرسل اليوم ' + q.used + ' من ' + S.settings.dailyLimit), h('span', { class: 'chip ' + (q.ready.length ? 'ok' : '') }, q.ready.length ? 'جاهز للإرسال ' + q.ready.length : 'لا أحد جاهز الآن'))));
-    const topReady = q.ready.slice(0, 5);
-    if (topReady.length) out.push(h('section', { class: 'card' }, h('h3', null, 'الأقوى الجاهزون للإرسال'), h('div', { class: 'list' }, topReady.map(l => leadItem(l)))));
     if (alertF.due) out.push(h('section', { class: 'card alert' }, h('h2', null, 'مرّت ' + ALERT_EVERY + ' رسالة بلا رد بشري'), h('p', null, alertF.text)));
-    else out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'قياس الرسائل'), h('span', { class: 'muted num' }, 'باقي ' + alertF.next + ' رسالة للتقييم القادم')),
-      h('div', { class: 'muted' }, 'بعد كل ' + ALERT_EVERY + ' رسالة بلا رد بشري تغيّر شيئاً واحداً فقط، ثم تقيس.')));
-    out.push(h('section', { class: 'card' }, h('h2', null, 'خط المبيعات'),
-      h('div', { class: 'stagegrid' }, STAGES.map(s => h('div', null, h('span', { class: 'muted' }, STAGE_AR[s]), h('b', { class: 'num' }, counts[s]))))));
     return out;
+  }
+
+  /* ═════ الردود ═════ */
+  const R = { limit: 30, q: '' };
+  function viewReplies() {
+    const human = unansweredHuman(S.leads), waiting = awaitingReply(S.leads);
+    const out = [exampleNote(), h('div', { class: 'hello' }, h('h1', { class: 'title' }, 'الردود'), h('div', { class: 'muted' }, 'رد عليك أحد؟ اضغط نوع رده تحت اسمه. ضغطة وحدة تكفي.')), pendingCard()];
+    if (human.length) out.push(h('section', { class: 'card alert' }, h('div', { class: 'bhead' }, h('h2', null, 'ينتظرون ردك'), h('span', { class: 'chip num' }, human.length)),
+      h('div', { class: 'list' }, human.map(l => leadItem(l)))));
+    const list = h('div', { class: 'list' });
+    waiting.slice(0, R.limit).forEach(l => {
+      const sent = (l.log || []).filter(e => e.dir === 'out' && e.kind === 'intro').pop();
+      list.append(h('div', { class: 'rcard' },
+        h('button', { class: 'rhead', type: 'button', onclick: () => openLead(l.id) }, h('span', { class: 'avatar sm', 'aria-hidden': 'true' }, initial(l.name)),
+          h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted num' }, [catName(l.category), sent && sent.at ? 'أُرسل ' + shortDay(sent.at) : null, l.stage === 'auto_reply' ? 'رد آلي' : null].filter(Boolean).join(' · '))), ic('chev')),
+        replyButtons(l, render)));
+    });
+    out.push(h('section', { class: 'block' }, h('div', { class: 'bhead' }, h('h2', null, 'بانتظار رد'), h('span', { class: 'chip num' }, waiting.length)),
+      waiting.length ? list : h('div', { class: 'empty' }, h('span', null, 'ما أحد بانتظار رد. ابدأ الطابور.')),
+      waiting.length > R.limit ? h('button', { class: 'btn', type: 'button', onclick: () => { R.limit += 30; render(); } }, 'اعرض المزيد') : null));
+    // أرسلت لأحد من واتساب مباشرة أو من نسخة قديمة؟ احجبه هنا حتى لا يظهر في الطابور
+    const res = h('div', { class: 'list' });
+    const paint = () => {
+      res.innerHTML = '';
+      const qv = R.q.trim(); if (qv.length < 2) return;
+      const rows = real().filter(l => !l.do_not_contact && (l.name.includes(qv) || l.phone.includes(qv))).slice(0, 6);
+      if (!rows.length) { res.append(h('div', { class: 'muted' }, 'ما لقيت محلاً غير محجوب بهذا الاسم.')); return; }
+      rows.forEach(l => res.append(h('div', { class: 'prow' }, h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted ltr num', dir: 'ltr' }, l.phone)),
+        h('button', { class: 'btn sm', type: 'button', onclick: () => { markSentOutside(l); toast('حُجب ' + l.name); save(); paint(); renderTabs(); } }, 'أرسلت له'))));
+    };
+    const inp = h('input', { class: 'in', id: 'outside-q', placeholder: 'اسم المحل أو رقمه', 'aria-label': 'ابحث عن محل أرسلت له', value: R.q, oninput: e => { R.q = e.target.value; paint(); } });
+    paint();
+    out.push(h('details', { class: 'block fold', open: R.q ? true : false }, h('summary', null, 'أرسلت لأحد من برّا التطبيق؟'),
+      h('div', { class: 'muted' }, 'ابحث عنه واحجبه، فما يظهر في الطابور مرة ثانية.'), inp, res));
+    return out;
+  }
+
+  /* ═════ المزيد ═════ */
+  function viewMore() {
+    const link = (k, label, icon, sub) => h('button', { class: 'item', type: 'button', id: 'more-' + k, onclick: () => k === 'settings' ? settingsSheet() : go(k) },
+      h('span', { class: 'mico' }, ic(icon)), h('span', { class: 't' }, h('b', null, label), h('span', { class: 'muted' }, sub)), ic('chev'));
+    return [h('div', { class: 'hello' }, h('h1', { class: 'title' }, 'المزيد')),
+      h('div', { class: 'list' },
+        link('quotes', 'كوتيشن', 'quote', 'سعر جاهز بالدفعات للعميل'),
+        link('delivery', 'التسليم', 'box', 'قائمة التسليم والضمان'),
+        link('stats', 'الأرقام', 'chart', 'الإرسال والردود والدخل'),
+        link('settings', 'الإعدادات', 'gear', 'نوع الرسالة، الحد اليومي، الاستيراد والتصدير'))];
   }
 
   /* ═════ العملاء ═════ */
@@ -1402,7 +1648,7 @@ function exportCsv(leads) {
     const vList = h('button', { id: 'v-list', type: 'button', onclick: () => { F.view = 'list'; paint(); } }, 'قائمة'), vBoard = h('button', { id: 'v-board', type: 'button', onclick: () => { F.view = 'board'; paint(); } }, 'لوحة');
     const view = h('div', { class: 'seg', role: 'group', 'aria-label': 'طريقة العرض' }, vList, vBoard);
     paint();
-    return [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'العملاء المحتملون'),
+    return [exampleNote(), h('div', { class: 'row' }, h('h1', { class: 'title' }, 'العملاء المحتملون'),
       h('div', { class: 'row start' }, h('button', { class: 'btn sm', type: 'button', onclick: () => { F.selecting = !F.selecting; if (!F.selecting) F.sel.clear(); paint(); } }, 'تحديد'), h('button', { class: 'btn sm', type: 'button', onclick: quickAddSheet }, 'إدخال سريع'), h('button', { class: 'btn primary sm', type: 'button', onclick: addLeadSheet }, '+ محل'))),
       chips, h('div', { class: 'filters' }, search, cat, st, so), h('div', { class: 'row' }, count, view), bar, box];
   }
@@ -1463,25 +1709,24 @@ function exportCsv(leads) {
       h('div', { class: 'row start' }, h('a', { class: 'btn sm', target: '_blank', rel: 'noopener', href: mapsUrl(l) }, 'خرائط Google'),
         l.demo_url && !l.example ? h('a', { class: 'btn sm', target: '_blank', rel: 'noopener', href: l.demo_url }, 'النموذج') : null)));
     if (l.address || l.website) body.push(h('div', { class: 'muted', dir: 'auto' }, [l.address, l.website ? 'الحضور: ' + l.website : ''].filter(Boolean).join(' · ')));
-    // الرسالة الأولى جاهزة: نقرة تفتح المحادثة بالنص، ونقرة تسجّل الإرسال
-    if (!l.do_not_contact) {
+    // الرسالة الأولى: الفتح يسجّل ويحجب فوراً. «تم» تأكيد، و«ما أرسلت» يفك المعلّق من اليوم فقط.
+    if (l.pending_at) {
+      body.push(h('section', { class: 'card accent' }, h('h3', null, 'فتحت واتساب لهذا المحل'),
+        h('div', { class: 'muted' }, 'سُجّل وحُجب. أكّد أو تراجع إن ما أرسلت.'),
+        S.settings.mode === 'pdf' ? attachButton(l, () => { render(); openLead(id); }) : null,
+        h('div', { class: 'row start' },
+          h('button', { class: 'btn primary', type: 'button', onclick: () => { confirmSend(l); toast('سُجّل'); render(); openLead(id); } }, 'تم، أرسلت'),
+          h('button', { class: 'btn', type: 'button', onclick: () => { undoSend(l); render(); openLead(id); } }, 'ما أرسلت'))));
+    } else if (!l.do_not_contact) {
       const text = firstMessage(l, S.settings.mode, S.settings.siteUrl);
       const chk = l.example ? { ok: false, reason: 'مثال: لا يُرسل.', tips: [] } : sendCheck(l, real(), new Date(), S.settings.mode, S.settings.dailyLimit);
       const why = chk.ok ? null : chk.reason;
-      const attach = S.settings.mode === 'pdf' && !why ? attachButton(l, () => { attach.textContent = 'أُرفق البروفايل ✓'; }) : null;
-      if (attach && !sendState.opened[l.id]) attach.hidden = true;
-      const sentBtn = h('button', { class: 'btn', type: 'button', disabled: !sendState.opened[l.id], onclick: () => {
-        pushLog(l, { dir: 'out', kind: 'intro', body: text }); setStage(l, 'sent'); l.do_not_contact = true; delete sendState.opened[l.id];
-        toast('سُجّل. لا متابعة لهذا المحل.'); render(); openLead(id);
-      } }, '2. تم الإرسال');
       body.push(h('section', { class: 'card' }, h('h3', null, 'الرسالة الأولى جاهزة'), h('div', { class: 'msg', dir: 'rtl' }, text),
         why ? h('div', { class: 'banner' }, why) : null,
         chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
-        h('div', { class: 'row start' },
-          h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
-            onclick: e => { if (why) { e.preventDefault(); return; } sendState.opened[l.id] = true; sentBtn.disabled = false; if (attach) attach.hidden = false; } }, '1. افتح واتساب والرسالة جاهزة'), attach, sentBtn),
-
-        h('div', { class: 'muted' }, 'أنت تضغط إرسال بنفسك. رسالة واحدة لكل محل.')));
+        h('a', { class: 'btn primary', href: why ? '#' : waLink(l.phone, text), target: '_blank', rel: 'noopener', 'aria-disabled': why ? 'true' : false,
+          onclick: e => { if (why) { e.preventDefault(); return; } openWa(l, text); setTimeout(() => { render(); openLead(id); }, 50); } }, ic('wa'), 'افتح واتساب والرسالة جاهزة'),
+        h('div', { class: 'muted' }, 'تضغط إرسال بنفسك. يُسجَّل المحل لحظة الفتح، فلا يرجع للطابور.')));
     }
     const sc = leadScore(l);
     body.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'قوة العميل'), h('span', { class: 'chip num' }, sc.score + ' / 100')),
@@ -1512,9 +1757,7 @@ function exportCsv(leads) {
       } }, 'احفظ الرابط وعلّمه «نموذج جاهز»')));
     // الردود
     const replies = h('section', { class: 'card' }, h('h3', null, 'سجّل رد المحل'),
-      h('div', { class: 'row start' },
-        h('button', { class: 'btn sm', type: 'button', onclick: () => { l.replyType = 'auto'; pushLog(l, { dir: 'in', kind: 'reply', reply: 'auto' }); if (l.stage === 'sent') setStage(l, 'auto_reply'); render(); openLead(id); } }, 'رد آلي'),
-        h('button', { class: 'btn sm', type: 'button', onclick: () => { l.replyType = 'human'; pushLog(l, { dir: 'in', kind: 'reply', reply: 'human' }); if (['sent', 'auto_reply'].includes(l.stage)) setStage(l, 'human_reply'); render(); openLead(id); } }, 'رد بشري')),
+      replyButtons(l, () => { render(); openLead(id); }),
       h('div', { class: 'muted' }, 'الرد الآلي ليس رداً. لا نتابع عليه.'),
       h('h3', null, 'ردود جاهزة'),
       h('div', { class: 'list' }, QUICK_REPLIES.map(r => {
@@ -1568,65 +1811,83 @@ function exportCsv(leads) {
     } }, done ? 'أُرفق البروفايل ✓ (أرفقه مرة ثانية)' : '٢. أرفق البروفايل PDF');
   }
 
-  /* ═════ الإرسال ═════ */
-  const sendState = { opened: {}, attached: {} };
-  const skipped = new Set();   // «التالي»: تخطٍّ مؤقت في هذه الجلسة، لا حجب
+  /* ═════ الإرسال ═════
+     الفتح نفسه يسجّل ويحجب (markOpened) ويحفظ فوراً، فلا يرجع المحل للطابور ولو أُعيد تحميل التطبيق أو نُسي «تم».
+     «تم، التالي» تأكيد فقط، و«ما أرسلت» يفك المعلّق من اليوم وحده. */
+  const sendState = { attached: {} };
+  const skipped = new Set();   // «تخطَّ»: تخطٍّ مؤقت في هذه الجلسة، لا حجب
+  function openWa(lead, text) {
+    if (!markOpened(lead, { body: text, pdf: S.settings.mode === 'pdf' })) return;
+    if (cloudMode) { clearTimeout(cloudT); Cloud.save(S); } else persistNow();   // يبدأ الحفظ قبل أن ينتقل الجوال لواتساب
+  }
+  function confirmSend(lead) { confirmPending(lead, { pdf: !!sendState.attached[lead.id] }); delete sendState.attached[lead.id]; }
+  function undoSend(lead) {
+    if (undoPending(lead)) { delete sendState.attached[lead.id]; toast('رجع ' + lead.name + ' للطابور'); }
+    else toast('ما يمدي: الإرسال مؤكد أو من يوم سابق');
+  }
+  const progress = (used, limit) => h('div', { class: 'qprog', role: 'progressbar', 'aria-label': 'إرسال اليوم', 'aria-valuenow': used, 'aria-valuemin': 0, 'aria-valuemax': limit },
+    h('div', { style: 'width:' + Math.min(100, Math.round(used / Math.max(1, limit) * 100)) + '%' }));
   function viewSend() {
     const mode = S.settings.mode, q = sendQueue(S.leads, new Date(), mode, S.settings.dailyLimit);
     if (skipped.size && q.ready.every(l => skipped.has(l.id))) skipped.clear();
     q.ready = q.ready.filter(l => !skipped.has(l.id)).concat(q.ready.filter(l => skipped.has(l.id)));
-    const out = [exampleNote(), h('div', { class: 'row' }, h('h1', { style: 'font-size:26px' }, 'طابور الإرسال'), h('span', { class: 'chip num' }, 'اليوم ' + q.used + ' من ' + S.settings.dailyLimit)),
-      mode === 'demo' ? null : h('div', { class: 'seg', role: 'group', 'aria-label': 'نوع الرسالة الأولى' },
-        h('button', { type: 'button', 'aria-pressed': String(mode === 'pdf'), onclick: () => { S.settings.mode = 'pdf'; save(); render(); } }, 'نص + ملف PDF'),
-        h('button', { type: 'button', 'aria-pressed': String(mode === 'site'), onclick: () => { S.settings.mode = 'site'; save(); render(); } }, 'نص + رابط الموقع'))];
-    const lead = q.ready[0];
+    const pend = pendingSends(real()).sort((a, b) => b.pending_at.localeCompare(a.pending_at));
+    const out = [exampleNote(),
+      h('div', { class: 'qhead' },
+        h('div', null, h('h1', { class: 'title' }, 'الطابور'), h('div', { class: 'muted num' }, 'اليوم ' + q.used + ' من ' + S.settings.dailyLimit + ' · باقي ' + q.ready.length)),
+        mode === 'demo' ? null : h('div', { class: 'seg', role: 'group', 'aria-label': 'نوع الرسالة الأولى' },
+          h('button', { type: 'button', 'aria-pressed': String(mode === 'pdf'), onclick: () => { S.settings.mode = 'pdf'; save(); render(); } }, 'ملف PDF'),
+          h('button', { type: 'button', 'aria-pressed': String(mode === 'site'), onclick: () => { S.settings.mode = 'site'; save(); render(); } }, 'رابط الموقع'))),
+      progress(q.used, S.settings.dailyLimit)];
+    const lead = pend[0] || q.ready[0];
     if (lead) {
-      // ضغطتان لكل محل: «افتح واتساب» ثم «تم، التالي». الأزرار أولاً تحت الإبهام، والرسالة مطوية تحتها.
-      const text = firstMessage(lead, mode, S.settings.siteUrl);
-      const chk = sendCheck(lead, real(), new Date(), mode, S.settings.dailyLimit);
-      const opened = !!sendState.opened[lead.id];
-      const meta = h('div', { class: 'muted' }, [catName(lead.category), lead.city && lead.city !== 'جدة' ? lead.city : null, lead.district || null].filter(Boolean).join(' · '),
-        lead.rating ? h('span', { class: 'chip num', dir: 'ltr', style: 'margin-inline-start:8px' }, '★ ' + lead.rating + ' (' + (lead.reviews || 0) + ')') : null);
-      const done = () => {
-        pushLog(lead, { dir: 'out', kind: 'intro', body: text, pdf: !!sendState.attached[lead.id] }); setStage(lead, 'sent'); lead.do_not_contact = true;
-        delete sendState.opened[lead.id]; delete sendState.attached[lead.id];
-        toast('سُجّل ' + lead.name); render(); window.scrollTo(0, 0);
-      };
+      const opened = !!lead.pending_at;
+      const text = opened ? ((lead.log || []).find(e => e.pending) || {}).body || firstMessage(lead, mode, S.settings.siteUrl) : firstMessage(lead, mode, S.settings.siteUrl);
+      const chk = opened ? { tips: [] } : sendCheck(lead, real(), new Date(), mode, S.settings.dailyLimit);
+      const meta = h('div', { class: 'qmeta' }, h('span', null, catName(lead.category)), lead.city && lead.city !== 'جدة' ? h('span', null, lead.city) : null,
+        lead.district ? h('span', null, lead.district) : null);
+      const rate = lead.rating ? h('span', { class: 'qrate num' }, h('span', { dir: 'ltr' }, '★ ' + lead.rating), h('span', { class: 'muted' }, (lead.reviews || 0) + ' مراجعة')) : null;
+      const steps = mode === 'pdf'
+        ? h('ol', { class: 'steps', 'aria-label': 'الخطوات' }, h('li', { class: opened ? 'done' : 'now' }, 'النص'), h('li', { class: !opened ? '' : sendState.attached[lead.id] ? 'done' : 'now' }, 'الملف'), h('li', { class: opened && sendState.attached[lead.id] ? 'now' : '' }, 'تم'))
+        : null;
       const actions = lead.example ? h('div', { class: 'banner' }, 'مثال: لا يُرسل.') : opened
         ? h('div', { class: 'qbtns' },
             mode === 'pdf' ? attachButton(lead, () => render()) : null,
-            // الزر البارز هو الخطوة التالية: الإرفاق أولاً في وضع الملف، ثم «تم، التالي»
-            h('button', { class: 'btn big' + (mode === 'pdf' && !sendState.attached[lead.id] ? '' : ' primary'), id: 'q-done', type: 'button', onclick: done }, mode === 'pdf' ? '٣. تم، التالي' : 'تم، التالي'),
-            h('div', { class: 'row start' },
-              h('a', { class: 'btn sm', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener' }, 'افتح واتساب مرة ثانية'),
-              h('button', { class: 'btn sm', type: 'button', onclick: () => { delete sendState.opened[lead.id]; render(); } }, 'ما أرسلت')))
+            h('button', { class: 'btn big' + (mode === 'pdf' && !sendState.attached[lead.id] ? '' : ' primary'), id: 'q-done', type: 'button',
+              onclick: () => { confirmSend(lead); toast('سُجّل ' + lead.name); render(); window.scrollTo(0, 0); } }, 'تم، التالي'),
+            h('div', { class: 'qmore' },
+              h('a', { class: 'btn sm ghost', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener' }, 'افتح المحادثة ثانية'),
+              h('button', { class: 'btn sm ghost', id: 'q-undo', type: 'button', onclick: () => { undoSend(lead); render(); } }, 'ما أرسلت')))
         : h('div', { class: 'qbtns' },
             h('a', { class: 'btn primary big', id: 'q-open', href: waLink(lead.phone, text), target: '_blank', rel: 'noopener',
-              onclick: () => { sendState.opened[lead.id] = true; setTimeout(render, 50); } }, mode === 'pdf' ? '١. افتح واتساب وأرسل النص' : 'افتح واتساب'),
-            h('div', { class: 'row start' },
-              h('button', { class: 'btn sm', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'تخطَّ'),
-              h('button', { class: 'btn sm', type: 'button', onclick: () => {
+              onclick: () => { openWa(lead, text); setTimeout(render, 50); } }, ic('wa'), mode === 'pdf' ? 'افتح واتساب وأرسل النص' : 'افتح واتساب'),
+            h('div', { class: 'qmore' },
+              h('button', { class: 'btn sm ghost', type: 'button', onclick: () => { skipped.add(lead.id); render(); } }, 'تخطَّ'),
+              h('button', { class: 'btn sm ghost', type: 'button', onclick: () => {
                 lead.no_whatsapp = true; pushLog(lead, { kind: 'no_whatsapp' }); toast('أُخرج من الطابور: بلا واتساب'); render();
-              } }, 'ما عليه واتساب')));
-      out.push(h('section', { class: 'card qcard' },
-        h('div', { class: 'row' }, h('h2', null, lead.name), h('button', { class: 'btn sm', type: 'button', onclick: () => openLead(lead.id) }, 'البطاقة')),
-        meta,
+              } }, 'ما عليه واتساب'),
+              h('button', { class: 'btn sm ghost', type: 'button', onclick: () => openLead(lead.id) }, 'البطاقة')));
+      out.push(h('section', { class: 'qcard' + (opened ? ' is-open' : '') },
+        h('div', { class: 'qtop' }, h('span', { class: 'avatar', 'aria-hidden': 'true' }, initial(lead.name)),
+          h('div', { class: 'qname' }, h('h2', null, lead.name), meta, rate)),
+        opened ? h('div', { class: 'qstate', role: 'status' }, ic('check'), 'سُجّل وحُجب. ', mode === 'pdf' && !sendState.attached[lead.id] ? 'أرفق الملف ثم «تم».' : 'ارجع واضغط «تم، التالي».') : null,
+        steps,
         chk.tips.length ? h('div', { class: 'tips', role: 'note' }, chk.tips.map(x => h('div', null, x)), h('div', null, 'القرار لك.')) : null,
         actions,
-        h('details', { class: 'qmsg' }, h('summary', null, 'الرسالة'), h('div', { class: 'msg', dir: 'rtl' }, text))));
-      const next = q.ready.slice(1, 6);
-      if (next.length) out.push(h('section', { class: 'card' }, h('div', { class: 'row' }, h('h3', null, 'التالي'), h('span', { class: 'muted num' }, 'باقي ' + (q.ready.length - 1))),
-        h('div', { class: 'list' }, next.map(l => h('button', { class: 'item', type: 'button', onclick: () => { skipped.clear(); q.ready.slice(0, q.ready.indexOf(l)).forEach(x => skipped.add(x.id)); render(); window.scrollTo(0, 0); } },
-          h('span', null, l.name), h('span', { class: 'muted' }, catName(l.category)))))));
+        h('details', { class: 'qmsg' }, h('summary', null, 'اقرأ الرسالة'), h('div', { class: 'msg', dir: 'rtl' }, text))));
+      const next = q.ready.filter(l => l !== lead).slice(0, 5);
+      if (next.length) out.push(h('section', { class: 'block' }, h('div', { class: 'bhead' }, h('h3', null, 'بعده'), h('span', { class: 'muted num' }, q.ready.length - (opened ? 0 : 1))),
+        h('div', { class: 'list' }, next.map(l => h('button', { class: 'item', type: 'button', disabled: !!pend.length, onclick: () => { skipped.clear(); q.ready.slice(0, q.ready.indexOf(l)).forEach(x => skipped.add(x.id)); render(); window.scrollTo(0, 0); } },
+          h('span', { class: 'avatar sm', 'aria-hidden': 'true' }, initial(l.name)), h('span', { class: 't' }, h('b', null, l.name), h('span', { class: 'muted' }, catName(l.category))))))));
     } else {
       const reasons = {};
       S.leads.filter(l => (mode !== 'demo' ? ['candidate', 'demo_ready'] : ['demo_ready']).includes(l.stage) && !l.do_not_contact).forEach(l => { const r = sendBlock(l, new Date(), mode); if (r) reasons[r] = (reasons[r] || 0) + 1; });
-      out.push(h('section', { class: 'card empty' }, h('h2', null, 'ما فيه أحد تقدر ترسل له'),
+      out.push(h('section', { class: 'card empty' }, h('span', { class: 'empty-ic', 'aria-hidden': 'true' }, ic('check')), h('h2', null, mode === 'demo' || Object.keys(reasons).length ? 'ما فيه أحد تقدر ترسل له' : 'خلّصت الطابور'),
         Object.keys(reasons).length ? h('div', { class: 'list', style: 'width:100%' }, Object.entries(reasons).map(([r, n]) => h('div', { class: 'row' }, h('span', null, r), h('span', { class: 'chip num' }, n)))) :
           h('span', null, mode !== 'demo' ? 'كل عملائك أُرسل لهم أو محجوبون. أضف محلات جديدة من «إدخال سريع» في العملاء.' : 'علّم محلاً «نموذج جاهز» من بطاقته بعد ما تبني نموذجه وتضع رابطه.'),
         h('button', { class: 'btn sm', type: 'button', onclick: () => go('leads') }, 'العملاء')));
     }
-    out.push(h('section', { class: 'card' }, h('h3', null, 'الأوقات المقترحة'),
+    out.push(h('details', { class: 'block fold' }, h('summary', null, 'الأوقات المقترحة لكل فئة'),
       h('div', { class: 'tw' }, h('table', { class: 'table' }, h('tbody', null, Object.keys(CATEGORIES).map(k => {
         const w = CATEGORIES[k].win, f = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
         return h('tr', null, h('td', null, CATEGORIES[k].ar), h('td', { class: 'n' }, h('span', { class: 'ltr', dir: 'ltr' }, f(w[0]) + ' - ' + f(w[1]))));
@@ -1660,7 +1921,7 @@ function exportCsv(leads) {
       if (status === 'sent') { pushLog(lead, { dir: 'out', kind: 'quote' }); if (['human_reply', 'interested'].includes(lead.stage)) setStage(lead, 'quoted'); }
       Q.opened = false; toast(status === 'sent' ? 'سُجّل كمُرسل' : 'حُفظت المسودة'); render();
     }
-    const out = [exampleNote(), h('h1', { style: 'font-size:26px' }, 'كوتيشن')];
+    const out = [exampleNote(), h('h1', { class: 'title' }, 'كوتيشن')];
     out.push(h('section', { class: 'card' },
       h('label', { class: 'f', for: 'q-lead' }, 'المحل', h('select', { class: 'in', id: 'q-lead', onchange: e => { Q.leadId = e.target.value; Q.opened = false; paint(); } },
         h('option', { value: '' }, 'بدون محل'), S.leads.filter(l => !FINAL_STAGES.includes(l.stage) || l.stage === 'won').map(l => h('option', { value: l.id, selected: Q.leadId === l.id }, l.name)))),
@@ -1697,7 +1958,7 @@ function exportCsv(leads) {
   /* ═════ التسليم ═════ */
   function viewDelivery() {
     const rows = S.leads.filter(l => ['deposit', 'delivering'].includes(l.stage) || (l.stage === 'won' && l.delivery && l.delivery.delivered_at));
-    const out = [exampleNote(), h('h1', { style: 'font-size:26px' }, 'التسليم والضمان')];
+    const out = [exampleNote(), h('h1', { class: 'title' }, 'التسليم والضمان')];
     if (!rows.length) out.push(h('div', { class: 'empty card' }, h('b', null, 'لا مشاريع قيد التسليم'), h('span', null, 'تظهر هنا بعد أول دفعة تسجّلها.')));
     rows.forEach(l => {
       const d = l.delivery = l.delivery || { checks: DELIVERY_CHECKLIST.map(() => false) };
@@ -1719,14 +1980,15 @@ function exportCsv(leads) {
     const a = weekStats(real(), ...wk(0)), b = weekStats(real(), ...wk(1));
     const rows = [['أُرسل', 'sent'], ['مقروء', 'read'], ['رد بشري', 'human_replies'], ['مهتم', 'interested'], ['كوتيشن', 'quotes'], ['مغلق', 'won'], ['دخل', 'revenue']];
     const al = fortyAlert(real());
-    return [exampleNote(), h('h1', { style: 'font-size:26px' }, 'الأرقام'),
+    return [exampleNote(), h('h1', { class: 'title' }, 'الأرقام'),
       h('section', { class: 'card' }, h('h2', null, 'الأسبوع'), h('div', { class: 'tw' }, h('table', { class: 'table' },
         h('thead', null, h('tr', null, h('th', null, h('span', { class: 'sr' }, 'البند')), h('th', { class: 'n' }, 'هذا الأسبوع'), h('th', { class: 'n' }, 'الماضي'))),
         h('tbody', null, rows.map(([lbl, k]) => h('tr', null, h('td', null, lbl), h('td', { class: 'n' }, a[k]), h('td', { class: 'n' }, b[k])))))),
         h('div', { class: 'muted' }, 'تحسب الأسبوع من الأحد. «مقروء» يظهر حين تعلّم الرسالة مقروءة، وهو غير معروف تلقائياً.')),
       h('section', { class: 'card' }, h('h2', null, 'قياس الأربعين'), h('div', { class: 'num' }, 'مرسل الكل: ' + al.sent + ' · الكتلة القادمة بعد ' + al.next + ' رسالة'),
         al.due ? h('div', { class: 'banner' }, al.text) : h('div', { class: 'muted' }, 'تغيّر متغيراً واحداً فقط (الوقت أو النص أو الفئة) عند كل تنبيه.')),
-      h('section', { class: 'card' }, h('h2', null, 'دخل الشهر'), h('div', { class: 'big num' }, String(Math.round(monthRevenue(real())))), h('div', { class: 'muted num' }, 'من هدف ' + MONTH_TARGET + ' ريال'))];
+      h('section', { class: 'card' }, h('h2', null, 'دخل الشهر'), h('div', { class: 'big num' }, String(Math.round(monthRevenue(real())))), h('div', { class: 'muted num' }, 'من هدف ' + MONTH_TARGET + ' ريال. المحسوب فقط ما سجّلته دفعة.')),
+      h('section', { class: 'card' }, h('h2', null, 'خط المبيعات'), h('div', { class: 'stagegrid' }, STAGES.map(s => h('div', null, h('span', { class: 'muted' }, STAGE_AR[s]), h('b', { class: 'num' }, stageCounts(S.leads)[s])))))];
   }
 
   /* ═════ الإعدادات: استيراد، نسخة، رابط الأعمال ═════ */
@@ -1818,7 +2080,7 @@ function exportCsv(leads) {
         } }, 'استرجع')));
   }
 
-  const VIEW = { today: viewToday, leads: viewLeads, send: viewSend, quotes: viewQuotes, delivery: viewDelivery, stats: viewStats };
+  const VIEW = { today: viewToday, send: viewSend, replies: viewReplies, leads: viewLeads, more: viewMore, quotes: viewQuotes, delivery: viewDelivery, stats: viewStats };
 
   $('#b-set').addEventListener('click', () => { if (S) settingsSheet(); });
   $('#b-theme').addEventListener('click', () => {

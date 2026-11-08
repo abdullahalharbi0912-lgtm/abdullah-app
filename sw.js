@@ -1,5 +1,5 @@
 // يُولَّد عند البناء. تغيّر الاسم يعني نسخة جديدة وتنظيف القديمة.
-const CACHE = 'desk-43ee2ec2f8';
+const CACHE = 'desk-ba622dac50';
 const SHELL = ["./","./index.html","./manifest.webmanifest","./icon-192.png","./icon-512.png","./apple-touch-icon.png","./portrait.jpg","./profile.pdf","./fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2","./fonts/ibm-plex-sans-arabic-latin-400-normal.woff2","./fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2","./fonts/ibm-plex-sans-arabic-latin-500-normal.woff2","./fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2","./fonts/ibm-plex-sans-arabic-latin-600-normal.woff2","./fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2","./fonts/ibm-plex-sans-arabic-latin-700-normal.woff2"];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
