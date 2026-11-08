@@ -347,6 +347,9 @@ textarea.code { font-family: var(--f-mono); font-size: 12px; direction: ltr; min
 // قاعدة الدمج: كل تصدير يبدأ السطر بكلمة export، ولا تصدير مجمَّع.
 
 const DEFAULT_SITE_URL = 'https://abdullah-alharbi-studio.netlify.app';
+// عند نقل الموقع (مثلاً إلى abdullahalharbi0912-lgtm.github.io): غيّر DEFAULT_SITE_URL وضع العنوان القديم هنا،
+// فينتقل من حفظه في إعدادات التطبيق تلقائياً. فارغة حتى يُنشأ مستودع الموقع على GitHub.
+const OLD_SITE_URLS = [];
 
 const OWNER = {
   name: 'عبدالله الحربي',
@@ -462,7 +465,18 @@ const CATEGORIES = {
   bakery:     { ar: 'مخابز',               en: 'Bakeries',           win: [hm(16), hm(18)] },
   flowers:    { ar: 'ورد',                 en: 'Flowers',            win: [hm(16), hm(18)] },
   tailor:     { ar: 'خياطة رجالية',        en: "Men's tailoring",    win: [hm(16), hm(18)] },
+  // خدمات بميزانية (٨ نوفمبر ٢٠٢٦، طلب عبدالله): الزبون يبحث عنها في Google ويقارن قبل ما يتصل، وقيمة الطلب الواحد عالية.
+  ac:         { ar: 'صيانة مكيفات وتبريد', en: 'AC repair',          win: [hm(9, 30), hm(12)] },
+  kitchens:   { ar: 'مطابخ ودواليب وديكور', en: 'Kitchens & joinery', win: [hm(10), hm(12, 30)] },
+  cleaning:   { ar: 'شركات تنظيف',         en: 'Cleaning companies', win: [hm(9, 30), hm(12)] },
+  pest:       { ar: 'مكافحة حشرات',        en: 'Pest control',       win: [hm(9, 30), hm(12)] },
+  moving:     { ar: 'نقل عفش',             en: 'Movers',             win: [hm(9, 30), hm(12)] },
 };
+// الأولوية في الطابور: خدمات قيمة الطلب فيها عالية وعندها ميزانية. ثم الباقي.
+const PRIORITY_CATEGORIES = ['ac', 'kitchens', 'cleaning', 'pest', 'moving', 'garage', 'carpet'];
+// فئات أُوقفت (قرار عبدالله ٨ نوفمبر ٢٠٢٦): الحلاقون بلا ميزانية. يبقون في القائمة ولا يدخلون الطابور.
+const PAUSED_CATEGORIES = ['barber'];
+const SERVICE_CATEGORIES = ['ac', 'kitchens', 'cleaning', 'pest', 'moving'];
 const FRIDAY_FROM = hm(15, 30);
 
 function inWindow(category, date = new Date()) {
@@ -509,6 +523,11 @@ const HOOKS = {
   phones: 'كثير يتصلون يسألون كم التصليح وما يرجعون، ولو شافوا الأسعار قدامهم جوكم وهم جاهزين.',
   tailor: 'الزبون يبغى يشوف التفصيلات والأسعار قبل ما يجي، ويحجز موعد القياس من جواله.',
   carpet: 'الزبون يبغى يطلب الغسيل والاستلام من جواله، بدل ما يتصل وينتظر أحد يرد.',
+  ac: 'اللي مكيفه خربان في حر جدة يدور في Google ويتصل بأول واحد يطلع له، وإذا ما لقى صفحتكم يروح لغيركم.',
+  kitchens: 'اللي يفصّل مطبخ يبغى يشوف شغلكم وتصاميمكم قبل ما يزوركم، والصور في الواتساب تضيع وما توصل للي يبحث.',
+  cleaning: 'العميل يبغى يعرف الخدمات والأسعار ويحجز موعد بدون ما يتصل كذا مرة، وإذا ما لقى يروح للي بعدكم.',
+  pest: 'اللي عنده حشرات في البيت يبغى حل اليوم، ويتصل بأول شركة يلقى عندها خدمات وأسعار واضحة.',
+  moving: 'اللي ينقل عفش يقارن بين كذا شركة، واللي يلقى عندها الأسعار والخدمات واضحة يطلبها على طول.',
 };
 const hookOf = lead => HOOKS[lead.category] || 'كثير يدورون عليكم في الخرائط، ويبغون يطلبون منكم على طول بدون اتصال.';
 // النبرة: جداوية ودودة وقصيرة. بلا رقم التقييمات (يحسّسه أنه مراقَب كأنها رسالة آلية) وبلا وعود بيع في أول رسالة.
@@ -525,6 +544,7 @@ function introMessage(lead) {
 // رسالة تعرّف بالموقع الترحيبي (وضع 'site'). الرابط يحمل اسم المحل لتخصيص الصفحة.
 function normSiteUrl(u) {
   const x = String(u || '').trim().replace(/\/+$/, '');
+  if (OLD_SITE_URLS.includes(x.toLowerCase())) return DEFAULT_SITE_URL;
   return /^https:\/\/[a-z0-9.-]+(:\d+)?(\/[^\s?#]*)?$/i.test(x) ? x : DEFAULT_SITE_URL;
 }
 // رابط نظيف قصير. الرابط المخصص بالاسم يظهر في واتساب حروفاً مشفّرة طويلة (%D9%85...) فيبدو احتيالاً.
@@ -590,6 +610,7 @@ const REPLIED = ['human_reply', 'interested', 'quoted', 'deposit', 'delivering',
 function sendBlock(lead, now = new Date(), mode = 'demo') {
   if (lead.do_not_contact) return 'محجوب: تواصلنا معه سابقاً';
   if (lead.no_whatsapp) return 'الرقم بلا واتساب';
+  if (PAUSED_CATEGORIES.includes(lead.category)) return 'فئة موقوفة: بلا ميزانية';
   if (FINAL_STAGES.includes(lead.stage)) return 'مرحلته نهائية';
   if (mode !== 'demo') { // الموقع والبروفايل لا يحتاجان نموذجاً لكل محل
     if (!['candidate', 'demo_ready'].includes(lead.stage)) return 'ليس مرشحاً للإرسال';
@@ -642,6 +663,7 @@ function lastSentAt(leads) {
 }
 
 // الطابور: من يُرسل له الآن. فارغ إن بلغ الحد أو لم تمضِ المهلة.
+const prio = l => Number(PRIORITY_CATEGORIES.includes(l.category));
 function sendQueue(leads, now = new Date(), mode = 'demo', limit = DAILY_LIMIT) {
   const used = sentTodayCount(leads, now);
   const left = Math.max(0, Math.min(Number(limit) || DAILY_LIMIT, 20) - used);
@@ -650,7 +672,7 @@ function sendQueue(leads, now = new Date(), mode = 'demo', limit = DAILY_LIMIT) 
   const eligible = leads.filter(l => !sendBlock(l, now, mode));
   // ready: كل من يجوز الإرسال له، ولو خارج وقته. داخل الوقت أولاً ثم الأقوى. القرار لعبدالله.
   const ready = leads.filter(l => { const r = sendBlock(l, now, mode); return !r || TIME_REASONS.includes(r); })
-    .sort((a, b) => (Number(!sendBlock(b, now, mode)) - Number(!sendBlock(a, now, mode))) || (leadScore(b).score - leadScore(a).score));
+    .sort((a, b) => (prio(b) - prio(a)) || (Number(!sendBlock(b, now, mode)) - Number(!sendBlock(a, now, mode))) || (leadScore(b).score - leadScore(a).score));
   return { used, left, waitMin, ready, eligible: left ? eligible : [], blockedReason: left ? null : 'بلغت الحد اليومي' };
 }
 
@@ -930,6 +952,12 @@ function normalizeRow(raw) {
 }
 const WOMEN = /نسائي|نسائية|للنساء|سيدات|ladies|women|beauty|تجميل|سبا|spa\b/i;
 const CAT_RULES = [
+  // الخدمات أولاً: «مطبخ» و«تنظيف» تتقاطع مع المطاعم والمغاسل
+  ['kitchens', /مطابخ|دواليب|ديكور|نجار|kitchen\s*(furniture|remodel|cabinet)|cabinet|carpent|joinery/i],
+  ['ac', /تبريد|تكييف|مكيفات|مكيف|سبيلت|فريون|air\s*condition|hvac/i],
+  ['pest', /حشرات|مكافحة|رش\s*مبيد|pest|exterminat/i],
+  ['moving', /نقل\s*(عفش|اثاث|أثاث)|moving|movers/i],
+  ['cleaning', /شركة\s*(تنظيف|نظافة)|خدمات\s*(تنظيف|نظافة)|تنظيف\s*(منازل|فلل|شقق|خزانات)|cleaning\s*(service|company)|house\s*clean/i],
   ['carwash', /مغسلة\s*سيارات|غسيل\s*سيارات|car\s*wash|تلميع\s*سيارات/i],
   ['carpet', /سجاد|مفروشات|carpet|rug\b/i],
   ['barber', /حلاق|barber|صالون\s*رجال|men'?s\s*(salon|grooming)|قص\s*شعر/i],
@@ -997,7 +1025,9 @@ function importLeads(rows, existing = []) {
     if (!CATEGORIES[lead.category]) warn.push('فئة غير معروفة');
     if (hasSite) warn.push('عنده موقع');
     if (rating !== null && rating < 4.0) warn.push('تقييم أقل من ٤٫٠');
-    if (reviews !== null && reviews < 300) warn.push('مراجعات أقل من ٣٠٠');
+    // شركات الخدمات (مكيفات، مطابخ، تنظيف...) قليلة المراجعات بطبيعتها لكن الطلب الواحد غالٍ: ٢٠ تكفي
+    const minRev = SERVICE_CATEGORIES.includes(lead.category) ? 20 : 300;
+    if (reviews !== null && reviews < minRev) warn.push('مراجعات أقل من ' + toIndic(minRev));
     if (warn.length) { lead.warnings = warn; flagged.push({ name: lead.name, warn }); }
     added.push(lead);
     byPhone.set(phone, lead);
@@ -1112,6 +1142,7 @@ function applyBulk(leads, ids, op, arg) {
 
 // قوائم ذكية
 const SMART = {
+  value: { ar: 'خدمات بميزانية', test: (l) => !l.do_not_contact && PRIORITY_CATEGORIES.includes(l.category) && ['candidate', 'demo_ready'].includes(l.stage), sort: (a, b) => leadScore(b).score - leadScore(a).score },
   top: { ar: 'الأقوى', test: (l, ctx) => !l.do_not_contact && ['candidate', 'demo_ready'].includes(l.stage), sort: (a, b) => leadScore(b).score - leadScore(a).score },
   ready: { ar: 'جاهز للإرسال الآن', test: (l, ctx) => !sendBlock(l, ctx.now, ctx.mode), sort: (a, b) => leadScore(b).score - leadScore(a).score },
   waiting: { ar: 'ردود تنتظرني', test: (l, ctx) => ctx.waiting.has(l.id), sort: (a, b) => 0 },
