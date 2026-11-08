@@ -6,48 +6,51 @@
 <title>مساعد عبدالله</title>
 
 <style>
-/* الهوية: هادئة ومهنية. لون واحد للتفاعل (أزرق بحري)، حدود رفيعة بدل البطاقات والظلال، خط واحد.
+/* الهوية (٨ نوفمبر ٢٠٢٦، من صور عبدالله): أبيض الثوب، أحمر الشماغ #872C45، فحمي الاستوديو #1D1D1F.
+   لون واحد للتفاعل (الأحمر)، والذهبي للزخرفة فقط. مربعات الشماغ (--check) النمط الوحيد، شريطاً رفيعاً لا خلفية.
    كل لون رمز. الداكن يعيد تعريف الرموز فقط. الأسماء القديمة (panel, reef, sand, coral) أسماء مستعارة للمساعد. */
 :root {
-  --bg: #FFFFFF;
+  --bg: #F7F6F4;
   --surface: #FFFFFF;
-  --surface-2: #F3F5F7;
-  --ink: #0E1A24;
-  --muted: #4F5D6B;
-  --line: #DCE2E8;
-  --line-strong: #B9C3CD;
-  --accent: #0A4D68;
+  --surface-2: #EFEDE9;
+  --ink: #1D1D1F;
+  --muted: #5A5B59;
+  --line: #E2E0DC;
+  --line-strong: #C9C6C0;
+  --accent: #872C45;
   --accent-ink: #FFFFFF;
-  --accent-text: #0A4D68;
-  --accent-soft: #E7F0F4;
+  --accent-text: #872C45;
+  --accent-soft: #F6EBEE;
   --ok: #176B3E;
   --warn: #8A5200;
   --bad: #AE2A1F;
   --ok-bg: #E2F3E9;
   --warn-bg: #FBEFD2;
   --bad-bg: #F9E0DD;
+  --gold: #A8822E;
+  --check: repeating-conic-gradient(#872C45 0 25%, #FFFFFF 0 50%) 0 0 / 8px 8px;
   /* أسماء مستعارة */
-  --panel: var(--accent); --panel-ink: var(--accent-ink); --panel-muted: #BCD3DC;
+  --panel: var(--accent); --panel-ink: var(--accent-ink); --panel-muted: #E8D5DB;
   --reef: var(--accent); --reef-ink: var(--accent-text);
   --sand: var(--surface-2); --sand-ink: var(--ink);
   --coral: var(--accent); --coral-ink: var(--accent-ink);
   --f-display: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-body: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --r-s: 6px; --r-m: 8px; --r-l: 12px;
+  --r-s: 10px; --r-m: 14px; --r-l: 20px;
   --gutter: max(20px, env(safe-area-inset-left, 0px));
   --gutter-e: max(20px, env(safe-area-inset-right, 0px));
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0B1118; --surface: #111A23; --surface-2: #16212C; --ink: #E8EEF3; --muted: #9DAAB7; --line: #243140; --line-strong: #3A4A5B;
-    --accent: #7CC4DC; --accent-ink: #06202B; --accent-text: #8FD0E6; --accent-soft: #12303D; --panel-muted: #14394A;
+    --bg: #121213; --surface: #1C1C1E; --surface-2: #26262A; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2C2C30; --line-strong: #45454A;
+    --accent: #A3375A; --accent-ink: #FFFFFF; --accent-text: #EE9AB2; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
     --ok: #5FD296; --warn: #F2B95F; --bad: #FF8E80; --ok-bg: #12331F; --warn-bg: #3A2C0F; --bad-bg: #3D1814; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0B1118; --surface: #111A23; --surface-2: #16212C; --ink: #E8EEF3; --muted: #9DAAB7; --line: #243140; --line-strong: #3A4A5B;
-  --accent: #7CC4DC; --accent-ink: #06202B; --accent-text: #8FD0E6; --accent-soft: #12303D; --panel-muted: #14394A;
+  --bg: #121213; --surface: #1C1C1E; --surface-2: #26262A; --ink: #EDEDEB; --muted: #A6A7A4; --line: #2C2C30; --line-strong: #45454A;
+  --accent: #A3375A; --accent-ink: #FFFFFF; --accent-text: #EE9AB2; --accent-soft: #3A1E27; --panel-muted: #3A1E27; --gold: #C9A24A;
   --ok: #5FD296; --warn: #F2B95F; --bad: #FF8E80; --ok-bg: #12331F; --warn-bg: #3A2C0F; --bad-bg: #3D1814; color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -75,9 +78,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn.sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; pointer-events: none; }
 
-/* العلامة: الحرف ح في مربع بلون التفاعل */
-.mark { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--r-m); background: var(--accent);
-  color: var(--accent-ink); font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 1; flex: none; }
+/* العلامة: «ح» أبيض على فحمي، وتحته شريط مربعات الشماغ */
+.mark { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #1D1D1F; position: relative; overflow: hidden; padding-bottom: 10%;
+  color: #FFFFFF; font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 1; flex: none; }
+.mark::after { content: ''; position: absolute; inset-inline: 22%; bottom: 14%; height: 12%; background: var(--check); background-size: 4px 4px; border-radius: 1px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand b { font-weight: 700; font-size: 18px; line-height: 1.2; display: block; }
 .brand small { color: var(--muted); font-size: 13px; display: block; line-height: 1.3; }
@@ -354,7 +358,7 @@ const OWNER = {
 // الباقات كما في SPEC القسم ٥. الأسعار بالريال. fromPrice = «يبدأ من».
 const PACKAGES = [
   {
-    id: 'page', price: 1200, fromPrice: false, days: 5, deposit: [50, 50],
+    id: 'page', price: 799, fromPrice: false, days: 5, deposit: [50, 50],
     ar: { name: 'صفحة المحل', tag: 'للمحل الذي يبدأ',
       items: ['صفحة واحدة مثل النموذج بصور المحل وبياناته', 'زر طلب وحجز على واتساب', 'خريطة وساعات عمل', 'ربط بحساب Google للمحل', 'تعديل واحد بعد التسليم'] },
     en: { name: 'Shop page', tag: 'For a shop getting started',
