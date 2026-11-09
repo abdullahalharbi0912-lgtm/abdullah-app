@@ -471,12 +471,20 @@ const CATEGORIES = {
   cleaning:   { ar: 'شركات تنظيف',         en: 'Cleaning companies', win: [hm(9, 30), hm(12)] },
   pest:       { ar: 'مكافحة حشرات',        en: 'Pest control',       win: [hm(9, 30), hm(12)] },
   moving:     { ar: 'نقل عفش',             en: 'Movers',             win: [hm(9, 30), hm(12)] },
+  // عملاء أقوى (٩ نوفمبر ٢٠٢٦، طلب عبدالله): قيمة العميل عالية، والناس تقارن في Google قبل ما تحجز.
+  clinic:      { ar: 'عيادات ومجمعات طبية',        en: 'Clinics',                win: [hm(10), hm(12)] },
+  realestate:  { ar: 'مكاتب عقار',                 en: 'Real estate offices',    win: [hm(10), hm(12, 30)] },
+  contracting: { ar: 'مقاولات وترميم وتصميم داخلي', en: 'Contracting & interiors', win: [hm(9, 30), hm(12)] },
+  training:    { ar: 'مراكز تدريب ومعاهد وحضانات', en: 'Training & nurseries',   win: [hm(10), hm(12)] },
+  events:      { ar: 'قاعات ومناسبات وتصوير',      en: 'Events & photography',   win: [hm(11), hm(13)] },
+  travel:      { ar: 'تأجير سيارات وسفر وعمرة',    en: 'Car rental & travel',    win: [hm(10), hm(12, 30)] },
 };
 // الأولوية في الطابور: خدمات قيمة الطلب فيها عالية وعندها ميزانية. ثم الباقي.
-const PRIORITY_CATEGORIES = ['ac', 'kitchens', 'cleaning', 'pest', 'moving', 'garage', 'carpet'];
-// فئات أُوقفت (قرار عبدالله ٨ نوفمبر ٢٠٢٦): الحلاقون بلا ميزانية. يبقون في القائمة ولا يدخلون الطابور.
-const PAUSED_CATEGORIES = ['barber'];
-const SERVICE_CATEGORIES = ['ac', 'kitchens', 'cleaning', 'pest', 'moving'];
+const PRIORITY_CATEGORIES = ['clinic', 'realestate', 'contracting', 'training', 'events', 'travel', 'ac', 'kitchens', 'cleaning', 'pest', 'moving'];
+// فئات أُوقفت (قرار عبدالله ٨ و٩ نوفمبر ٢٠٢٦): الحلاقون والمغاسل والورش ما يهتمون ولا عندهم ميزانية.
+// حُذفوا من بياناته، ولو رجعوا في استيراد ملف قديم ما يدخلون الطابور أبداً.
+const PAUSED_CATEGORIES = ['barber', 'carwash', 'garage'];
+const SERVICE_CATEGORIES = ['clinic', 'realestate', 'contracting', 'training', 'events', 'travel', 'ac', 'kitchens', 'cleaning', 'pest', 'moving'];
 const FRIDAY_FROM = hm(15, 30);
 
 function inWindow(category, date = new Date()) {
@@ -528,11 +536,19 @@ const HOOKS = {
   cleaning: 'العميل يبغى يعرف الخدمات والأسعار ويحجز موعد بدون ما يتصل كذا مرة، وإذا ما لقى يروح للي بعدكم.',
   pest: 'اللي عنده حشرات في البيت يبغى حل اليوم، ويتصل بأول شركة يلقى عندها خدمات وأسعار واضحة.',
   moving: 'اللي ينقل عفش يقارن بين كذا شركة، واللي يلقى عندها الأسعار والخدمات واضحة يطلبها على طول.',
+  clinic: 'اللي يدور عيادة يقارن الأطباء والخدمات ويحجز من جواله، وإذا ما لقى صفحتكم يحجز عند غيركم.',
+  realestate: 'اللي يدور شقة أو أرض يبغى يشوف العروض والصور قبل ما يتصل، والعروض في الواتساب تضيع بين الرسائل.',
+  contracting: 'اللي يبغى يرمم أو يبني يبغى يشوف مشاريعكم السابقة قبل ما يعطيكم شغل بعشرات الآلاف.',
+  training: 'ولي الأمر أو المتدرب يبغى يشوف البرامج والرسوم ويسجل من جواله، بدل ما يتصل كذا مرة.',
+  events: 'اللي يجهز لمناسبة يقارن الباقات والصور، واللي يلقى عنده كل شي واضح يحجز على طول.',
+  travel: 'اللي يدور سيارة أو رحلة يقارن الأسعار ويحجز من جواله، وإذا ما لقى عندكم يروح للي بعدكم.',
 };
 const hookOf = lead => HOOKS[lead.category] || 'كثير يدورون عليكم في الخرائط، ويبغون يطلبون منكم على طول بدون اتصال.';
 // النبرة: جداوية ودودة وقصيرة. بلا رقم التقييمات (يحسّسه أنه مراقَب كأنها رسالة آلية) وبلا وعود بيع في أول رسالة.
-const opener = 'أنا عبدالله الحربي من جدة، أسوي مواقع للمحلات.';
-const sawLine = lead => `شفت ${lead.name} في الخرائط، ما شاء الله تقييماتكم حلوة، بس ما لقيت لكم موقع.`;
+const opener = 'أنا عبدالله الحربي من جدة، أسوي مواقع للشركات والمحلات.';
+// من الخرائط بتقييم: نمدح التقييم. من مصدر آخر (Apollo وغيره) بلا تقييم: لا نذكر الخرائط ولا تقييماً لم نره.
+const sawLine = lead => (lead.rating ? `شفت ${lead.name} في الخرائط، ما شاء الله تقييماتكم حلوة، بس ما لقيت لكم موقع.`
+  : `شفت ${lead.name}، وما لقيت لكم موقع يعرض شغلكم.`);
 const closer = 'وإذا مو وقته، عادي والله، الله يوفقكم.';
 const hello = 'السلام عليكم، كيفكم؟';
 
@@ -952,6 +968,12 @@ function normalizeRow(raw) {
 }
 const WOMEN = /نسائي|نسائية|للنساء|سيدات|ladies|women|beauty|تجميل|سبا|spa\b/i;
 const CAT_RULES = [
+  ['clinic', /عيادة|عيادات|مجمع\s*طبي|مركز\s*طبي|اسنان|أسنان|جلدية|علاج\s*طبيعي|clinic|dental|dentist|dermatolog|physiotherap|medical\s*(center|centre)/i],
+  ['realestate', /عقار|عقارات|real\s*estate|realty|property/i],
+  ['contracting', /مقاولات|مقاول|ترميم|تشطيب|تصميم\s*داخلي|contracting|contractor|renovation|interior\s*design|fit.?out/i],
+  ['training', /تدريب|معهد|أكاديمية|اكاديمية|حضانة|روضة|training|institute|academy|nursery|kindergarten/i],
+  ['events', /قاعة|قاعات|أفراح|افراح|حفلات|مناسبات|تصوير|wedding|event|photograph/i],
+  ['travel', /تأجير\s*(ال)?سيارات|تاجير\s*(ال)?سيارات|سياحة|سفر|عمرة|طيران|car\s*rental|rent\s*a\s*car|travel|umrah|tourism/i],
   // الخدمات أولاً: «مطبخ» و«تنظيف» تتقاطع مع المطاعم والمغاسل
   ['kitchens', /مطابخ|دواليب|ديكور|نجار|kitchen\s*(furniture|remodel|cabinet)|cabinet|carpent|joinery/i],
   ['ac', /تبريد|تكييف|مكيفات|مكيف|سبيلت|فريون|air\s*condition|hvac/i],
